@@ -1,0 +1,25 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5rem;
+  background: #ffa07a;
+  border-bottom: 0.5rem solid #e9967a;
+  border-bottom-left-radius: 1rem; /* Закругление нижнего левого угла */
+  border-bottom-right-radius: 1rem; /* Закругление нижнего правого угла */
+}
+
+.header__logo {
+  text-align: center;
+}
+
+.header__logo-img {
+  max-width: 12rem;
+  height: auto;
+}
+
+.stars {
+  max-width: 5rem;
+  height: auto;
+  margin-right: 1rem;
+}
