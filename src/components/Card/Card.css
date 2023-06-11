@@ -1,8 +1,4 @@
 .card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   text-align: center;
   background-color: #fff6e5;
   border: 1px solid #e9967a;
@@ -13,18 +9,36 @@
   max-width: 400px;
 }
 
-.card h2 {
-  margin-right: 10px;
-  margin-top: 0;
+.checked {
+  color: #fee58b;
+  background-color: #4b4b4b;
+  border: 1px solid #fff;
 }
 
-.card img {
-  margin-right: 10px;
-  max-width: 100%;
+.card__block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card__block-title {
+  width: 120px;
+  text-align: start;
+}
+
+.card__block-checkbox {
+  width: 22px;
+  height: 22px;
+  border-radius: 1rem;
+}
+
+.card__img {
+  width: 100%;
   height: auto;
+  vertical-align: middle;
 }
 
-.card p {
+.card__content-text {
   text-align: justify;
   margin-bottom: 0;
 }
