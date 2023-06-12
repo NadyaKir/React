@@ -15,6 +15,7 @@ function Card(props) {
   const [editedTitle, setEditedTitle] = useState('');
 
   const [descr, setDescr] = useState(props.descr);
+  const [editedDescr, setEditedDescr] = useState('');
 
   //checkbox func
   const checkboxChangeHandler = () => {
@@ -26,16 +27,19 @@ function Card(props) {
     setIsEditing(!isEditing);
     setIsChecked(isChecked ? !isChecked : isChecked);
     setEditedTitle(title);
+    setEditedDescr(descr);
   };
 
   const clickSaveButtonHandler = () => {
     setIsEditing(!isEditing);
     setTitle(editedTitle);
+    setDescr(editedDescr);
   };
 
   const clickCancelButtonHandler = () => {
     setIsEditing(!isEditing);
     setEditedTitle(title);
+    setEditedDescr(descr);
   };
 
   //clasnames
@@ -51,7 +55,7 @@ function Card(props) {
             className="card-block__input"
             type="text"
             value={editedTitle}
-            onChange={(e) => setTitle(e.target.value)}></textarea>
+            onChange={(e) => setEditedTitle(e.target.value)}></textarea>
         ) : (
           <h2 className="card-block__title">{title}</h2>
         )}
@@ -78,8 +82,8 @@ function Card(props) {
       {isEditing ? (
         <textarea
           className="card__textarea"
-          value={descr}
-          onChange={(e) => setDescr(e.target.value)}></textarea>
+          value={editedDescr}
+          onChange={(e) => setEditedDescr(e.target.value)}></textarea>
       ) : (
         <p className="card__text">{descr}</p>
       )}
