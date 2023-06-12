@@ -10,7 +10,10 @@ function Card(props) {
 
   //edit
   const [isEditing, setIsEditing] = useState(false);
+
   const [title, setTitle] = useState(props.title);
+  const [editedTitle, setEditedTitle] = useState('');
+
   const [descr, setDescr] = useState(props.descr);
 
   //checkbox func
@@ -19,11 +22,20 @@ function Card(props) {
   };
 
   //buttons func
-  const clickButtonHandler = () => {
+  const clickEditButtonHandler = () => {
     setIsEditing(!isEditing);
+    setIsChecked(isChecked ? !isChecked : isChecked);
+    setEditedTitle(title);
   };
-  const clickSaveButtonHandler = (e) => {
-    setTitle();
+
+  const clickSaveButtonHandler = () => {
+    setIsEditing(!isEditing);
+    setTitle(editedTitle);
+  };
+
+  const clickCancelButtonHandler = () => {
+    setIsEditing(!isEditing);
+    setEditedTitle(title);
   };
 
   //clasnames
@@ -35,19 +47,23 @@ function Card(props) {
     <div className={cardClassName}>
       <div className="card-block">
         {isEditing ? (
-          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+          <textarea
+            className="card-block__input"
+            type="text"
+            value={editedTitle}
+            onChange={(e) => setTitle(e.target.value)}></textarea>
         ) : (
           <h2 className="card-block__title">{title}</h2>
         )}
-        <button className={buttonClassName} onClick={clickButtonHandler}>
+        <button className={buttonClassName} onClick={clickEditButtonHandler}>
           <MdEdit />
         </button>
         {isEditing && (
           <>
-            <button onClick={clickButtonHandler}>
+            <button onClick={clickSaveButtonHandler}>
               <MdSave />
             </button>
-            <button onClick={clickButtonHandler}>
+            <button onClick={clickCancelButtonHandler}>
               <MdEditOff />
             </button>
           </>
@@ -60,7 +76,10 @@ function Card(props) {
       </div>
       <img className="card__img" src={props.img} alt="cat" />
       {isEditing ? (
-        <textarea value={descr} onChange={(e) => setDescr(e.target.value)}></textarea>
+        <textarea
+          className="card__textarea"
+          value={descr}
+          onChange={(e) => setDescr(e.target.value)}></textarea>
       ) : (
         <p className="card__text">{descr}</p>
       )}
