@@ -1,46 +1,51 @@
 .card {
-  text-align: center;
-  background-color: #fff6e5;
-  border: 1px solid #e9967a;
-  padding: 20px;
-  border-radius: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9967a;
+  border-radius: 1rem;
+  background-color: #fff6e5;
+  padding: 20px;
   min-width: 300px;
   max-width: 400px;
+  text-align: center;
 }
 
 .checked {
-  color: #fee58b;
-  background-color: #4b4b4b;
   border: 1px solid #fff;
+  background-color: #4b4b4b;
+  color: #fee58b;
 }
 
-.card__block {
+.card-block {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.card__block-title {
+.card-block__title {
+  margin-right: auto;
   width: 120px;
   text-align: start;
 }
 
-.card__block-checkbox {
+.card-block-checkbox {
+  border-radius: 1rem;
   width: 22px;
   height: 22px;
-  border-radius: 1rem;
 }
 
 .card__img {
+  vertical-align: middle;
   width: 100%;
   height: auto;
-  vertical-align: middle;
 }
 
-.card__content-text {
-  text-align: justify;
+.card__text {
   margin-bottom: 0;
+  text-align: justify;
+}
+
+.hide {
+  display: none;
 }
 
 @media screen and (max-height: 600px) {
