@@ -22,7 +22,7 @@ function Card(props) {
     setIsChecked(!isChecked);
   };
 
-  //buttons func
+  //buttons func-s
   const clickEditButtonHandler = () => {
     setIsEditing(!isEditing);
     setIsChecked(isChecked ? !isChecked : isChecked);
@@ -42,7 +42,7 @@ function Card(props) {
     setEditedDescr(descr);
   };
 
-  //clasnames
+  //clasnames variables
   const cardClassName = isChecked ? 'card checked' : 'card';
   const buttonClassName = isEditing ? 'card-block__edit-btn hide' : 'card-block__edit-btn';
   const checkboxClassName = isEditing ? 'card-block__checkbox hide' : 'card-block__checkbox';
