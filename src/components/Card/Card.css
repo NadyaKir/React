@@ -1,32 +1,51 @@
 .card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-color: #fff6e5;
-  border: 1px solid #e9967a;
-  padding: 20px;
-  border-radius: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9967a;
+  border-radius: 1rem;
+  background-color: #fff6e5;
+  padding: 20px;
   min-width: 300px;
   max-width: 400px;
+  text-align: center;
 }
 
-.card h2 {
-  margin-right: 10px;
-  margin-top: 0;
+.checked {
+  border: 1px solid #fff;
+  background-color: #4b4b4b;
+  color: #fee58b;
 }
 
-.card img {
-  margin-right: 10px;
-  max-width: 100%;
+.card-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-block__title {
+  margin-right: auto;
+  width: 120px;
+  text-align: start;
+}
+
+.card-block-checkbox {
+  border-radius: 1rem;
+  width: 22px;
+  height: 22px;
+}
+
+.card__img {
+  vertical-align: middle;
+  width: 100%;
   height: auto;
 }
 
-.card p {
-  text-align: justify;
+.card__text {
   margin-bottom: 0;
+  text-align: justify;
+}
+
+.hide {
+  display: none;
 }
 
 @media screen and (max-height: 600px) {
