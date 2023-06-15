@@ -25,7 +25,7 @@ function Card(props) {
   //buttons func-s
   const clickEditButtonHandler = () => {
     setIsEditing(!isEditing);
-    setIsChecked(!isChecked);
+    setIsChecked(false);
     setEditedTitle(title);
     setEditedDescr(descr);
   };
