@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import classNames from 'classnames';
 
 import { MdEdit, MdSave, MdEditOff } from 'react-icons/md';
 
@@ -43,12 +44,10 @@ function Card(props) {
   };
 
   //clasnames variables
-  const cardClassName = isChecked ? 'card checked' : 'card';
-  const buttonClassName = isEditing ? 'card-block__edit-btn hide' : 'card-block__edit-btn';
   const checkboxClassName = isEditing ? 'card-block__checkbox hide' : 'card-block__checkbox';
 
   return (
-    <div className={cardClassName}>
+    <div className={classNames('card', { 'card checked': isChecked })}>
       <div className="card-block">
         {isEditing ? (
           <textarea
@@ -59,7 +58,11 @@ function Card(props) {
         ) : (
           <h2 className="card-block__title">{title}</h2>
         )}
-        <button className={buttonClassName} onClick={clickEditButtonHandler}>
+        <button
+          className={classNames('card-block__edit-btn', {
+            'card-block__edit-btn hide': isEditing,
+          })}
+          onClick={clickEditButtonHandler}>
           <MdEdit />
         </button>
         {isEditing && (
@@ -73,7 +76,7 @@ function Card(props) {
           </>
         )}
         <input
-          className={checkboxClassName}
+          className={classNames('card-block__checkbox', { 'card-block__checkbox hide': isEditing })}
           type="checkbox"
           checked={isChecked}
           onChange={checkboxChangeHandler}></input>
