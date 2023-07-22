@@ -12,11 +12,8 @@ function Card(props) {
   //edit
   const [isEditing, setIsEditing] = useState(false);
 
-  const [title, setTitle] = useState(props.title);
-  const [editedTitle, setEditedTitle] = useState('');
-
-  const [descr, setDescr] = useState(props.descr);
-  const [editedDescr, setEditedDescr] = useState('');
+  const [editedTitle, setEditedTitle] = useState(props.title);
+  const [editedDescr, setEditedDescr] = useState(props.descr);
 
   //checkbox func
   const checkboxChangeHandler = () => {
@@ -27,24 +24,34 @@ function Card(props) {
   const clickEditButtonHandler = () => {
     setIsEditing(!isEditing);
     setIsChecked(false);
-    setEditedTitle(title);
-    setEditedDescr(descr);
   };
 
   const clickSaveButtonHandler = () => {
+    console.log(props.id); // Убедитесь, что это значение определено
     setIsEditing(!isEditing);
-    setTitle(editedTitle);
-    setDescr(editedDescr);
+    props.handleCatChange(props.id, editedTitle, editedDescr);
+    console.log('---');
+    console.log(props.id, editedTitle, editedDescr);
+  };
+
+  const resetValues = () => {
+    setEditedTitle(props.title);
+    setEditedDescr(props.descr);
   };
 
   const clickCancelButtonHandler = () => {
     setIsEditing(!isEditing);
-    setEditedTitle(title);
-    setEditedDescr(descr);
+    resetValues();
   };
 
-  //clasnames variables
-  const checkboxClassName = isEditing ? 'card-block__checkbox hide' : 'card-block__checkbox';
+  //change handlers
+  const titleChangeHandler = (event) => {
+    setEditedTitle(event.target.value);
+  };
+
+  const descrChangeHandler = (event) => {
+    setEditedDescr(event.target.value);
+  };
 
   return (
     <div className={classNames('card', { 'card checked': isChecked })}>
@@ -54,9 +61,9 @@ function Card(props) {
             className="card-block__input"
             type="text"
             value={editedTitle}
-            onChange={(e) => setEditedTitle(e.target.value)}></textarea>
+            onChange={titleChangeHandler}></textarea>
         ) : (
-          <h2 className="card-block__title">{title}</h2>
+          <h2 className="card-block__title">{props.title}</h2>
         )}
         <button
           className={classNames('card-block__edit-btn', {
@@ -86,9 +93,9 @@ function Card(props) {
         <textarea
           className="card__textarea"
           value={editedDescr}
-          onChange={(e) => setEditedDescr(e.target.value)}></textarea>
+          onChange={descrChangeHandler}></textarea>
       ) : (
-        <p className="card__text">{descr}</p>
+        <p className="card__text">{props.descr}</p>
       )}
     </div>
   );
