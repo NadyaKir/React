@@ -27,11 +27,8 @@ function Card(props) {
   };
 
   const clickSaveButtonHandler = () => {
-    console.log(props.id); // Убедитесь, что это значение определено
     setIsEditing(!isEditing);
-    props.handleCatChange(props.id, editedTitle, editedDescr);
-    console.log('---');
-    console.log(props.id, editedTitle, editedDescr);
+    props.handleLoremChange(props.id, editedTitle, editedDescr);
   };
 
   const resetValues = () => {
@@ -65,13 +62,17 @@ function Card(props) {
         ) : (
           <h2 className="card-block__title">{props.title}</h2>
         )}
-        <button
-          className={classNames('card-block__edit-btn', {
-            'card-block__edit-btn hide': isEditing,
-          })}
-          onClick={clickEditButtonHandler}>
-          <MdEdit />
-        </button>
+
+        {!props.readOnly && (
+          <button
+            className={classNames('card-block__edit-btn', {
+              'card-block__edit-btn hide': isEditing,
+            })}
+            onClick={clickEditButtonHandler}>
+            <MdEdit />
+          </button>
+        )}
+
         {isEditing && (
           <>
             <button onClick={clickSaveButtonHandler}>
@@ -88,7 +89,6 @@ function Card(props) {
           checked={isChecked}
           onChange={checkboxChangeHandler}></input>
       </div>
-      <img className="card__img" src={props.img} alt="cat" />
       {isEditing ? (
         <textarea
           className="card__textarea"

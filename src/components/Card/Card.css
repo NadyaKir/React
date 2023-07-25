@@ -4,8 +4,7 @@
   border-radius: 1rem;
   background-color: #fff6e5;
   padding: 20px;
-  min-width: 300px;
-  max-width: 400px;
+  max-width: 500px;
 }
 
 .checked {
@@ -22,7 +21,6 @@
 
 .card-block__title {
   margin-right: auto;
-  width: 120px;
 }
 
 .card-block__input {
@@ -33,12 +31,6 @@
   resize: none;
   font-weight: bold;
   font-size: 24px;
-}
-
-.card-block__checkbox {
-  border-radius: 1rem;
-  width: 22px;
-  height: 22px;
 }
 
 .card__img {
