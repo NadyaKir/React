@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import classNames from 'classnames';
 
 import { MdEdit, MdSave, MdEditOff } from 'react-icons/md';
@@ -14,6 +14,16 @@ function Card(props) {
 
   const [editedTitle, setEditedTitle] = useState(props.title);
   const [editedDescr, setEditedDescr] = useState(props.descr);
+
+  // Функция для сброса режима редактирования
+  const resetEditingMode = () => {
+    setIsEditing(false);
+  };
+
+  // Проверка на изменение props.readOnly и сброс режима редактирования при необходимости
+  if (props.readOnly && isEditing) {
+    resetEditingMode();
+  }
 
   //checkbox func
   const checkboxChangeHandler = () => {
@@ -74,21 +84,25 @@ function Card(props) {
         )}
 
         {isEditing && (
-          <>
+          <Fragment>
             <button onClick={clickSaveButtonHandler}>
               <MdSave />
             </button>
             <button onClick={clickCancelButtonHandler}>
               <MdEditOff />
             </button>
-          </>
+          </Fragment>
         )}
+
         <input
-          className={classNames('card-block__checkbox', { 'card-block__checkbox hide': isEditing })}
+          className={classNames('card-block__checkbox', {
+            'card-block__checkbox hide': isEditing,
+          })}
           type="checkbox"
           checked={isChecked}
           onChange={checkboxChangeHandler}></input>
       </div>
+
       {isEditing ? (
         <textarea
           className="card__textarea"
