@@ -1,4 +1,4 @@
-import { useState, Fragment } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import classNames from 'classnames';
 
 import { MdEdit, MdSave, MdEditOff } from 'react-icons/md';
@@ -20,10 +20,12 @@ function Card(props) {
     setIsEditing(false);
   };
 
-  // Проверка на изменение props.readOnly и сброс режима редактирования при необходимости
-  if (props.readOnly && isEditing) {
-    resetEditingMode();
-  }
+  useEffect(() => {
+    if (props.readOnly && isEditing) {
+      resetValues();
+      resetEditingMode();
+    }
+  }, [isEditing, props.readOnly]);
 
   //checkbox func
   const checkboxChangeHandler = () => {
@@ -38,7 +40,7 @@ function Card(props) {
 
   const clickSaveButtonHandler = () => {
     setIsEditing(!isEditing);
-    props.handleLoremChange(props.id, editedTitle, editedDescr);
+    props.handleChange(props.id, editedTitle, editedDescr);
   };
 
   const resetValues = () => {

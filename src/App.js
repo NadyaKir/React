@@ -3,9 +3,9 @@ import { Fragment, useState } from 'react';
 import Header from './components/Header/Header';
 import Card from './components/Card/Card';
 import Container from './components/UI/Container';
-import ViewOnlyCheckbox from './components/Checkbox/ViewOnlyCheckbox';
+import ViewOnlyCheckbox from './components/ViewOnlyCheckbox/ViewOnlyCheckbox';
 
-const BASE_LOREM = [
+const ITEMS = [
   {
     id: '1',
     title: 'Lorem ipsum dolor',
@@ -51,20 +51,20 @@ const BASE_LOREM = [
 ];
 
 function App() {
-  const [lorem, setLorem] = useState(BASE_LOREM);
+  const [items, setItems] = useState(ITEMS);
 
-  const handleLoremChange = (loremId, editedTitle, editedDescr) => {
-    const updatedLorem = lorem.map((lrm) => {
-      if (lrm.id === loremId) {
+  const handleChange = (id, editedTitle, editedDescr) => {
+    const updatedItems = items.map((item) => {
+      if (item.id === id) {
         return {
-          ...lrm,
+          ...item,
           title: editedTitle,
           descr: editedDescr,
         };
       }
-      return lrm;
+      return item;
     });
-    setLorem(updatedLorem);
+    setItems(updatedItems);
   };
 
   const [readOnly, setReadOnly] = useState(true);
@@ -79,13 +79,13 @@ function App() {
       <Container>
         <ViewOnlyCheckbox readOnly={readOnly} readOnlyHandler={readOnlyHandler}></ViewOnlyCheckbox>
         <div className="cards">
-          {lorem.map((lrm) => (
+          {items.map((item) => (
             <Card
-              key={lrm.id}
-              id={lrm.id}
-              title={lrm.title}
-              descr={lrm.descr}
-              handleLoremChange={handleLoremChange}
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              descr={item.descr}
+              handleChange={handleChange}
               readOnly={readOnly}
             />
           ))}
