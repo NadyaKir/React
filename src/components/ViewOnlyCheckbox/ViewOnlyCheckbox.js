@@ -3,7 +3,7 @@ import styles from './ViewOnlyCheckbox.module.css';
 const ViewOnlyCheckbox = (props) => {
   return (
     <div className={styles['view-only-checkbox']}>
-      <label htmlFor="checkbox">Только просмотр:</label>
+      <label htmlFor="viewOnly">Только просмотр:</label>
       <input
         className={styles['checkbox']}
         type="checkbox"

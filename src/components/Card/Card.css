@@ -4,13 +4,7 @@
   border-radius: 1rem;
   background-color: #fff6e5;
   padding: 20px;
-  max-width: 500px;
-}
-
-.checked {
-  border: 1px solid #fff;
-  background-color: #4b4b4b;
-  color: #fee58b;
+  width: 500px;
 }
 
 .card-block {
@@ -29,27 +23,50 @@
   min-height: fit-content;
   resize: none;
   font-weight: bold;
+  border: none;
   font-size: 24px;
-}
-
-.card__img {
-  vertical-align: middle;
-  width: 100%;
-  height: auto;
+  font-family: inherit;
+  padding-top: 20px;
 }
 
 .card__textarea {
-  margin-top: 16px;
   background: #fff6e5;
   width: 100%;
   height: 200px;
   resize: none;
   font-size: inherit;
   font-family: inherit;
+  border: none;
+  text-align: justify;
 }
 
 .card__text {
   text-align: justify;
+}
+
+.btn {
+  margin-left: 5px;
+  background-color: #60391d;
+  color: white;
+  border: none;
+  padding: 3px 5px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-right: 5px;
+  transition: opacity 0.3s ease;
+}
+
+.save-btn {
+  background-color: #4caf50;
+}
+
+.cancel-btn {
+  background-color: #f44336;
+}
+
+.btn:hover {
+  opacity: 0.8;
 }
 
 .hide {
