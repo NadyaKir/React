@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import classNames from 'classnames';
 
 import { MdEdit, MdSave, MdEditOff } from 'react-icons/md';
@@ -15,6 +15,18 @@ function Card(props) {
   const [editedTitle, setEditedTitle] = useState(props.title);
   const [editedDescr, setEditedDescr] = useState(props.descr);
 
+  // Функция для сброса режима редактирования
+  const resetEditingMode = () => {
+    setIsEditing(false);
+  };
+
+  useEffect(() => {
+    if (props.readOnly && isEditing) {
+      resetValues();
+      resetEditingMode();
+    }
+  }, [isEditing, props.readOnly]);
+
   //checkbox func
   const checkboxChangeHandler = () => {
     setIsChecked(!isChecked);
@@ -27,11 +39,8 @@ function Card(props) {
   };
 
   const clickSaveButtonHandler = () => {
-    console.log(props.id); // Убедитесь, что это значение определено
     setIsEditing(!isEditing);
-    props.handleCatChange(props.id, editedTitle, editedDescr);
-    console.log('---');
-    console.log(props.id, editedTitle, editedDescr);
+    props.handleChange(props.id, editedTitle, editedDescr);
   };
 
   const resetValues = () => {
@@ -65,30 +74,37 @@ function Card(props) {
         ) : (
           <h2 className="card-block__title">{props.title}</h2>
         )}
-        <button
-          className={classNames('card-block__edit-btn', {
-            'card-block__edit-btn hide': isEditing,
-          })}
-          onClick={clickEditButtonHandler}>
-          <MdEdit />
-        </button>
+
+        {!props.readOnly && (
+          <button
+            className={classNames('card-block__edit-btn', {
+              'card-block__edit-btn hide': isEditing,
+            })}
+            onClick={clickEditButtonHandler}>
+            <MdEdit />
+          </button>
+        )}
+
         {isEditing && (
-          <>
+          <Fragment>
             <button onClick={clickSaveButtonHandler}>
               <MdSave />
             </button>
             <button onClick={clickCancelButtonHandler}>
               <MdEditOff />
             </button>
-          </>
+          </Fragment>
         )}
+
         <input
-          className={classNames('card-block__checkbox', { 'card-block__checkbox hide': isEditing })}
+          className={classNames('card-block__checkbox', {
+            'card-block__checkbox hide': isEditing,
+          })}
           type="checkbox"
           checked={isChecked}
           onChange={checkboxChangeHandler}></input>
       </div>
-      <img className="card__img" src={props.img} alt="cat" />
+
       {isEditing ? (
         <textarea
           className="card__textarea"

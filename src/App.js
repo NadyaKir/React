@@ -1,76 +1,97 @@
+import { Fragment, useState } from 'react';
+
 import Header from './components/Header/Header';
 import Card from './components/Card/Card';
+import Container from './components/UI/Container';
+import ViewOnlyCheckbox from './components/ViewOnlyCheckbox/ViewOnlyCheckbox';
 
-import MeinKun from './Images/meinkun.jpg';
-import ShotlCat from './Images/shotl.jpg';
-import BritainCat from './Images/brit.jpeg';
-import BenglCat from './Images/bengl.jpg';
-import { useState } from 'react';
-
-const BASE_CATS = [
+const ITEMS = [
   {
     id: '1',
-    title: 'Мейн-кун',
+    title: 'Lorem ipsum dolor',
     descr:
-      'Одной из самых удивительных и загадочных пород считается мейн-кун – ласковый гигант с серьезным взглядом. Этих созданий называют «комнатными рысями», что неудивительно, т.к. они одни из самых крупных домашних кошек.',
-    img: MeinKun,
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget enim congue, mattis odio eget, congue tortor. Cras ullamcorper ut eros rutrum sodales. Nunc tempor elit neque, eget semper sem sollicitudin eget. Pellentesque egestas rutrum feugiat. Maecenas tempus porta nulla, in volutpat orci mattis eu. Suspendisse id blandit sem. Aliquam felis odio, porta non tempus a, fermentum quis nibh. Donec accumsan lorem est, vel euismod est sagittis vitae.',
   },
   {
     id: '2',
-    title: 'Шотландская вислоухая',
+    title: 'Lorem ipsum dolor',
     descr:
-      'Во всём мире эту породу именуют «скоттиш-фолд», но нам привычней называть этих милых кошек «шотландскими вислоухими». Их «няшная» внешность никого не оставит равнодушным – такое создание сразу хочется взять на руки и затискать.',
-    img: ShotlCat,
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget enim congue, mattis odio eget, congue tortor. Cras ullamcorper ut eros rutrum sodales. Nunc tempor elit neque, eget semper sem sollicitudin eget. Pellentesque egestas rutrum feugiat. Maecenas tempus porta nulla, in volutpat orci mattis eu. Suspendisse id blandit sem. Aliquam felis odio, porta non tempus a, fermentum quis nibh. Donec accumsan lorem est, vel euismod est sagittis vitae.',
   },
   {
     id: '3',
-    title: 'Британская короткошерстные',
+    title: 'Lorem ipsum dolor',
     descr:
-      'Без таких вот «плюшевых» комочков счастья не мыслят своего существования миллионы людей во всем мире. Эти аристократичные, дружелюбные, харизматичные и весьма чистоплотные питомцы уже долгое время являются одной из самых популярных кошачьих пород на планете.',
-    img: BritainCat,
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget enim congue, mattis odio eget, congue tortor. Cras ullamcorper ut eros rutrum sodales. Nunc tempor elit neque, eget semper sem sollicitudin eget. Pellentesque egestas rutrum feugiat. Maecenas tempus porta nulla, in volutpat orci mattis eu. Suspendisse id blandit sem. Aliquam felis odio, porta non tempus a, fermentum quis nibh. Donec accumsan lorem est, vel euismod est sagittis vitae.',
   },
   {
     id: '4',
-    title: 'Бенгальская кошка',
+    title: 'Lorem ipsum dolor',
     descr:
-      'Бенгальские кошки – невероятно красивые животные, которые сочетают в себе эффектную внешность диких хищников и покладистый характер домашних питомцев. Ну а главной «фишкой» этих созданий является «леопардовый окрас», за что их и зовут «домашними леопардами».',
-    img: BenglCat,
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget enim congue, mattis odio eget, congue tortor. Cras ullamcorper ut eros rutrum sodales. Nunc tempor elit neque, eget semper sem sollicitudin eget. Pellentesque egestas rutrum feugiat. Maecenas tempus porta nulla, in volutpat orci mattis eu. Suspendisse id blandit sem. Aliquam felis odio, porta non tempus a, fermentum quis nibh. Donec accumsan lorem est, vel euismod est sagittis vitae.',
+  },
+  {
+    id: '5',
+    title: 'Lorem ipsum dolor',
+    descr:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget enim congue, mattis odio eget, congue tortor. Cras ullamcorper ut eros rutrum sodales. Nunc tempor elit neque, eget semper sem sollicitudin eget. Pellentesque egestas rutrum feugiat. Maecenas tempus porta nulla, in volutpat orci mattis eu. Suspendisse id blandit sem. Aliquam felis odio, porta non tempus a, fermentum quis nibh. Donec accumsan lorem est, vel euismod est sagittis vitae.',
+  },
+  {
+    id: '6',
+    title: 'Lorem ipsum dolor',
+    descr:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget enim congue, mattis odio eget, congue tortor. Cras ullamcorper ut eros rutrum sodales. Nunc tempor elit neque, eget semper sem sollicitudin eget. Pellentesque egestas rutrum feugiat. Maecenas tempus porta nulla, in volutpat orci mattis eu. Suspendisse id blandit sem. Aliquam felis odio, porta non tempus a, fermentum quis nibh. Donec accumsan lorem est, vel euismod est sagittis vitae.',
+  },
+  {
+    id: '7',
+    title: 'Lorem ipsum dolor',
+    descr:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget enim congue, mattis odio eget, congue tortor. Cras ullamcorper ut eros rutrum sodales. Nunc tempor elit neque, eget semper sem sollicitudin eget. Pellentesque egestas rutrum feugiat. Maecenas tempus porta nulla, in volutpat orci mattis eu. Suspendisse id blandit sem. Aliquam felis odio, porta non tempus a, fermentum quis nibh. Donec accumsan lorem est, vel euismod est sagittis vitae.',
   },
 ];
 
 function App() {
-  const [cats, setCats] = useState(BASE_CATS);
+  const [items, setItems] = useState(ITEMS);
 
-  const handleCatChange = (catId, editedTitle, editedDescr) => {
-    const updatedCats = cats.map((cat) => {
-      if (cat.id === catId) {
+  const handleChange = (id, editedTitle, editedDescr) => {
+    const updatedItems = items.map((item) => {
+      if (item.id === id) {
         return {
-          ...cat,
+          ...item,
           title: editedTitle,
           descr: editedDescr,
         };
       }
-      return cat;
+      return item;
     });
-    setCats(updatedCats);
+    setItems(updatedItems);
+  };
+
+  const [readOnly, setReadOnly] = useState(true);
+
+  const readOnlyHandler = () => {
+    setReadOnly(!readOnly);
   };
 
   return (
-    <div>
+    <Fragment>
       <Header />
-      <div className="cards">
-        {cats.map((cat) => (
-          <Card
-            key={cat.id}
-            id={cat.id}
-            title={cat.title}
-            descr={cat.descr}
-            img={cat.img}
-            handleCatChange={handleCatChange}
-          />
-        ))}
-      </div>
-    </div>
+      <Container>
+        <ViewOnlyCheckbox readOnly={readOnly} readOnlyHandler={readOnlyHandler}></ViewOnlyCheckbox>
+        <div className="cards">
+          {items.map((item) => (
+            <Card
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              descr={item.descr}
+              handleChange={handleChange}
+              readOnly={readOnly}
+            />
+          ))}
+        </div>
+      </Container>
+    </Fragment>
   );
 }
 
