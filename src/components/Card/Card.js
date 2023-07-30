@@ -15,7 +15,6 @@ function Card(props) {
   const [editedTitle, setEditedTitle] = useState(props.title);
   const [editedDescr, setEditedDescr] = useState(props.descr);
 
-  // Функция для сброса режима редактирования
   const resetEditingMode = () => {
     setIsEditing(false);
   };
@@ -77,8 +76,8 @@ function Card(props) {
 
         {!props.readOnly && (
           <button
-            className={classNames('card-block__edit-btn', {
-              'card-block__edit-btn hide': isEditing,
+            className={classNames('btn edit-btn', {
+              'btn edit-btn hide': isEditing,
             })}
             onClick={clickEditButtonHandler}>
             <MdEdit />
@@ -87,10 +86,10 @@ function Card(props) {
 
         {isEditing && (
           <Fragment>
-            <button onClick={clickSaveButtonHandler}>
+            <button className="btn save-btn" onClick={clickSaveButtonHandler}>
               <MdSave />
             </button>
-            <button onClick={clickCancelButtonHandler}>
+            <button className="btn cancel-btn" onClick={clickCancelButtonHandler}>
               <MdEditOff />
             </button>
           </Fragment>
