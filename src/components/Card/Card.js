@@ -1,7 +1,7 @@
-import { useState, useEffect, Fragment } from 'react';
+import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 
-import { MdEdit, MdSave, MdEditOff } from 'react-icons/md';
+import CardHeader from './CardHeader';
 
 import './Card.css';
 
@@ -63,46 +63,17 @@ function Card(props) {
 
   return (
     <div className={classNames('card', { 'card checked': isChecked })}>
-      <div className="card-block">
-        {isEditing ? (
-          <textarea
-            className="card-block__input"
-            type="text"
-            value={editedTitle}
-            onChange={titleChangeHandler}></textarea>
-        ) : (
-          <h2 className="card-block__title">{props.title}</h2>
-        )}
-
-        {!props.readOnly && (
-          <button
-            className={classNames('btn edit-btn', {
-              'btn edit-btn hide': isEditing,
-            })}
-            onClick={clickEditButtonHandler}>
-            <MdEdit />
-          </button>
-        )}
-
-        {isEditing && (
-          <Fragment>
-            <button className="btn save-btn" onClick={clickSaveButtonHandler}>
-              <MdSave />
-            </button>
-            <button className="btn cancel-btn" onClick={clickCancelButtonHandler}>
-              <MdEditOff />
-            </button>
-          </Fragment>
-        )}
-
-        <input
-          className={classNames('card-block__checkbox', {
-            'card-block__checkbox hide': isEditing,
-          })}
-          type="checkbox"
-          checked={isChecked}
-          onChange={checkboxChangeHandler}></input>
-      </div>
+      <CardHeader
+        isEditing={isEditing}
+        editedTitle={editedTitle}
+        title={props.title}
+        titleChangeHandler={titleChangeHandler}
+        clickEditButtonHandler={clickEditButtonHandler}
+        clickSaveButtonHandler={clickSaveButtonHandler}
+        clickCancelButtonHandler={clickCancelButtonHandler}
+        checkboxChangeHandler={checkboxChangeHandler}
+        checked={isChecked}
+        readOnly={props.readOnly}></CardHeader>
 
       {isEditing ? (
         <textarea
