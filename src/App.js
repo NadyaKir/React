@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react';
 
 import Header from './components/Header/Header';
-import Card from './components/Card/Card';
+import CardList from './components/CardList/CardList';
 import Container from './components/UI/Container';
 import ViewOnlyCheckbox from './components/ViewOnlyCheckbox/ViewOnlyCheckbox';
 
@@ -78,18 +78,7 @@ function App() {
       <Header />
       <Container>
         <ViewOnlyCheckbox readOnly={readOnly} readOnlyHandler={readOnlyHandler}></ViewOnlyCheckbox>
-        <div className="cards">
-          {items.map((item) => (
-            <Card
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              descr={item.descr}
-              handleChange={handleChange}
-              readOnly={readOnly}
-            />
-          ))}
-        </div>
+        <CardList items={items} handleChange={handleChange} readOnly={readOnly} />
       </Container>
     </Fragment>
   );

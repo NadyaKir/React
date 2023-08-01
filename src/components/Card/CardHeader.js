@@ -15,16 +15,16 @@ const CardHeader = (props) => {
           <Title>{props.title}</Title>
         )}
         {!props.readOnly && (
-          <Button edit isEditing={props.isEditing} onClick={props.clickEditButtonHandler}>
+          <Button $edit={true} isEditing={props.isEditing} onClick={props.clickEditButtonHandler}>
             <MdEdit />
           </Button>
         )}
         {props.isEditing && (
           <Fragment>
-            <Button save onClick={props.clickSaveButtonHandler}>
+            <Button $save={true} onClick={props.clickSaveButtonHandler}>
               <MdSave />
             </Button>
-            <Button cancel onClick={props.clickCancelButtonHandler}>
+            <Button $cancel={true} onClick={props.clickCancelButtonHandler}>
               <MdEditOff />
             </Button>
           </Fragment>
