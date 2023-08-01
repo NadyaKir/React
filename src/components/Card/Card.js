@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 
 import CardHeader from './CardHeader';
+import CardBody from './CardBody';
 
 import './Card.css';
 
@@ -74,15 +75,11 @@ function Card(props) {
         checkboxChangeHandler={checkboxChangeHandler}
         checked={isChecked}
         readOnly={props.readOnly}></CardHeader>
-
-      {isEditing ? (
-        <textarea
-          className="card__textarea"
-          value={editedDescr}
-          onChange={descrChangeHandler}></textarea>
-      ) : (
-        <p className="card__text">{props.descr}</p>
-      )}
+      <CardBody
+        descr={props.descr}
+        editedDescr={editedDescr}
+        isEditing={isEditing}
+        descrChangeHandler={descrChangeHandler}></CardBody>
     </div>
   );
 }
