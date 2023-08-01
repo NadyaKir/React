@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
-import classNames from 'classnames';
 
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
-
-import './Card.css';
+import CardWrapper from '../UI/CardWrapper';
 
 function Card(props) {
   //checkbox
@@ -63,7 +61,7 @@ function Card(props) {
   };
 
   return (
-    <div className={classNames('card', { 'card checked': isChecked })}>
+    <CardWrapper>
       <CardHeader
         isEditing={isEditing}
         editedTitle={editedTitle}
@@ -80,7 +78,7 @@ function Card(props) {
         editedDescr={editedDescr}
         isEditing={isEditing}
         descrChangeHandler={descrChangeHandler}></CardBody>
-    </div>
+    </CardWrapper>
   );
 }
 
