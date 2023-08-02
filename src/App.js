@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import CardList from './components/CardList/CardList';
 import Container from './components/UI/Container';
 import ViewOnlyCheckbox from './components/ViewOnlyCheckbox/ViewOnlyCheckbox';
+import Delete from './components/Delete/Delete';
 
 const ITEMS = [
   {
@@ -52,6 +53,8 @@ const ITEMS = [
 
 function App() {
   const [items, setItems] = useState(ITEMS);
+  const [readOnly, setReadOnly] = useState(true);
+  const [selectedCardIds, setSelectedCardIds] = useState([]);
 
   const handleChange = (id, editedTitle, editedDescr) => {
     const updatedItems = items.map((item) => {
@@ -67,7 +70,10 @@ function App() {
     setItems(updatedItems);
   };
 
-  const [readOnly, setReadOnly] = useState(true);
+  const handleDeleteCards = (selectedCardIds) => {
+    const updatedItems = items.filter((item) => !selectedCardIds.includes(item.id));
+    setItems(updatedItems);
+  };
 
   const readOnlyHandler = () => {
     setReadOnly(!readOnly);
@@ -77,8 +83,17 @@ function App() {
     <Fragment>
       <Header />
       <Container>
-        <ViewOnlyCheckbox readOnly={readOnly} readOnlyHandler={readOnlyHandler}></ViewOnlyCheckbox>
-        <CardList items={items} handleChange={handleChange} readOnly={readOnly} />
+        <ViewOnlyCheckbox readOnly={readOnly} readOnlyHandler={readOnlyHandler} />
+        <Delete handleDeleteCards={handleDeleteCards} selectedCardIds={selectedCardIds}></Delete>
+        <CardList
+          items={items}
+          setItems={setItems}
+          handleChange={handleChange}
+          readOnly={readOnly}
+          handleDeleteCards={handleDeleteCards}
+          selectedCardIds={selectedCardIds}
+          setSelectedCardIds={setSelectedCardIds}
+        />
       </Container>
     </Fragment>
   );

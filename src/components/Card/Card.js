@@ -27,6 +27,12 @@ function Card(props) {
 
   //checkbox func
   const checkboxChangeHandler = () => {
+    if (props.selectedCardIds.includes(props.id)) {
+      props.setSelectedCardIds(props.selectedCardIds.filter((id) => id !== props.id));
+    } else {
+      props.setSelectedCardIds([...props.selectedCardIds, props.id]);
+    }
+
     setIsChecked(!isChecked);
   };
 
@@ -63,6 +69,7 @@ function Card(props) {
   return (
     <CardWrapper>
       <CardHeader
+        id={props.id}
         isEditing={isEditing}
         editedTitle={editedTitle}
         title={props.title}
