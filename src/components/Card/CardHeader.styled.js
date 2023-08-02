@@ -40,7 +40,7 @@ export const Button = styled.button`
   ${(props) =>
     props.edit &&
     css`
-      display: ${(props) => (props.isEditing ? 'none' : 'block')};
+      display: ${(props) => (props.$isEditing ? 'none' : 'block')};
       background-color: #60391d;
     `}
 
@@ -61,5 +61,5 @@ export const Checkbox = styled.input`
   border-radius: 1rem;
   width: 22px;
   height: 22px;
-  display: ${(props) => (props.isEditing ? 'none' : 'block')};
+  display: ${(props) => (props.$isEditing ? 'none' : 'block')};
 `;
