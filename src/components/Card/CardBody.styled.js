@@ -9,6 +9,8 @@ export const Textarea = styled.textarea`
   font-family: inherit;
   border: none;
   text-align: justify;
+  overflow-y: hidden;
+  overflow-x: hidden;
 `;
 
 export const Paragraph = styled.p`
