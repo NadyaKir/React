@@ -5,7 +5,6 @@ import { Header, Textarea, Title, Button, Checkbox } from './CardHeader.styled';
 const CardHeader = (props) => {
   return (
     <Fragment>
-      <div>{props.id}</div>
       <Header>
         {props.isEditing ? (
           <Textarea
