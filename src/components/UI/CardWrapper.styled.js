@@ -6,17 +6,13 @@ export const Wrapper = styled.div`
   border-radius: 1rem;
   background-color: #fff6e5;
   padding: 20px;
-  width: 500px;
+  flex: 0 0 calc(33.33% - 20px);
 
-  @media screen and (max-height: 600px) {
-    flex-basis: calc(33.33% - 20px);
+  @media screen and (max-width: 1180px) {
+    flex: 0 0 calc(50% - 10px);
   }
 
-  @media screen and (max-height: 400px) {
-    flex-basis: calc(50% - 20px);
-  }
-
-  @media screen and (max-height: 300px) {
-    flex-basis: 100%;
+  @media screen and (max-width: 750px) {
+    flex: 0 0 calc(90% - 10px);
   }
 `;
