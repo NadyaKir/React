@@ -2,7 +2,7 @@ import Card from '../Card/Card';
 
 import { Wrapper } from './CardList.styled';
 
-const CardList = ({ items, selectedCardIds, setSelectedCardIds, handleChange, readOnly }) => {
+const CardList = ({ items, handleChange, readOnly }) => {
   return (
     <Wrapper>
       {items.map((item) => (
@@ -11,10 +11,9 @@ const CardList = ({ items, selectedCardIds, setSelectedCardIds, handleChange, re
           id={item.id}
           title={item.title}
           descr={item.descr}
+          isChecked={item.isChecked}
           handleChange={handleChange}
           readOnly={readOnly}
-          selectedCardIds={selectedCardIds}
-          setSelectedCardIds={setSelectedCardIds}
         />
       ))}
     </Wrapper>

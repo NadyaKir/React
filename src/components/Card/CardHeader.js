@@ -31,7 +31,7 @@ const CardHeader = (props) => {
         )}
         <Checkbox
           type="checkbox"
-          $isEditing={props.isEditing}
+          isEditing={props.isEditing}
           checked={props.isChecked}
           onChange={props.checkboxChangeHandler}></Checkbox>
       </Header>

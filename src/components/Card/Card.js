@@ -6,7 +6,7 @@ import CardWrapper from '../UI/CardWrapper';
 
 function Card(props) {
   //checkbox
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(props.isChecked);
 
   //edit
   const [isEditing, setIsEditing] = useState(false);
@@ -27,13 +27,10 @@ function Card(props) {
 
   //checkbox func
   const checkboxChangeHandler = () => {
-    if (props.selectedCardIds.includes(props.id)) {
-      props.setSelectedCardIds(props.selectedCardIds.filter((id) => id !== props.id));
-    } else {
-      props.setSelectedCardIds([...props.selectedCardIds, props.id]);
-    }
+    const newIsChecked = !isChecked;
 
-    setIsChecked(!isChecked);
+    setIsChecked(newIsChecked);
+    props.handleChange(props.id, editedTitle, editedDescr, newIsChecked);
   };
 
   //buttons func-s
@@ -44,7 +41,7 @@ function Card(props) {
 
   const clickSaveButtonHandler = () => {
     setIsEditing(!isEditing);
-    props.handleChange(props.id, editedTitle, editedDescr);
+    props.handleChange(props.id, editedTitle, editedDescr, isChecked);
   };
 
   const resetValues = () => {
@@ -78,7 +75,7 @@ function Card(props) {
         clickSaveButtonHandler={clickSaveButtonHandler}
         clickCancelButtonHandler={clickCancelButtonHandler}
         checkboxChangeHandler={checkboxChangeHandler}
-        checked={isChecked}
+        isChecked={isChecked}
         readOnly={props.readOnly}></CardHeader>
       <CardBody
         descr={props.descr}
