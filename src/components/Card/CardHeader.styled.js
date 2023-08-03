@@ -14,10 +14,13 @@ export const Textarea = styled.textarea`
   margin-right: auto;
   background: #fff6e5;
   min-height: fit-content;
+  max-width: 300px;
   resize: none;
   font-weight: bold;
   border: none;
+  font-family: inherit;
   font-size: 24px;
+  box-sizing: border-box;
   padding-top: 20px;
 `;
 
