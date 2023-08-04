@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const ViewOnlyCheckboxWrapper = styled.label`
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin: 1em 0;
   cursor: pointer;
 `;
 

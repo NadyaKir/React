@@ -9,6 +9,7 @@ import Delete from './components/Delete/Delete';
 import Add from './components/Add/Add';
 import Modal from './components/Modal/Modal';
 
+import { Wrapper } from './components/UI/Wrapper.styled';
 import { Button } from './components/UI/Button.styled';
 
 const ITEMS = [
@@ -113,22 +114,24 @@ function App() {
     <Fragment>
       <Header />
       <Container>
-        <ViewOnlyCheckbox readOnly={readOnly} readOnlyHandler={readOnlyHandler} />
-        <Button onClick={handleAddClick}>Добавить</Button>
-        <Delete handleDeleteCards={handleDeleteCards}></Delete>
-        <CardList
-          items={items}
-          setItems={setItems}
-          handleChange={handleChange}
-          readOnly={readOnly}
-          handleDeleteCards={handleDeleteCards}
-        />
-        {isAddModalOpen && ( // Условный рендеринг модального окна
-          <Modal closeModal={() => setIsAddModalOpen(false)}>
-            <h3>Добавление карточки</h3>
-            <Add handleAdd={handleAdd} />
-          </Modal>
-        )}
+        <Wrapper>
+          <ViewOnlyCheckbox readOnly={readOnly} readOnlyHandler={readOnlyHandler} />
+          <Button onClick={handleAddClick}>Добавить</Button>
+          <Delete handleDeleteCards={handleDeleteCards}></Delete>
+          <CardList
+            items={items}
+            setItems={setItems}
+            handleChange={handleChange}
+            readOnly={readOnly}
+            handleDeleteCards={handleDeleteCards}
+          />
+          {isAddModalOpen && (
+            <Modal closeModal={() => setIsAddModalOpen(false)}>
+              <h3>Добавление карточки</h3>
+              <Add handleAdd={handleAdd} />
+            </Modal>
+          )}
+        </Wrapper>
       </Container>
     </Fragment>
   );
