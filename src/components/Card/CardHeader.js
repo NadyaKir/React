@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { MdEdit, MdSave, MdEditOff } from 'react-icons/md';
-import { Header, Textarea, Title, Button, Checkbox } from './CardHeader.styled';
+import { Header, Textarea, Title, Checkbox } from './CardHeader.styled';
+import { Button } from '../UI/Button.styled';
 
 const CardHeader = (props) => {
   return (

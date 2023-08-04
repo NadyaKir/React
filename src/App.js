@@ -1,10 +1,12 @@
 import { Fragment, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import Header from './components/Header/Header';
 import CardList from './components/CardList/CardList';
 import Container from './components/UI/Container';
 import ViewOnlyCheckbox from './components/ViewOnlyCheckbox/ViewOnlyCheckbox';
 import Delete from './components/Delete/Delete';
+import Add from './components/Add/Add';
 
 const ITEMS = [
   {
@@ -62,6 +64,18 @@ function App() {
   const [items, setItems] = useState(ITEMS);
   const [readOnly, setReadOnly] = useState(true);
 
+  const handleAdd = (title, descr) => {
+    const id = uuidv4();
+    const newItem = {
+      id: id,
+      title: title,
+      descr: descr,
+      isChecked: false,
+    };
+
+    setItems((prevItems) => [...prevItems, newItem]);
+  };
+
   const handleChange = (id, editedTitle, editedDescr, isChecked) => {
     const updatedItems = items.map((item) => {
       if (item.id === id) {
@@ -91,6 +105,7 @@ function App() {
       <Header />
       <Container>
         <ViewOnlyCheckbox readOnly={readOnly} readOnlyHandler={readOnlyHandler} />
+        <Add handleAdd={handleAdd}></Add>
         <Delete handleDeleteCards={handleDeleteCards}></Delete>
         <CardList
           items={items}
