@@ -77,7 +77,7 @@ function App() {
       isChecked: false,
     };
 
-    setItems((prevItems) => [...prevItems, newItem]);
+    setItems((prevItems) => [newItem, ...prevItems]);
 
     setIsAddModalOpen(false);
   };

@@ -27,7 +27,7 @@ const Add = ({ handleAdd }) => {
   };
 
   return (
-    <Form>
+    <Form onClick={stopPropagation}>
       <Label htmlFor="title">Заголовок:</Label>
       <Input
         id="title"
