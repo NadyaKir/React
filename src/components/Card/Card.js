@@ -1,13 +1,12 @@
-import { useState, useEffect, Fragment } from 'react';
-import classNames from 'classnames';
+import { useState, useEffect } from 'react';
 
-import { MdEdit, MdSave, MdEditOff } from 'react-icons/md';
-
-import './Card.css';
+import CardHeader from './CardHeader';
+import CardBody from './CardBody';
+import CardWrapper from '../UI/CardWrapper';
 
 function Card(props) {
   //checkbox
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(props.isChecked);
 
   //edit
   const [isEditing, setIsEditing] = useState(false);
@@ -28,7 +27,10 @@ function Card(props) {
 
   //checkbox func
   const checkboxChangeHandler = () => {
-    setIsChecked(!isChecked);
+    const newIsChecked = !isChecked;
+
+    setIsChecked(newIsChecked);
+    props.handleChange(props.id, editedTitle, editedDescr, newIsChecked);
   };
 
   //buttons func-s
@@ -39,7 +41,7 @@ function Card(props) {
 
   const clickSaveButtonHandler = () => {
     setIsEditing(!isEditing);
-    props.handleChange(props.id, editedTitle, editedDescr);
+    props.handleChange(props.id, editedTitle, editedDescr, isChecked);
   };
 
   const resetValues = () => {
@@ -62,57 +64,25 @@ function Card(props) {
   };
 
   return (
-    <div className={classNames('card', { 'card checked': isChecked })}>
-      <div className="card-block">
-        {isEditing ? (
-          <textarea
-            className="card-block__input"
-            type="text"
-            value={editedTitle}
-            onChange={titleChangeHandler}></textarea>
-        ) : (
-          <h2 className="card-block__title">{props.title}</h2>
-        )}
-
-        {!props.readOnly && (
-          <button
-            className={classNames('btn edit-btn', {
-              'btn edit-btn hide': isEditing,
-            })}
-            onClick={clickEditButtonHandler}>
-            <MdEdit />
-          </button>
-        )}
-
-        {isEditing && (
-          <Fragment>
-            <button className="btn save-btn" onClick={clickSaveButtonHandler}>
-              <MdSave />
-            </button>
-            <button className="btn cancel-btn" onClick={clickCancelButtonHandler}>
-              <MdEditOff />
-            </button>
-          </Fragment>
-        )}
-
-        <input
-          className={classNames('card-block__checkbox', {
-            'card-block__checkbox hide': isEditing,
-          })}
-          type="checkbox"
-          checked={isChecked}
-          onChange={checkboxChangeHandler}></input>
-      </div>
-
-      {isEditing ? (
-        <textarea
-          className="card__textarea"
-          value={editedDescr}
-          onChange={descrChangeHandler}></textarea>
-      ) : (
-        <p className="card__text">{props.descr}</p>
-      )}
-    </div>
+    <CardWrapper>
+      <CardHeader
+        id={props.id}
+        isEditing={isEditing}
+        editedTitle={editedTitle}
+        title={props.title}
+        titleChangeHandler={titleChangeHandler}
+        clickEditButtonHandler={clickEditButtonHandler}
+        clickSaveButtonHandler={clickSaveButtonHandler}
+        clickCancelButtonHandler={clickCancelButtonHandler}
+        checkboxChangeHandler={checkboxChangeHandler}
+        isChecked={isChecked}
+        readOnly={props.readOnly}></CardHeader>
+      <CardBody
+        descr={props.descr}
+        editedDescr={editedDescr}
+        isEditing={isEditing}
+        descrChangeHandler={descrChangeHandler}></CardBody>
+    </CardWrapper>
   );
 }
 
