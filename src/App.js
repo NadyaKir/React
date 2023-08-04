@@ -7,6 +7,9 @@ import Container from './components/UI/Container';
 import ViewOnlyCheckbox from './components/ViewOnlyCheckbox/ViewOnlyCheckbox';
 import Delete from './components/Delete/Delete';
 import Add from './components/Add/Add';
+import Modal from './components/Modal/Modal';
+
+import { Button } from './components/UI/Button.styled';
 
 const ITEMS = [
   {
@@ -63,7 +66,7 @@ const ITEMS = [
 function App() {
   const [items, setItems] = useState(ITEMS);
   const [readOnly, setReadOnly] = useState(true);
-
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const handleAdd = (title, descr) => {
     const id = uuidv4();
     const newItem = {
@@ -74,6 +77,8 @@ function App() {
     };
 
     setItems((prevItems) => [...prevItems, newItem]);
+
+    setIsAddModalOpen(false);
   };
 
   const handleChange = (id, editedTitle, editedDescr, isChecked) => {
@@ -100,12 +105,16 @@ function App() {
     setReadOnly(!readOnly);
   };
 
+  const handleAddClick = () => {
+    setIsAddModalOpen(true);
+  };
+
   return (
     <Fragment>
       <Header />
       <Container>
         <ViewOnlyCheckbox readOnly={readOnly} readOnlyHandler={readOnlyHandler} />
-        <Add handleAdd={handleAdd}></Add>
+        <Button onClick={handleAddClick}>Добавить</Button>
         <Delete handleDeleteCards={handleDeleteCards}></Delete>
         <CardList
           items={items}
@@ -114,6 +123,12 @@ function App() {
           readOnly={readOnly}
           handleDeleteCards={handleDeleteCards}
         />
+        {isAddModalOpen && ( // Условный рендеринг модального окна
+          <Modal closeModal={() => setIsAddModalOpen(false)}>
+            <h3>Добавление карточки</h3>
+            <Add handleAdd={handleAdd} />
+          </Modal>
+        )}
       </Container>
     </Fragment>
   );
