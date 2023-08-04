@@ -116,7 +116,9 @@ function App() {
       <Container>
         <Wrapper>
           <ViewOnlyCheckbox readOnly={readOnly} readOnlyHandler={readOnlyHandler} />
-          <Button onClick={handleAddClick}>Добавить</Button>
+          <Button save="true" onClick={handleAddClick}>
+            Добавить
+          </Button>
           <Delete handleDeleteCards={handleDeleteCards}></Delete>
           <CardList
             items={items}
@@ -127,7 +129,6 @@ function App() {
           />
           {isAddModalOpen && (
             <Modal closeModal={() => setIsAddModalOpen(false)}>
-              <h3>Добавление карточки</h3>
               <Add handleAdd={handleAdd} />
             </Modal>
           )}

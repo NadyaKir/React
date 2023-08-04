@@ -1,26 +1,7 @@
 import { useState } from 'react';
 
-import styled from 'styled-components';
-import CardWrapper from '../UI/CardWrapper';
+import { Form, Label, Input, Textarea } from './Add.styled';
 import { Button } from '../UI/Button.styled';
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 500px;
-`;
-
-const Label = styled.label`
-  margin-bottom: 5px;
-`;
-
-const Input = styled.input`
-  margin-bottom: 15px;
-`;
-
-const Textarea = styled.textarea`
-  margin-bottom: 20px;
-`;
 
 const Add = ({ handleAdd }) => {
   const [title, setTitle] = useState('');
@@ -41,16 +22,30 @@ const Add = ({ handleAdd }) => {
     handleAdd(title, descr);
   };
 
+  const stopPropagation = (event) => {
+    event.stopPropagation();
+  };
+
   return (
-    <CardWrapper>
-      <Form>
-        <Label htmlFor="title">Заголовок:</Label>
-        <Input id="title" type="text" value={title} onChange={titleChangeHandler} />
-        <Label htmlFor="descr">Описание:</Label>
-        <Textarea id="descr" type="text" value={descr} onChange={descrChangeHandler} />
-        <Button onClick={clickAddButton}>Добавить</Button>
-      </Form>
-    </CardWrapper>
+    <Form>
+      <Label htmlFor="title">Заголовок:</Label>
+      <Input
+        id="title"
+        type="text"
+        value={title}
+        onChange={titleChangeHandler}
+        onClick={stopPropagation}
+      />
+      <Label htmlFor="descr">Описание:</Label>
+      <Textarea
+        id="descr"
+        type="text"
+        value={descr}
+        onChange={descrChangeHandler}
+        onClick={stopPropagation}
+      />
+      <Button onClick={clickAddButton}>Добавить</Button>
+    </Form>
   );
 };
 
