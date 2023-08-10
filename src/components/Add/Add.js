@@ -9,12 +9,10 @@ const Add = ({ handleAdd }) => {
 
   const titleChangeHandler = (event) => {
     setTitle(event.target.value);
-    // console.log(title);
   };
 
   const descrChangeHandler = (event) => {
     setDescr(event.target.value);
-    // console.log(descr);
   };
 
   const clickAddButton = (event) => {
@@ -22,19 +20,14 @@ const Add = ({ handleAdd }) => {
     handleAdd(title, descr);
   };
 
-  const stopPropagation = (event) => {
-    event.stopPropagation();
-  };
-
   return (
-    <Form onClick={stopPropagation}>
+    <Form>
       <Label htmlFor="title">Заголовок:</Label>
       <Input
         id="title"
         type="text"
         value={title}
         onChange={titleChangeHandler}
-        onClick={stopPropagation}
       />
       <Label htmlFor="descr">Описание:</Label>
       <Textarea
@@ -42,7 +35,6 @@ const Add = ({ handleAdd }) => {
         type="text"
         value={descr}
         onChange={descrChangeHandler}
-        onClick={stopPropagation}
       />
       <Button onClick={clickAddButton}>Добавить</Button>
     </Form>
