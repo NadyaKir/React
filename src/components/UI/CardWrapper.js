@@ -1,10 +1,7 @@
 import { Wrapper } from "./CardWrapper.styled";
 
-const CardWrapper = ({ children }) => {
-  const stopPropagation = (event) => {
-    event.stopPropagation();
-  };
-  return <Wrapper onClick={stopPropagation}>{children}</Wrapper>;
+const CardWrapper = ({ children, onClick }) => {
+  return <Wrapper onClick={onClick}>{children}</Wrapper>;
 };
 
 export default CardWrapper;

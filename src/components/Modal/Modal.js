@@ -4,9 +4,13 @@ import CardWrapper from "../UI/CardWrapper";
 import { ModalWrapper } from "./Modal.styled";
 
 const Modal = ({ children, closeModal }) => {
+  const stopPropagation = (event) => {
+    event.stopPropagation();
+  };
+
   return (
     <ModalWrapper onClick={closeModal}>
-      <CardWrapper>{children}</CardWrapper>
+      <CardWrapper onClick={stopPropagation}>{children}</CardWrapper>
     </ModalWrapper>
   );
 };
