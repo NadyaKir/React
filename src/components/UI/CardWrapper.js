@@ -1,7 +1,7 @@
-import { Wrapper } from './CardWrapper.styled';
+import { Wrapper } from "./CardWrapper.styled";
 
-const CardWrapper = (props) => {
-  return <Wrapper>{props.children}</Wrapper>;
+const CardWrapper = ({ children, onClick }) => {
+  return <Wrapper onClick={onClick}>{children}</Wrapper>;
 };
 
 export default CardWrapper;

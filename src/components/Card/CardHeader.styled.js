@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const Header = styled.div`
   display: flex;
@@ -22,41 +22,6 @@ export const Textarea = styled.textarea`
   font-size: 24px;
   box-sizing: border-box;
   padding-top: 20px;
-`;
-
-export const Button = styled.button`
-  margin-left: 5px;
-  color: white;
-  border: none;
-  padding: 3px 5px;
-  font-size: 16px;
-  border-radius: 5px;
-  margin-right: 5px;
-  transition: opacity 0.3s ease;
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.8;
-  }
-
-  ${(props) =>
-    props.edit &&
-    css`
-      display: ${(props) => (props.isEditing ? 'none' : 'block')};
-      background-color: #60391d;
-    `}
-
-  ${(props) =>
-    props.save &&
-    css`
-      background-color: #4caf50;
-    `}
-
-    ${(props) =>
-    props.cancel &&
-    css`
-      background-color: #f44336;
-    `};
 `;
 
 export const Checkbox = styled.input`
