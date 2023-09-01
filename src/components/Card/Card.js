@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import CardHeader from './CardHeader';
-import CardBody from './CardBody';
-import CardWrapper from '../UI/CardWrapper';
+import CardHeader from "./CardHeader";
+import CardBody from "./CardBody";
+import CardWrapper from "../UI/CardWrapper";
+import withLoadingDelay from "../UI/withLoadingDelay";
 
 function Card(props) {
   //checkbox
@@ -76,14 +77,16 @@ function Card(props) {
         clickCancelButtonHandler={clickCancelButtonHandler}
         checkboxChangeHandler={checkboxChangeHandler}
         isChecked={isChecked}
-        readOnly={props.readOnly}></CardHeader>
+        readOnly={props.readOnly}
+      ></CardHeader>
       <CardBody
         descr={props.descr}
         editedDescr={editedDescr}
         isEditing={isEditing}
-        descrChangeHandler={descrChangeHandler}></CardBody>
+        descrChangeHandler={descrChangeHandler}
+      ></CardBody>
     </CardWrapper>
   );
 }
 
-export default Card;
+export default withLoadingDelay(Card);
