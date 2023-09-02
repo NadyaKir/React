@@ -4,8 +4,18 @@ import CardHeader from './CardHeader';
 import CardBody from './CardBody';
 import CardWrapper from '../UI/CardWrapper';
 import withLoadingDelay from '../UI/withLoadingDelay';
+import PropTypes from 'prop-types';
 
-function Card(props) {
+const Card = (props) => {
+  Card.propTypes = {
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string,
+    descr: PropTypes.string,
+    isChecked: PropTypes.bool,
+    handleChange: PropTypes.func,
+    readOnly: PropTypes.bool,
+  };
+
   //checkbox
   const [isChecked, setIsChecked] = useState(props.isChecked);
 
@@ -87,6 +97,6 @@ function Card(props) {
       ></CardBody>
     </CardWrapper>
   );
-}
+};
 
 export default withLoadingDelay(Card);
