@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { Form, Label, Input, Textarea } from "./Add.styled";
-import { Button } from "../UI/Button.styled";
+import { Form, Label, Input, Textarea } from './Add.styled';
+import { Button } from '../UI/Button.styled';
 
 const Add = ({ handleAdd }) => {
-  const [title, setTitle] = useState("");
-  const [descr, setDescr] = useState("");
+  const [title, setTitle] = useState('');
+  const [descr, setDescr] = useState('');
 
   const titleChangeHandler = (event) => {
     setTitle(event.target.value);

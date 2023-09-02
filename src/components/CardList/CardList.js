@@ -1,6 +1,6 @@
-import Card from "../Card/Card";
+import Card from '../Card/Card';
 
-import { Wrapper } from "./CardList.styled";
+import { Wrapper } from './CardList.styled';
 
 const CardList = ({ items, handleChange, readOnly }) => {
   return (

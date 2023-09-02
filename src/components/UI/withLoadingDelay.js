@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { CircleLoader } from "react-spinners";
+import React, { useState, useEffect } from 'react';
+import { CircleLoader } from 'react-spinners';
 
 // HOC для управления задержкой
 const withLoadingDelay = (WrappedComponent) => {
@@ -20,7 +20,7 @@ const withLoadingDelay = (WrappedComponent) => {
     if (isLoading) {
       return (
         <div>
-          <CircleLoader size={60} color={"#e9967a"} loading={true} />
+          <CircleLoader size={60} color={'#e9967a'} loading={true} />
         </div>
       );
     }

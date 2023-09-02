@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-import CardHeader from "./CardHeader";
-import CardBody from "./CardBody";
-import CardWrapper from "../UI/CardWrapper";
-import withLoadingDelay from "../UI/withLoadingDelay";
+import CardHeader from './CardHeader';
+import CardBody from './CardBody';
+import CardWrapper from '../UI/CardWrapper';
+import withLoadingDelay from '../UI/withLoadingDelay';
 
 function Card(props) {
   //checkbox
