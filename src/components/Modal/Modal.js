@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import CardWrapper from "../UI/CardWrapper";
-import { ModalWrapper } from "./Modal.styled";
+import CardWrapper from '../UI/CardWrapper';
+import { ModalWrapper } from './Modal.styled';
 
 const Modal = ({ children, closeModal }) => {
   const stopPropagation = (event) => {

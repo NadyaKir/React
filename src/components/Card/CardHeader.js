@@ -11,12 +11,17 @@ const CardHeader = (props) => {
           <Textarea
             type="text"
             value={props.editedTitle}
-            onChange={props.titleChangeHandler}></Textarea>
+            onChange={props.titleChangeHandler}
+          ></Textarea>
         ) : (
           <Title>{props.title}</Title>
         )}
         {!props.readOnly && (
-          <Button edit="true" isEditing={props.isEditing} onClick={props.clickEditButtonHandler}>
+          <Button
+            edit="true"
+            isEditing={props.isEditing}
+            onClick={props.clickEditButtonHandler}
+          >
             <MdEdit />
           </Button>
         )}
@@ -34,7 +39,8 @@ const CardHeader = (props) => {
           type="checkbox"
           isEditing={props.isEditing}
           checked={props.isChecked}
-          onChange={props.checkboxChangeHandler}></Checkbox>
+          onChange={props.checkboxChangeHandler}
+        ></Checkbox>
       </Header>
     </Fragment>
   );

@@ -6,7 +6,10 @@ const CardBody = (props) => {
   return (
     <Fragment>
       {props.isEditing ? (
-        <Textarea value={props.editedDescr} onChange={props.descrChangeHandler}></Textarea>
+        <Textarea
+          value={props.editedDescr}
+          onChange={props.descrChangeHandler}
+        ></Textarea>
       ) : (
         <Paragraph>{props.descr}</Paragraph>
       )}

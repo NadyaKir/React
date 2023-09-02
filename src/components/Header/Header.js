@@ -8,7 +8,11 @@ function Header() {
     <div className="header">
       <img className="stars" src={stars} alt="stars" />
       <a className="header__logo">
-        <img className="header__logo-img" src={headerLogo} alt="Cute sleeping cat" />
+        <img
+          className="header__logo-img"
+          src={headerLogo}
+          alt="Cute sleeping cat"
+        />
       </a>
       <img className="stars" src={stars} alt="stars" />
     </div>
