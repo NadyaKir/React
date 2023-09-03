@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useItems } from '../../store/context';
 
 import { Form, Label, Input, Textarea } from './Add.styled';
 import { Button } from '../UI/Button.styled';

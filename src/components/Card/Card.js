@@ -5,6 +5,7 @@ import CardBody from './CardBody';
 import CardWrapper from '../UI/CardWrapper';
 import withLoadingDelay from '../UI/withLoadingDelay';
 import PropTypes from 'prop-types';
+import { useItems } from '../../store/context';
 
 const Card = (props) => {
   Card.propTypes = {
@@ -29,19 +30,21 @@ const Card = (props) => {
     setIsEditing(false);
   };
 
+  const { readOnly, handleChange } = useItems();
+
   useEffect(() => {
-    if (props.readOnly && isEditing) {
+    if (readOnly && isEditing) {
       resetValues();
       resetEditingMode();
     }
-  }, [isEditing, props.readOnly]);
+  }, [isEditing, readOnly]);
 
   //checkbox func
   const checkboxChangeHandler = () => {
     const newIsChecked = !isChecked;
 
     setIsChecked(newIsChecked);
-    props.handleChange(props.id, editedTitle, editedDescr, newIsChecked);
+    handleChange(props.id, editedTitle, editedDescr, newIsChecked);
   };
 
   //buttons func-s
@@ -87,7 +90,7 @@ const Card = (props) => {
         clickCancelButtonHandler={clickCancelButtonHandler}
         checkboxChangeHandler={checkboxChangeHandler}
         isChecked={isChecked}
-        readOnly={props.readOnly}
+        readOnly={readOnly}
       ></CardHeader>
       <CardBody
         descr={props.descr}

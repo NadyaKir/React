@@ -1,17 +1,7 @@
-import { Fragment, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import Header from './components/Header/Header';
-import CardList from './components/CardList/CardList';
-import Container from './components/UI/Container';
-import ViewOnlyCheckbox from './components/ViewOnlyCheckbox/ViewOnlyCheckbox';
-import Delete from './components/Delete/Delete';
-import Add from './components/Add/Add';
-import Modal from './components/Modal/Modal';
-import { Provider, useItems } from './store/context';
-
-import { Wrapper } from './components/UI/Wrapper.styled';
-import { Button } from './components/UI/Button.styled';
+const ItemsContext = createContext();
 
 const ITEMS = [
   {
@@ -65,50 +55,56 @@ const ITEMS = [
   },
 ];
 
-function App() {
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+export const useItems = () => {
+  return useContext(ItemsContext);
+};
+
+export const Provider = ({ children }) => {
   const [items, setItems] = useState(ITEMS);
+  const [readOnly, setReadOnly] = useState(true);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
-  const handleAdd = (title, descr) => {
-    const id = uuidv4();
-    const newItem = {
-      id: id,
-      title: title,
-      descr: descr,
-      isChecked: false,
-    };
+  const handleChange = (id, editedTitle, editedDescr, isChecked) => {
+    const updatedItems = items.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          title: editedTitle,
+          descr: editedDescr,
+          isChecked: isChecked,
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  };
 
-    setItems((prevItems) => [newItem, ...prevItems]);
+  const handleDeleteCards = () => {
+    const updatedItems = items.filter((item) => !item.isChecked);
+    setItems(updatedItems);
+  };
 
-    setIsAddModalOpen(false);
+  const readOnlyHandler = () => {
+    setReadOnly(!readOnly);
   };
 
   const handleAddClick = () => {
     setIsAddModalOpen(true);
   };
 
-  return (
-    <Fragment>
-      <Provider>
-        <Header />
-        <Container>
-          <Wrapper>
-            <ViewOnlyCheckbox />
-            <Button save="true" onClick={handleAddClick}>
-              Добавить
-            </Button>
-            <Delete></Delete>
-            <CardList />
-            {isAddModalOpen && (
-              <Modal closeModal={() => setIsAddModalOpen(false)}>
-                <Add handleAdd={handleAdd} />
-              </Modal>
-            )}
-          </Wrapper>
-        </Container>
-      </Provider>
-    </Fragment>
-  );
-}
+  const contextData = {
+    itemsCount: items.length,
+    items: items,
+    readOnly: readOnly,
+    readOnlyHandler: readOnlyHandler,
+    handleAddClick: handleAddClick,
+    handleChange: handleChange,
+    handleDeleteCards: handleDeleteCards,
+  };
 
-export default App;
+  return (
+    <ItemsContext.Provider value={contextData}>
+      {children}
+    </ItemsContext.Provider>
+  );
+};

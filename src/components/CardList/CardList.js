@@ -1,8 +1,11 @@
+import { useItems } from '../../store/context';
 import Card from '../Card/Card';
 
 import { Wrapper } from './CardList.styled';
 
-const CardList = ({ items, handleChange, readOnly }) => {
+const CardList = () => {
+  const { items } = useItems();
+
   return (
     <Wrapper>
       {items.map((item) => (
@@ -12,8 +15,6 @@ const CardList = ({ items, handleChange, readOnly }) => {
           title={item.title}
           descr={item.descr}
           isChecked={item.isChecked}
-          handleChange={handleChange}
-          readOnly={readOnly}
         />
       ))}
     </Wrapper>
