@@ -1,5 +1,4 @@
 import { Fragment, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 import Header from './components/Header/Header';
 import CardList from './components/CardList/CardList';
