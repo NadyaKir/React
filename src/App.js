@@ -7,39 +7,41 @@ import ViewOnlyCheckbox from './components/ViewOnlyCheckbox/ViewOnlyCheckbox';
 import Delete from './components/Delete/Delete';
 import Add from './components/Add/Add';
 import Modal from './components/Modal/Modal';
-import { Provider } from './store/context';
+import { Provider, useItems } from './store/context';
 
 import { Wrapper } from './components/UI/Wrapper.styled';
 import { Button } from './components/UI/Button.styled';
 
-function App() {
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-
-  const handleAddClick = () => {
-    setIsAddModalOpen(true);
-  };
+function AppContent() {
+  const { isAddModalOpen, setIsAddModalOpen, handleAddClick } = useItems();
 
   return (
     <Fragment>
-      <Provider>
-        <Header />
-        <Container>
-          <Wrapper>
-            <ViewOnlyCheckbox />
-            <Button save="true" onClick={handleAddClick}>
-              Добавить
-            </Button>
-            <Delete></Delete>
-            <CardList />
-            {isAddModalOpen && (
-              <Modal closeModal={() => setIsAddModalOpen(false)}>
-                <Add />
-              </Modal>
-            )}
-          </Wrapper>
-        </Container>
-      </Provider>
+      <Header />
+      <Container>
+        <Wrapper>
+          <ViewOnlyCheckbox />
+          <Button save="true" onClick={handleAddClick}>
+            Добавить
+          </Button>
+          <Delete></Delete>
+          <CardList />
+          {isAddModalOpen && (
+            <Modal closeModal={() => setIsAddModalOpen(false)}>
+              <Add />
+            </Modal>
+          )}
+        </Wrapper>
+      </Container>
     </Fragment>
+  );
+}
+
+function App() {
+  return (
+    <Provider>
+      <AppContent />
+    </Provider>
   );
 }
 
