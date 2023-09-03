@@ -64,6 +64,20 @@ export const Provider = ({ children }) => {
   const [readOnly, setReadOnly] = useState(true);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
+  const handleAdd = (title, descr) => {
+    const id = uuidv4();
+    const newItem = {
+      id: id,
+      title: title,
+      descr: descr,
+      isChecked: false,
+    };
+
+    setItems((prevItems) => [newItem, ...prevItems]);
+
+    setIsAddModalOpen(false);
+  };
+
   const handleChange = (id, editedTitle, editedDescr, isChecked) => {
     const updatedItems = items.map((item) => {
       if (item.id === id) {
@@ -96,7 +110,10 @@ export const Provider = ({ children }) => {
     itemsCount: items.length,
     items: items,
     readOnly: readOnly,
+    isAddModalOpen: isAddModalOpen,
+    setIsAddModalOpen: setIsAddModalOpen,
     readOnlyHandler: readOnlyHandler,
+    handleAdd: handleAdd,
     handleAddClick: handleAddClick,
     handleChange: handleChange,
     handleDeleteCards: handleDeleteCards,

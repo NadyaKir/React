@@ -69,23 +69,11 @@ function App() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [items, setItems] = useState(ITEMS);
 
-  const handleAdd = (title, descr) => {
-    const id = uuidv4();
-    const newItem = {
-      id: id,
-      title: title,
-      descr: descr,
-      isChecked: false,
-    };
-
-    setItems((prevItems) => [newItem, ...prevItems]);
-
-    setIsAddModalOpen(false);
-  };
-
   const handleAddClick = () => {
     setIsAddModalOpen(true);
   };
+
+  // const { isAddModalOpen, setIsAddModalOpen, handleAddClick } = useItems();
 
   return (
     <Fragment>
@@ -101,7 +89,7 @@ function App() {
             <CardList />
             {isAddModalOpen && (
               <Modal closeModal={() => setIsAddModalOpen(false)}>
-                <Add handleAdd={handleAdd} />
+                <Add />
               </Modal>
             )}
           </Wrapper>

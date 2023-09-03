@@ -4,9 +4,11 @@ import { useItems } from '../../store/context';
 import { Form, Label, Input, Textarea } from './Add.styled';
 import { Button } from '../UI/Button.styled';
 
-const Add = ({ handleAdd }) => {
+const Add = () => {
   const [title, setTitle] = useState('');
   const [descr, setDescr] = useState('');
+
+  const { handleAdd } = useItems();
 
   const titleChangeHandler = (event) => {
     setTitle(event.target.value);
