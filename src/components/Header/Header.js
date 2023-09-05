@@ -1,22 +1,30 @@
-import './Header.css';
+import { useContext } from 'react';
+
+import {
+  HeaderWrapper,
+  HeaderLogo,
+  ImgLogo,
+  ImgStars,
+  Badge,
+} from './Header.styled';
+import { ItemsContext } from '../../store/context';
 
 import headerLogo from './header-logo.png';
 import stars from './stars.png';
 
-function Header() {
+const Header = () => {
+  const { itemsCount } = useContext(ItemsContext);
+
   return (
-    <div className="header">
-      <img className="stars" src={stars} alt="stars" />
-      <a className="header__logo">
-        <img
-          className="header__logo-img"
-          src={headerLogo}
-          alt="Cute sleeping cat"
-        />
-      </a>
-      <img className="stars" src={stars} alt="stars" />
-    </div>
+    <HeaderWrapper>
+      <ImgStars src={stars} alt="stars" />
+      <HeaderLogo>
+        <ImgLogo src={headerLogo} alt="Cute sleeping cat" />
+      </HeaderLogo>
+      <ImgStars src={stars} alt="stars" />
+      <Badge>{itemsCount}</Badge>
+    </HeaderWrapper>
   );
-}
+};
 
 export default Header;

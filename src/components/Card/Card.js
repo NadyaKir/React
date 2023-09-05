@@ -1,11 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
 import CardWrapper from '../UI/CardWrapper';
 import withLoadingDelay from '../UI/withLoadingDelay';
+import PropTypes from 'prop-types';
+import { ItemsContext } from '../../store/context';
 
-function Card(props) {
+const Card = (props) => {
+  Card.propTypes = {
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string,
+    descr: PropTypes.string,
+    isChecked: PropTypes.bool,
+    handleChange: PropTypes.func,
+    readOnly: PropTypes.bool,
+  };
+
   //checkbox
   const [isChecked, setIsChecked] = useState(props.isChecked);
 
@@ -19,19 +30,21 @@ function Card(props) {
     setIsEditing(false);
   };
 
+  const { readOnly, handleChange } = useContext(ItemsContext);
+
   useEffect(() => {
-    if (props.readOnly && isEditing) {
+    if (readOnly && isEditing) {
       resetValues();
       resetEditingMode();
     }
-  }, [isEditing, props.readOnly]);
+  }, [isEditing, readOnly]);
 
   //checkbox func
   const checkboxChangeHandler = () => {
     const newIsChecked = !isChecked;
 
     setIsChecked(newIsChecked);
-    props.handleChange(props.id, editedTitle, editedDescr, newIsChecked);
+    handleChange(props.id, editedTitle, editedDescr, newIsChecked);
   };
 
   //buttons func-s
@@ -77,7 +90,7 @@ function Card(props) {
         clickCancelButtonHandler={clickCancelButtonHandler}
         checkboxChangeHandler={checkboxChangeHandler}
         isChecked={isChecked}
-        readOnly={props.readOnly}
+        readOnly={readOnly}
       ></CardHeader>
       <CardBody
         descr={props.descr}
@@ -87,6 +100,6 @@ function Card(props) {
       ></CardBody>
     </CardWrapper>
   );
-}
+};
 
 export default withLoadingDelay(Card);

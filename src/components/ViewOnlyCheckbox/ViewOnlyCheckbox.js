@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { ItemsContext } from '../../store/context';
 import {
   ViewOnlyCheckboxWrapper,
   HiddenCheckbox,
@@ -6,17 +8,19 @@ import {
   Label,
 } from './ViewOnlyCheckbox.styled';
 
-const ViewOnlyCheckbox = (props) => {
+const ViewOnlyCheckbox = () => {
+  const { readOnly, readOnlyHandler } = useContext(ItemsContext);
+
   return (
     <ViewOnlyCheckboxWrapper>
       <HiddenCheckbox
         type="checkbox"
         id="viewOnly"
-        checked={props.readOnly}
-        onChange={props.readOnlyHandler}
+        checked={readOnly}
+        onChange={readOnlyHandler}
       />
-      <StyledCheckbox checked={props.readOnly}>
-        <Checkmark checked={props.readOnly}>&#10003;</Checkmark>
+      <StyledCheckbox checked={readOnly}>
+        <Checkmark checked={readOnly}>&#10003;</Checkmark>
       </StyledCheckbox>
       <Label>Только просмотр</Label>
     </ViewOnlyCheckboxWrapper>
