@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-const ItemsContext = createContext();
+export const ItemsContext = createContext();
 
 const ITEMS = [
   {
@@ -54,10 +54,6 @@ const ITEMS = [
     isChecked: false,
   },
 ];
-
-export const useItems = () => {
-  return useContext(ItemsContext);
-};
 
 export const Provider = ({ children }) => {
   const [items, setItems] = useState(ITEMS);

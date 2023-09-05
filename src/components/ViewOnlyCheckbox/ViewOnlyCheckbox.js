@@ -1,4 +1,5 @@
-import { useItems } from '../../store/context';
+import { useContext } from 'react';
+import { ItemsContext } from '../../store/context';
 import {
   ViewOnlyCheckboxWrapper,
   HiddenCheckbox,
@@ -8,7 +9,7 @@ import {
 } from './ViewOnlyCheckbox.styled';
 
 const ViewOnlyCheckbox = () => {
-  const { readOnly, readOnlyHandler } = useItems();
+  const { readOnly, readOnlyHandler } = useContext(ItemsContext);
 
   return (
     <ViewOnlyCheckboxWrapper>

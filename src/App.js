@@ -1,4 +1,5 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
+import { useContext } from 'react';
 
 import Header from './components/Header/Header';
 import CardList from './components/CardList/CardList';
@@ -7,13 +8,14 @@ import ViewOnlyCheckbox from './components/ViewOnlyCheckbox/ViewOnlyCheckbox';
 import Delete from './components/Delete/Delete';
 import Add from './components/Add/Add';
 import Modal from './components/Modal/Modal';
-import { Provider, useItems } from './store/context';
+import { Provider, ItemsContext } from './store/context';
 
 import { Wrapper } from './components/UI/Wrapper.styled';
 import { Button } from './components/UI/Button.styled';
 
 function AppContent() {
-  const { isAddModalOpen, setIsAddModalOpen, handleAddClick } = useItems();
+  const { isAddModalOpen, setIsAddModalOpen, handleAddClick } =
+    useContext(ItemsContext);
 
   return (
     <Fragment>

@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import {
   HeaderWrapper,
   HeaderLogo,
@@ -5,13 +7,13 @@ import {
   ImgStars,
   Badge,
 } from './Header.styled';
-import { useItems } from '../../store/context';
+import { ItemsContext } from '../../store/context';
 
 import headerLogo from './header-logo.png';
 import stars from './stars.png';
 
 const Header = () => {
-  const { itemsCount } = useItems();
+  const { itemsCount } = useContext(ItemsContext);
 
   return (
     <HeaderWrapper>

@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
 import CardWrapper from '../UI/CardWrapper';
 import withLoadingDelay from '../UI/withLoadingDelay';
 import PropTypes from 'prop-types';
-import { useItems } from '../../store/context';
+import { ItemsContext } from '../../store/context';
 
 const Card = (props) => {
   Card.propTypes = {
@@ -30,7 +30,7 @@ const Card = (props) => {
     setIsEditing(false);
   };
 
-  const { readOnly, handleChange } = useItems();
+  const { readOnly, handleChange } = useContext(ItemsContext);
 
   useEffect(() => {
     if (readOnly && isEditing) {

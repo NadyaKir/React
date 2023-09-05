@@ -1,8 +1,10 @@
+import { useContext } from 'react';
+
 import { Button } from '../UI/Button.styled';
-import { useItems } from '../../store/context';
+import { ItemsContext } from '../../store/context';
 
 const Delete = () => {
-  const { handleDeleteCards } = useItems();
+  const { handleDeleteCards } = useContext(ItemsContext);
 
   return (
     <Button delete="true" onClick={handleDeleteCards}>

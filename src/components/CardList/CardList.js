@@ -1,10 +1,12 @@
-import { useItems } from '../../store/context';
+import { useContext } from 'react';
+
+import { ItemsContext } from '../../store/context';
 import Card from '../Card/Card';
 
 import { Wrapper } from './CardList.styled';
 
 const CardList = () => {
-  const { items } = useItems();
+  const { items } = useContext(ItemsContext);
 
   return (
     <Wrapper>
