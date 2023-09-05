@@ -13,7 +13,7 @@ import { Provider, ItemsContext } from './store/context';
 import { Wrapper } from './components/UI/Wrapper.styled';
 import { Button } from './components/UI/Button.styled';
 
-function AppContent() {
+function App() {
   const { isAddModalOpen, setIsAddModalOpen, handleAddClick } =
     useContext(ItemsContext);
 
@@ -36,14 +36,6 @@ function AppContent() {
         </Wrapper>
       </Container>
     </Fragment>
-  );
-}
-
-function App() {
-  return (
-    <Provider>
-      <AppContent />
-    </Provider>
   );
 }
 
