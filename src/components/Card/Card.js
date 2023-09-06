@@ -17,20 +17,19 @@ const Card = (props) => {
     readOnly: PropTypes.bool,
   };
 
+  const { readOnly, handleChange } = useContext(ItemsContext);
+
   //checkbox
   const [isChecked, setIsChecked] = useState(props.isChecked);
 
   //edit
   const [isEditing, setIsEditing] = useState(false);
-
   const [editedTitle, setEditedTitle] = useState(props.title);
   const [editedDescr, setEditedDescr] = useState(props.descr);
 
   const resetEditingMode = () => {
     setIsEditing(false);
   };
-
-  const { readOnly, handleChange } = useContext(ItemsContext);
 
   useEffect(() => {
     if (readOnly && isEditing) {
@@ -55,7 +54,7 @@ const Card = (props) => {
 
   const clickSaveButtonHandler = () => {
     setIsEditing(!isEditing);
-    props.handleChange(props.id, editedTitle, editedDescr, isChecked);
+    handleChange(props.id, editedTitle, editedDescr, isChecked);
   };
 
   const resetValues = () => {

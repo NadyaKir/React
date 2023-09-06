@@ -8,7 +8,7 @@ import ViewOnlyCheckbox from './components/ViewOnlyCheckbox/ViewOnlyCheckbox';
 import Delete from './components/Delete/Delete';
 import Add from './components/Add/Add';
 import Modal from './components/Modal/Modal';
-import { Provider, ItemsContext } from './store/context';
+import { ItemsContext } from './store/context';
 
 import { Wrapper } from './components/UI/Wrapper.styled';
 import { Button } from './components/UI/Button.styled';
