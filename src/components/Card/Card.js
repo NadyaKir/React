@@ -55,7 +55,7 @@ const Card = (props) => {
 
   const clickSaveButtonHandler = () => {
     setIsEditing(!isEditing);
-    props.handleChange(props.id, editedTitle, editedDescr, isChecked);
+    handleChange(props.id, editedTitle, editedDescr, isChecked);
   };
 
   const resetValues = () => {
