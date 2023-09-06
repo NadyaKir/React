@@ -14,8 +14,8 @@ const CardList = () => {
         <Card
           key={item.id}
           id={item.id}
-          title={item.title}
-          descr={item.descr}
+          title={item.Name}
+          descr={item.About}
           isChecked={item.isChecked}
         />
       ))}
