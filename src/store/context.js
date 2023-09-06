@@ -8,7 +8,7 @@ export const Provider = ({ children }) => {
   const [items, setItems] = useState([]);
   const [readOnly, setReadOnly] = useState(true);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-
+  console.log(items);
   useEffect(() => {
     axios
       .get(
@@ -21,7 +21,7 @@ export const Provider = ({ children }) => {
   const handleAdd = (title, descr) => {
     const id = uuidv4();
     const newItem = {
-      id: id,
+      Number: id,
       Name: title,
       About: descr,
       isChecked: false,
@@ -34,7 +34,7 @@ export const Provider = ({ children }) => {
 
   const handleChange = (id, editedTitle, editedDescr, isChecked) => {
     const updatedItems = items.map((item) => {
-      if (item.id === id) {
+      if (item.Number === id) {
         return {
           ...item,
           Name: editedTitle,

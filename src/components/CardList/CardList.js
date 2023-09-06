@@ -12,8 +12,8 @@ const CardList = () => {
     <Wrapper>
       {items.map((item) => (
         <Card
-          key={item.id}
-          id={item.id}
+          key={item.Number}
+          id={item.Number}
           title={item.Name}
           descr={item.About}
           isChecked={item.isChecked}
