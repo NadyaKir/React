@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import styled from 'styled-components';
 
 export const HeaderWrapper = styled.div`
@@ -12,7 +14,7 @@ export const HeaderWrapper = styled.div`
   border-bottom-right-radius: 1rem; /* Закругление нижнего правого угла */
 `;
 
-export const HeaderLogo = styled.a`
+export const HeaderLogo = styled(Link)`
   text-align: center;
 `;
 
