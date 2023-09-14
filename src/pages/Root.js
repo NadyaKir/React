@@ -7,9 +7,7 @@ const RootLayout = () => {
   return (
     <Fragment>
       <Header />
-      <main>
-        <Outlet />
-      </main>
+      <Outlet />
     </Fragment>
   );
 };
