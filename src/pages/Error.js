@@ -6,8 +6,10 @@ const ErrorPage = () => {
   return (
     <Fragment>
       <Header />
-      <h1>An error occured</h1>
-      <p>Could not find this page</p>
+      <main>
+        <h1>An error occured</h1>
+        <p>Could not find this page</p>
+      </main>
     </Fragment>
   );
 };
