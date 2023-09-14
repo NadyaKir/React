@@ -8,7 +8,7 @@ export const Provider = ({ children }) => {
   const [items, setItems] = useState([]);
   const [readOnly, setReadOnly] = useState(true);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  console.log(items);
+
   useEffect(() => {
     axios
       .get(
