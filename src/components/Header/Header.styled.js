@@ -31,6 +31,7 @@ export const ImgStars = styled.img`
 
 export const Badge = styled.span`
   margin-left: 2rem;
+  margin-right: 3rem;
   font-size: 20px;
   color: #fff6e5;
   font-weight: 700;
