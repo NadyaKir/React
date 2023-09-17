@@ -18,6 +18,7 @@ export const Button = styled.button`
   ${(props) =>
     props.edit &&
     css`
+      margin-top: 0;
       display: ${(props) => (props.isEditing ? 'none' : 'block')};
       margin-right: 0.5em;
       background-color: #60391d;
@@ -26,6 +27,7 @@ export const Button = styled.button`
   ${(props) =>
     props.save &&
     css`
+      margin-top: 0;
       margin-right: 0.5em;
       background-color: #4caf50;
     `}
@@ -33,6 +35,7 @@ export const Button = styled.button`
   ${(props) =>
     props.cancel &&
     css`
+      margin-top: 0;
       margin-right: 0;
       background-color: #f44336;
     `};
