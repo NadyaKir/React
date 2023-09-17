@@ -24,7 +24,7 @@ const Header = () => {
       </HeaderLogo>
       <ImgStars src={stars} alt="stars" />
       <Badge>{itemsCount}</Badge>
-      <Link to="signin">Sigh in</Link>
+      <Link to="signin">Sign in</Link>
     </HeaderWrapper>
   );
 };
