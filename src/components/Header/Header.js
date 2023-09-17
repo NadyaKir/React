@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import {
   HeaderWrapper,
   HeaderLogo,
+  HeaderLink,
   ImgLogo,
   ImgStars,
   Badge,
@@ -24,7 +25,8 @@ const Header = () => {
       </HeaderLogo>
       <ImgStars src={stars} alt="stars" />
       <Badge>{itemsCount}</Badge>
-      <Link to="signin">Sign in</Link>
+      <HeaderLink to="">Home</HeaderLink>
+      <HeaderLink to="signin">Sign in</HeaderLink>
     </HeaderWrapper>
   );
 };

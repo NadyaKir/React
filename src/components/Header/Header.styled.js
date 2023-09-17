@@ -18,6 +18,10 @@ export const HeaderLogo = styled(Link)`
   text-align: center;
 `;
 
+export const HeaderLink = styled(Link)`
+  margin-right: 1rem;
+`;
+
 export const ImgLogo = styled.img`
   max-width: 12rem;
   height: auto;
