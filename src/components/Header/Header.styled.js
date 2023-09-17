@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import styled from 'styled-components';
 
 export const HeaderWrapper = styled.div`
@@ -12,8 +14,12 @@ export const HeaderWrapper = styled.div`
   border-bottom-right-radius: 1rem; /* Закругление нижнего правого угла */
 `;
 
-export const HeaderLogo = styled.a`
+export const HeaderLogo = styled(Link)`
   text-align: center;
+`;
+
+export const HeaderLink = styled(Link)`
+  margin-right: 1rem;
 `;
 
 export const ImgLogo = styled.img`
@@ -29,6 +35,7 @@ export const ImgStars = styled.img`
 
 export const Badge = styled.span`
   margin-left: 2rem;
+  margin-right: 3rem;
   font-size: 20px;
   color: #fff6e5;
   font-weight: 700;

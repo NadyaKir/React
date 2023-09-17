@@ -1,42 +1,24 @@
-import { Fragment } from 'react';
-import { useContext } from 'react';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import Header from './components/Header/Header';
-import CardList from './components/CardList/CardList';
-import Container from './components/UI/Container';
-import ViewOnlyCheckbox from './components/ViewOnlyCheckbox/ViewOnlyCheckbox';
-import Delete from './components/Delete/Delete';
-import Add from './components/Add/Add';
-import Modal from './components/Modal/Modal';
-import { ItemsContext } from './store/context';
+import RootLayout from './pages/Root';
+import HomePage from './pages/Home';
+import SignInPage from './pages/SignIn';
+import ErrorPage from './pages/Error';
 
-import { Wrapper } from './components/UI/Wrapper.styled';
-import { Button } from './components/UI/Button.styled';
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: 'signin', element: <SignInPage /> },
+    ],
+  },
+]);
 
 function App() {
-  const { isAddModalOpen, setIsAddModalOpen, handleAddClick } =
-    useContext(ItemsContext);
-
-  return (
-    <Fragment>
-      <Header />
-      <Container>
-        <Wrapper>
-          <ViewOnlyCheckbox />
-          <Button save="true" onClick={handleAddClick}>
-            Добавить
-          </Button>
-          <Delete></Delete>
-          <CardList />
-          {isAddModalOpen && (
-            <Modal closeModal={() => setIsAddModalOpen(false)}>
-              <Add />
-            </Modal>
-          )}
-        </Wrapper>
-      </Container>
-    </Fragment>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
