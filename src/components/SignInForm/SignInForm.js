@@ -9,12 +9,18 @@ const SignInForm = () => {
   const [enteredPassword, setEnteredPassword] = useState('');
 
   const isEmailValid = (email) => {
-    const isEmailVailid = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    const EmailVailid = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
-    return isEmailVailid.test(email);
+    return EmailVailid.test(email);
   };
 
-  const isLengthEight = enteredPassword.trim().length > 7;
+  const isPasswordValid = (password) => {
+    const PasswordValid = /^(?=.*[a-zA-Z])(?=.*[0-9])/;
+
+    return PasswordValid.test(password);
+  };
+
+  const isLengthMoreEight = enteredPassword.trim().length > 7;
 
   const enteredUsernameHandler = (event) => {
     setEnteredUsername(event.target.value);
@@ -24,22 +30,18 @@ const SignInForm = () => {
     setEnteredPassword(event.target.value);
   };
 
-  // console.log(enteredUsername);
-  // console.log(enteredPassword);
-
   const onClickHandler = () => {
-    if (isEmailValid(enteredUsername)) {
+    if (
+      isEmailValid(enteredUsername) &&
+      isLengthMoreEight &&
+      isPasswordValid(enteredPassword)
+    ) {
       console.log('Valid!');
     } else {
       console.log('Not valid!');
     }
-
-    if (isLengthEight) {
-      console.log('8 chars or more');
-    } else {
-      console.log('not 8 chars');
-    }
   };
+
   const onSubmitHandler = (event) => {
     event.preventDefault();
   };
