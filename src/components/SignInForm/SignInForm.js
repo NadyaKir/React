@@ -14,6 +14,8 @@ const SignInForm = () => {
     return isEmailVailid.test(email);
   };
 
+  const isLengthEight = enteredPassword.trim().length > 7;
+
   const enteredUsernameHandler = (event) => {
     setEnteredUsername(event.target.value);
   };
@@ -30,6 +32,12 @@ const SignInForm = () => {
       console.log('Valid!');
     } else {
       console.log('Not valid!');
+    }
+
+    if (isLengthEight) {
+      console.log('8 chars or more');
+    } else {
+      console.log('not 8 chars');
     }
   };
   const onSubmitHandler = (event) => {
