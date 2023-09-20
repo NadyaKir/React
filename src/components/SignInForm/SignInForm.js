@@ -8,11 +8,30 @@ const SignInForm = () => {
   const [enteredUsername, setEnteredUsername] = useState('');
   const [enteredPassword, setEnteredPassword] = useState('');
 
+  const isEmailValid = (email) => {
+    const isEmailVailid = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+    return isEmailVailid.test(email);
+  };
+
   const enteredUsernameHandler = (event) => {
     setEnteredUsername(event.target.value);
   };
-  console.log(enteredUsername);
 
+  const enteredPasswordHandler = (event) => {
+    setEnteredPassword(event.target.value);
+  };
+
+  // console.log(enteredUsername);
+  // console.log(enteredPassword);
+
+  const onClickHandler = () => {
+    if (isEmailValid(enteredUsername)) {
+      console.log('Valid!');
+    } else {
+      console.log('Not valid!');
+    }
+  };
   const onSubmitHandler = (event) => {
     event.preventDefault();
   };
@@ -21,13 +40,19 @@ const SignInForm = () => {
     <Form onSubmit={onSubmitHandler}>
       <label>username:</label>
       <Input
-        type="text"
+        type="email"
         onChange={enteredUsernameHandler}
-        value={enteredUsername}
+        placeholder="Enter your username"
+        required
       />
       <label>password:</label>
-      <Input />
-      <Button>Log in</Button>
+      <Input
+        type="text"
+        onChange={enteredPasswordHandler}
+        placeholder="Enter your password"
+        required
+      />
+      <Button onClick={onClickHandler}>Log in</Button>
     </Form>
   );
 };
