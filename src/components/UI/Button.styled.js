@@ -9,10 +9,11 @@ export const Button = styled.button`
   font-size: 16px;
   border-radius: 5px;
   transition: opacity 0.3s ease;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+  opacity: ${(props) => (props.disabled ? '0.5' : '1')};
 
   &:hover {
-    opacity: 0.8;
+    opacity: ${(props) => (props.disabled ? '0.5' : '0.8')};
   }
 
   ${(props) =>

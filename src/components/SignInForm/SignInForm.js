@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Button } from '../UI/Button.styled';
 import { Form } from './SignInForm.styled';
@@ -9,15 +9,15 @@ const SignInForm = () => {
   const [enteredPassword, setEnteredPassword] = useState('');
 
   const isEmailValid = (email) => {
-    const EmailVailid = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    const emailVailid = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
-    return EmailVailid.test(email);
+    return emailVailid.test(email);
   };
 
   const isPasswordValid = (password) => {
-    const PasswordValid = /^(?=.*[a-zA-Z])(?=.*[0-9])/;
+    const passwordValid = /^(?=.*[a-zA-Z])(?=.*[0-9])/;
 
-    return PasswordValid.test(password);
+    return passwordValid.test(password);
   };
 
   const isLengthMoreEight = enteredPassword.trim().length > 7;
@@ -30,16 +30,13 @@ const SignInForm = () => {
     setEnteredPassword(event.target.value);
   };
 
+  const isValid = () =>
+    isEmailValid(enteredUsername) &&
+    isLengthMoreEight &&
+    isPasswordValid(enteredPassword);
+
   const onClickHandler = () => {
-    if (
-      isEmailValid(enteredUsername) &&
-      isLengthMoreEight &&
-      isPasswordValid(enteredPassword)
-    ) {
-      console.log('Valid!');
-    } else {
-      console.log('Not valid!');
-    }
+    isValid();
   };
 
   const onSubmitHandler = (event) => {
@@ -57,12 +54,14 @@ const SignInForm = () => {
       />
       <label>password:</label>
       <Input
-        type="text"
+        type="password"
         onChange={enteredPasswordHandler}
         placeholder="Enter your password"
         required
       />
-      <Button onClick={onClickHandler}>Log in</Button>
+      <Button onClick={onClickHandler} disabled={!isValid()}>
+        Log in
+      </Button>
     </Form>
   );
 };
