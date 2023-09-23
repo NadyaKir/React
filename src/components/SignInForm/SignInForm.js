@@ -1,16 +1,14 @@
 import { useState } from 'react';
 
-import useValidation from '../../hooks/use-validation';
-
 import { Button } from '../UI/Button.styled';
 import { Form } from './SignInForm.styled';
-import Input from '../UI/Input';
+import { UsernameInput, PasswordInput } from '../UI/Input';
 
 const SignInForm = () => {
   const [enteredUsername, setEnteredUsername] = useState('');
   const [enteredPassword, setEnteredPassword] = useState('');
-
-  const isValid = useValidation(enteredUsername, enteredPassword);
+  const [enteredUsernameValid, setEnteredUsernameValid] = useState(false);
+  const [enteredPasswordValid, setEnteredPasswordValid] = useState(false);
 
   const enteredUsernameHandler = (event) => {
     setEnteredUsername(event.target.value);
@@ -24,23 +22,29 @@ const SignInForm = () => {
     event.preventDefault();
   };
 
+  const isSignInFormValid = enteredUsernameValid && enteredPasswordValid;
+
   return (
     <Form onSubmit={onSubmitHandler}>
       <label>Username:</label>
-      <Input
+      <UsernameInput
         type="email"
         onChange={enteredUsernameHandler}
         placeholder="Enter your username"
+        value={enteredUsername}
+        setEnteredUsernameValid={setEnteredUsernameValid}
         required
       />
       <label>Password:</label>
-      <Input
+      <PasswordInput
         type="password"
         onChange={enteredPasswordHandler}
         placeholder="Enter your password"
+        value={enteredPassword}
+        setEnteredPasswordValid={setEnteredPasswordValid}
         required
       />
-      <Button disabled={!isValid()}>Log in</Button>
+      <Button disabled={!isSignInFormValid}>Log in</Button>
     </Form>
   );
 };
