@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Button } from '../UI/Button.styled';
 import { Form } from './SignInForm.styled';
@@ -45,14 +45,14 @@ const SignInForm = () => {
 
   return (
     <Form onSubmit={onSubmitHandler}>
-      <label>username:</label>
+      <label>Username:</label>
       <Input
         type="email"
         onChange={enteredUsernameHandler}
         placeholder="Enter your username"
         required
       />
-      <label>password:</label>
+      <label>Password:</label>
       <Input
         type="password"
         onChange={enteredPasswordHandler}
