@@ -10,8 +10,7 @@ export const FormInput = styled.input`
   margin-right: 0.5em;
 
   &:focus {
-    border-color: ${(props) =>
-      props.isValid && props.value.trim().length > 0 ? '#7db87d' : '#fc2f21'};
+    border-color: ${(props) => (props.isValid ? '#7db87d' : '#fc2f21')};
 
     background-color: ${(props) => (props.isValid ? '#c0dcc0' : '#ffdaB9')};
   }
