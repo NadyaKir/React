@@ -26,8 +26,8 @@ const SignInForm = () => {
 
   return (
     <Form onSubmit={onSubmitHandler}>
-      <label>Username:</label>
       <UsernameInput
+        labelText="Username"
         type="email"
         onChange={enteredUsernameHandler}
         placeholder="Enter your username"
@@ -35,8 +35,8 @@ const SignInForm = () => {
         setEnteredUsernameValid={setEnteredUsernameValid}
         required
       />
-      <label>Password:</label>
       <PasswordInput
+        labelText="Password"
         type="password"
         onChange={enteredPasswordHandler}
         placeholder="Enter your password"
