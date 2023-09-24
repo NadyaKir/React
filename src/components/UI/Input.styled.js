@@ -11,7 +11,6 @@ export const FormInput = styled.input`
 
   &:focus {
     border-color: ${(props) => (props.isValid ? '#7db87d' : '#fc2f21')};
-
     background-color: ${(props) => (props.isValid ? '#c0dcc0' : '#ffdaB9')};
   }
 `;
