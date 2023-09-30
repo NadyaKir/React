@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
 import CardWrapper from '../UI/CardWrapper';
 import withLoadingDelay from '../UI/withLoadingDelay';
 import PropTypes from 'prop-types';
-import { ItemsContext } from '../../store/context';
 
 const Card = (props) => {
   Card.propTypes = {
@@ -17,15 +17,29 @@ const Card = (props) => {
     readOnly: PropTypes.bool,
   };
 
-  const { readOnly, handleChange } = useContext(ItemsContext);
-
   //checkbox
   const [isChecked, setIsChecked] = useState(props.isChecked);
+
+  console.log(props.id, isChecked);
 
   //edit
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(props.title);
   const [editedDescr, setEditedDescr] = useState(props.descr);
+
+  const dispatch = useDispatch();
+
+  const readOnly = useSelector((state) => state.readOnly);
+
+  const handleChange = () => {
+    dispatch({
+      type: 'ITEM_CHANGE',
+      id: props.id,
+      editedTitle: editedTitle,
+      editedDescr: editedDescr,
+      isChecked: isChecked,
+    });
+  };
 
   const resetEditingMode = () => {
     setIsEditing(false);
@@ -41,9 +55,9 @@ const Card = (props) => {
   //checkbox func
   const checkboxChangeHandler = () => {
     const newIsChecked = !isChecked;
-
     setIsChecked(newIsChecked);
     handleChange(props.id, editedTitle, editedDescr, newIsChecked);
+    console.log('id ' + props.id + ' ischecked ' + newIsChecked);
   };
 
   //buttons func-s

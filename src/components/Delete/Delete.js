@@ -1,10 +1,13 @@
-import { useContext } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Button } from '../UI/Button.styled';
-import { ItemsContext } from '../../store/context';
 
 const Delete = () => {
-  const { handleDeleteCards } = useContext(ItemsContext);
+  const dispatch = useDispatch();
+
+  const handleDeleteCards = () => {
+    dispatch({ type: 'DELETE_ITEM' });
+  };
 
   return (
     <Button delete="true" onClick={handleDeleteCards}>

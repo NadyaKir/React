@@ -1,12 +1,31 @@
-import { useContext } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
 
-import { ItemsContext } from '../../store/context';
 import Card from '../Card/Card';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Wrapper } from './CardList.styled';
 
 const CardList = () => {
-  const { items } = useContext(ItemsContext);
+  const dispatch = useDispatch();
+  const items = useSelector((state) => state.items);
+
+  console.log('items: ' + JSON.stringify(items));
+
+  useEffect(() => {
+    axios
+      .get(
+        'https://raw.githubusercontent.com/BrunnerLivio/PokemonDataGraber/master/output.json'
+      )
+      .then((res) => {
+        const modifiedData = res.data.slice(0, 15).map((item) => ({
+          ...item,
+          isChecked: item.isChecked,
+        }));
+        dispatch({ type: 'FETCH_DATA', modifiedData });
+      })
+      .catch((err) => console.log(err));
+  }, [dispatch]);
 
   return (
     <Wrapper>

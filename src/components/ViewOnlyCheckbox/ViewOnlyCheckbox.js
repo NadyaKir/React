@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { ItemsContext } from '../../store/context';
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
   ViewOnlyCheckboxWrapper,
   HiddenCheckbox,
@@ -9,7 +9,14 @@ import {
 } from './ViewOnlyCheckbox.styled';
 
 const ViewOnlyCheckbox = () => {
-  const { readOnly, readOnlyHandler } = useContext(ItemsContext);
+  const dispatch = useDispatch();
+  const readOnly = useSelector((state) => state.readOnly);
+
+  const readOnlyHandler = () => {
+    {
+      dispatch({ type: 'SET_READ_ONLY' });
+    }
+  };
 
   return (
     <ViewOnlyCheckboxWrapper>

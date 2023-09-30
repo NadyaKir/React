@@ -1,5 +1,4 @@
-import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import {
   HeaderWrapper,
@@ -9,13 +8,12 @@ import {
   ImgStars,
   Badge,
 } from './Header.styled';
-import { ItemsContext } from '../../store/context';
 
 import headerLogo from './header-logo.png';
 import stars from './stars.png';
 
 const Header = () => {
-  const { itemsCount } = useContext(ItemsContext);
+  const itemsCount = useSelector((state) => state.itemsCount);
 
   return (
     <HeaderWrapper>
