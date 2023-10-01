@@ -6,6 +6,7 @@ const initialState = {
   items: [],
   readOnly: true,
   isAddModalOpen: false,
+  isChecked: false,
   itemsCount: 0,
 };
 
@@ -19,7 +20,7 @@ const cardsReducer = (state = initialState, action) => {
     };
   }
 
-  //AddNewCard
+  //addNewCard
   if (action.type === 'ADD_ITEM') {
     const id = uuidv4();
     const newItem = {
@@ -64,7 +65,7 @@ const cardsReducer = (state = initialState, action) => {
     return {
       ...state,
       items: updatedItems,
-      itemsCount: state.items.length - 1,
+      itemsCount: updatedItems.length,
     };
   }
 

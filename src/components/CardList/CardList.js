@@ -20,7 +20,7 @@ const CardList = () => {
       .then((res) => {
         const modifiedData = res.data.slice(0, 15).map((item) => ({
           ...item,
-          isChecked: item.isChecked,
+          isChecked: false,
         }));
         dispatch({ type: 'FETCH_DATA', modifiedData });
       })

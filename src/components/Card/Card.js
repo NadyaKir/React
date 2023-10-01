@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import CardHeader from './CardHeader';
@@ -20,15 +20,12 @@ const Card = (props) => {
   //checkbox
   const [isChecked, setIsChecked] = useState(props.isChecked);
 
-  console.log(props.id, isChecked);
-
   //edit
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(props.title);
   const [editedDescr, setEditedDescr] = useState(props.descr);
 
   const dispatch = useDispatch();
-
   const readOnly = useSelector((state) => state.readOnly);
 
   const handleChange = () => {
@@ -56,14 +53,19 @@ const Card = (props) => {
   const checkboxChangeHandler = () => {
     const newIsChecked = !isChecked;
     setIsChecked(newIsChecked);
-    handleChange(props.id, editedTitle, editedDescr, newIsChecked);
-    console.log('id ' + props.id + ' ischecked ' + newIsChecked);
+    dispatch({
+      type: 'ITEM_CHANGE',
+      id: props.id,
+      editedTitle: editedTitle,
+      editedDescr: editedDescr,
+      isChecked: newIsChecked,
+    });
   };
 
   //buttons func-s
   const clickEditButtonHandler = () => {
     setIsEditing(!isEditing);
-    setIsChecked(false);
+    isChecked = false;
   };
 
   const clickSaveButtonHandler = () => {
