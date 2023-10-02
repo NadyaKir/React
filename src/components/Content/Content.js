@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import CardList from '../CardList/CardList';
 import ViewOnlyCheckbox from '../ViewOnlyCheckbox/ViewOnlyCheckbox';
@@ -7,11 +8,9 @@ import Add from '../Add/Add';
 import Modal from '../Modal/Modal';
 
 import { Button } from '../UI/Button.styled';
-import { useDispatch, useSelector } from 'react-redux';
 
 const Content = () => {
   const dispatch = useDispatch();
-
   const isAddModalOpen = useSelector((state) => state.isAddModalOpen);
 
   const handleAddClick = () => {

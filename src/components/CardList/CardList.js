@@ -1,16 +1,15 @@
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Card from '../Card/Card';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { Wrapper } from './CardList.styled';
 
 const CardList = () => {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.items);
-
-  console.log('items: ' + JSON.stringify(items));
 
   useEffect(() => {
     axios
@@ -27,16 +26,26 @@ const CardList = () => {
       .catch((err) => console.log(err));
   }, [dispatch]);
 
+  const navigate = useNavigate();
+
+  const handleDoubleClick = (id) => {
+    console.log('Double click happened ' + id);
+    navigate(`cards/${id}`);
+  };
+
   return (
     <Wrapper>
       {items.map((item) => (
-        <Card
-          key={item.Number}
-          id={item.Number}
-          title={item.Name}
-          descr={item.About}
-          isChecked={item.isChecked}
-        />
+        <>
+          <Card
+            key={item.Number}
+            id={item.Number}
+            title={item.Name}
+            descr={item.About}
+            isChecked={item.isChecked}
+            onDoubleClick={() => handleDoubleClick(item.Number)}
+          />
+        </>
       ))}
     </Wrapper>
   );

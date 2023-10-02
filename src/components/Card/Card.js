@@ -65,7 +65,7 @@ const Card = (props) => {
   //buttons func-s
   const clickEditButtonHandler = () => {
     setIsEditing(!isEditing);
-    isChecked = false;
+    setIsChecked(false);
   };
 
   const clickSaveButtonHandler = () => {
@@ -94,25 +94,27 @@ const Card = (props) => {
 
   return (
     <CardWrapper>
-      <CardHeader
-        id={props.id}
-        isEditing={isEditing}
-        editedTitle={editedTitle}
-        title={props.title}
-        titleChangeHandler={titleChangeHandler}
-        clickEditButtonHandler={clickEditButtonHandler}
-        clickSaveButtonHandler={clickSaveButtonHandler}
-        clickCancelButtonHandler={clickCancelButtonHandler}
-        checkboxChangeHandler={checkboxChangeHandler}
-        isChecked={isChecked}
-        readOnly={readOnly}
-      ></CardHeader>
-      <CardBody
-        descr={props.descr}
-        editedDescr={editedDescr}
-        isEditing={isEditing}
-        descrChangeHandler={descrChangeHandler}
-      ></CardBody>
+      <div onDoubleClick={props.onDoubleClick}>
+        <CardHeader
+          id={props.id}
+          isEditing={isEditing}
+          editedTitle={editedTitle}
+          title={props.title}
+          titleChangeHandler={titleChangeHandler}
+          clickEditButtonHandler={clickEditButtonHandler}
+          clickSaveButtonHandler={clickSaveButtonHandler}
+          clickCancelButtonHandler={clickCancelButtonHandler}
+          checkboxChangeHandler={checkboxChangeHandler}
+          isChecked={isChecked}
+          readOnly={readOnly}
+        ></CardHeader>
+        <CardBody
+          descr={props.descr}
+          editedDescr={editedDescr}
+          isEditing={isEditing}
+          descrChangeHandler={descrChangeHandler}
+        ></CardBody>
+      </div>
     </CardWrapper>
   );
 };
