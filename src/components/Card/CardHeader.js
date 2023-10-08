@@ -7,7 +7,6 @@ const CardHeader = (props) => {
   return (
     <Fragment>
       <Header>
-        <p>{}</p>
         {props.isEditing ? (
           <Textarea
             type="text"

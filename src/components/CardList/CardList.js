@@ -9,7 +9,9 @@ import { Wrapper } from './CardList.styled';
 
 const CardList = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const items = useSelector((state) => state.items);
+  const readOnly = useSelector((state) => state.readOnly);
 
   useEffect(() => {
     axios
@@ -26,26 +28,23 @@ const CardList = () => {
       .catch((err) => console.log(err));
   }, [dispatch]);
 
-  const navigate = useNavigate();
-
   const handleDoubleClick = (id) => {
-    console.log('Double click happened ' + id);
-    navigate(`cards/${id}`);
+    if (readOnly) {
+      navigate(`card/${id}`);
+    }
   };
 
   return (
     <Wrapper>
       {items.map((item) => (
-        <>
-          <Card
-            key={item.Number}
-            id={item.Number}
-            title={item.Name}
-            descr={item.About}
-            isChecked={item.isChecked}
-            onDoubleClick={() => handleDoubleClick(item.Number)}
-          />
-        </>
+        <Card
+          key={item.Number}
+          id={item.Number}
+          title={item.Name}
+          descr={item.About}
+          isChecked={item.isChecked}
+          onDoubleClick={() => handleDoubleClick(item.Number)}
+        />
       ))}
     </Wrapper>
   );
