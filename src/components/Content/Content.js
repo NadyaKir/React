@@ -7,11 +7,13 @@ import Delete from '../Delete/Delete';
 import Add from '../Add/Add';
 import Modal from '../Modal/Modal';
 
+import { ActionsBlock } from './Content.styled';
 import { Button } from '../UI/Button.styled';
 
 const Content = () => {
   const dispatch = useDispatch();
   const isAddModalOpen = useSelector((state) => state.isAddModalOpen);
+  const readOnly = useSelector((state) => state.readOnly);
 
   const handleAddClick = () => {
     dispatch({ type: 'OPEN_ADD_MODAL' });
@@ -24,10 +26,12 @@ const Content = () => {
   return (
     <Fragment>
       <ViewOnlyCheckbox />
-      <Button save="true" onClick={handleAddClick}>
-        Добавить
-      </Button>
-      <Delete></Delete>
+      <ActionsBlock>
+        <Button readOnly={readOnly} save="true" onClick={handleAddClick}>
+          Добавить
+        </Button>
+        <Delete readOnly={readOnly}></Delete>
+      </ActionsBlock>
       <CardList />
       {isAddModalOpen && (
         <Modal closeModal={() => closeModal}>

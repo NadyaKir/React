@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 
 import { Button } from '../UI/Button.styled';
 
-const Delete = () => {
+const Delete = ({ readOnly }) => {
   const dispatch = useDispatch();
 
   const handleDeleteCards = () => {
@@ -10,7 +10,7 @@ const Delete = () => {
   };
 
   return (
-    <Button delete="true" onClick={handleDeleteCards}>
+    <Button readOnly={readOnly} delete="true" onClick={handleDeleteCards}>
       Удалить выбранные карточки
     </Button>
   );

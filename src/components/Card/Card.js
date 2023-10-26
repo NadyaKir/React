@@ -21,12 +21,12 @@ const Card = (props) => {
   const [isChecked, setIsChecked] = useState(props.isChecked);
 
   //edit
-  const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(props.title);
   const [editedDescr, setEditedDescr] = useState(props.descr);
 
   const dispatch = useDispatch();
   const readOnly = useSelector((state) => state.readOnly);
+  const isEditing = useSelector((state) => state.isEditing);
 
   const handleChange = () => {
     dispatch({
@@ -39,7 +39,10 @@ const Card = (props) => {
   };
 
   const resetEditingMode = () => {
-    setIsEditing(false);
+    dispatch({
+      type: 'SET_CHECKBOX_VISABILITY',
+      isEditing: isEditing,
+    });
   };
 
   useEffect(() => {
@@ -64,12 +67,18 @@ const Card = (props) => {
 
   //buttons func-s
   const clickEditButtonHandler = () => {
-    setIsEditing(!isEditing);
+    dispatch({
+      type: 'SET_CHECKBOX_VISABILITY',
+      isEditing: !isEditing,
+    });
     setIsChecked(false);
   };
 
   const clickSaveButtonHandler = () => {
-    setIsEditing(!isEditing);
+    dispatch({
+      type: 'SET_CHECKBOX_VISABILITY',
+      isEditing: !isEditing,
+    });
     handleChange(props.id, editedTitle, editedDescr, isChecked);
   };
 
@@ -79,7 +88,10 @@ const Card = (props) => {
   };
 
   const clickCancelButtonHandler = () => {
-    setIsEditing(!isEditing);
+    dispatch({
+      type: 'SET_CHECKBOX_VISABILITY',
+      isEditing: !isEditing,
+    });
     resetValues();
   };
 

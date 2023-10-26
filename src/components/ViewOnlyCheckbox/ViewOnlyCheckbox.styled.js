@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const ViewOnlyCheckboxWrapper = styled.label`
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
   cursor: pointer;

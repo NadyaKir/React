@@ -7,6 +7,7 @@ const initialState = {
   readOnly: true,
   isAddModalOpen: false,
   isChecked: false,
+  isEditing: false,
   itemsCount: 0,
 };
 
@@ -17,6 +18,13 @@ const cardsReducer = (state = initialState, action) => {
       ...state,
       items: action.modifiedData,
       itemsCount: action.modifiedData.length,
+    };
+  }
+
+  if (action.type === 'SET_CHECKBOX_VISABILITY') {
+    return {
+      ...state,
+      isEditing: action.isEditing,
     };
   }
 
@@ -90,6 +98,7 @@ const cardsReducer = (state = initialState, action) => {
     return {
       ...state,
       readOnly: !state.readOnly,
+      isEditing: false,
     };
   }
 
