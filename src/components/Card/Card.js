@@ -15,6 +15,8 @@ const Card = (props) => {
     isChecked: PropTypes.bool,
     handleChange: PropTypes.func,
     readOnly: PropTypes.bool,
+    isCheckbox: PropTypes.bool,
+    hiddenCheckbox: PropTypes.bool,
   };
 
   //checkbox
@@ -68,7 +70,7 @@ const Card = (props) => {
   //buttons func-s
   const clickEditButtonHandler = () => {
     dispatch({
-      type: 'SET_CHECKBOX_VISABILITY',
+      type: 'SET_ISEDITING',
       isEditing: !isEditing,
     });
     setIsChecked(false);
@@ -76,7 +78,7 @@ const Card = (props) => {
 
   const clickSaveButtonHandler = () => {
     dispatch({
-      type: 'SET_CHECKBOX_VISABILITY',
+      type: 'SET_ISEDITING',
       isEditing: !isEditing,
     });
     handleChange(props.id, editedTitle, editedDescr, isChecked);
@@ -89,7 +91,7 @@ const Card = (props) => {
 
   const clickCancelButtonHandler = () => {
     dispatch({
-      type: 'SET_CHECKBOX_VISABILITY',
+      type: 'SET_ISEDITING',
       isEditing: !isEditing,
     });
     resetValues();
@@ -119,6 +121,7 @@ const Card = (props) => {
           checkboxChangeHandler={checkboxChangeHandler}
           isChecked={isChecked}
           readOnly={readOnly}
+          hiddenCheckbox={props.hiddenCheckbox}
         ></CardHeader>
         <CardBody
           descr={props.descr}

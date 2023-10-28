@@ -20,12 +20,8 @@ const CardHeader = (props) => {
         ) : (
           <Title>{props.title}</Title>
         )}
-        {!props.readOnly && (
-          <Button
-            edit="true"
-            isEditing={props.isEditing}
-            onClick={props.clickEditButtonHandler}
-          >
+        {!props.isEditing && !readOnly && (
+          <Button edit="true" onClick={props.clickEditButtonHandler}>
             <MdEdit />
           </Button>
         )}
@@ -39,7 +35,7 @@ const CardHeader = (props) => {
             </Button>
           </Fragment>
         )}
-        {!props.isEditing && !readOnly && (
+        {!readOnly && !props.hiddenCheckbox && (
           <Checkbox
             type="checkbox"
             isEditing={props.isEditing}

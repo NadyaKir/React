@@ -19,7 +19,6 @@ export const Button = styled.button`
     props.edit &&
     css`
       margin-top: 0;
-      display: ${(props) => (props.isEditing ? 'none' : 'block')};
       margin-right: 0.5em;
       background-color: #60391d;
     `}

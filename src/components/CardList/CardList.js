@@ -10,7 +10,7 @@ import { Wrapper } from './CardList.styled';
 const CardList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const items = useSelector((state) => state.items);
+  const items = useSelector((state) => state.items) || {};
   const readOnly = useSelector((state) => state.readOnly);
 
   useEffect(() => {
@@ -43,6 +43,7 @@ const CardList = () => {
           title={item.Name}
           descr={item.About}
           isChecked={item.isChecked}
+          hiddenCheckbox={false}
           onDoubleClick={() => handleDoubleClick(item.Number)}
         />
       ))}

@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  margin: 2em 0;
+  margin: 1em 0;
 
   @media screen and (max-width: 1180px) {
     justify-content: space-between;

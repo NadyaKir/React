@@ -21,7 +21,7 @@ const cardsReducer = (state = initialState, action) => {
     };
   }
 
-  if (action.type === 'SET_CHECKBOX_VISABILITY') {
+  if (action.type === 'SET_ISEDITING') {
     return {
       ...state,
       isEditing: action.isEditing,

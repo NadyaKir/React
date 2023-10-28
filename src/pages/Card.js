@@ -8,7 +8,6 @@ const CardPage = () => {
   const { id } = useParams();
   const items = useSelector((state) => state.items);
   const selectedCard = items.find((item) => item.Number === id);
-  const readOnly = useSelector((state) => state.readOnly);
 
   useEffect(() => {
     dispatch({ type: 'SET_READ_ONLY' });
@@ -21,6 +20,7 @@ const CardPage = () => {
         title={selectedCard.Name}
         descr={selectedCard.About}
         isChecked={selectedCard.isChecked}
+        hiddenCheckbox={true}
       />
     </div>
   );
