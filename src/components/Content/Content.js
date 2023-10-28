@@ -34,7 +34,7 @@ const Content = () => {
       </ActionsBlock>
       <CardList />
       {isAddModalOpen && (
-        <Modal closeModal={() => closeModal}>
+        <Modal closeModal={() => closeModal()}>
           <Add />
         </Modal>
       )}

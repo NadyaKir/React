@@ -89,6 +89,7 @@ const cardsReducer = (state = initialState, action) => {
   if (action.type === 'CLOSE_ADD_MODAL') {
     return {
       ...state,
+
       isAddModalOpen: false,
     };
   }
