@@ -1,9 +1,13 @@
 import { Fragment } from 'react';
+import { useSelector } from 'react-redux';
+
 import { MdEdit, MdSave, MdEditOff } from 'react-icons/md';
 import { Header, Textarea, Title, Checkbox } from './CardHeader.styled';
 import { Button } from '../UI/Button.styled';
 
 const CardHeader = (props) => {
+  const readOnly = useSelector((state) => state.readOnly);
+
   return (
     <Fragment>
       <Header>
@@ -16,12 +20,8 @@ const CardHeader = (props) => {
         ) : (
           <Title>{props.title}</Title>
         )}
-        {!props.readOnly && (
-          <Button
-            edit="true"
-            isEditing={props.isEditing}
-            onClick={props.clickEditButtonHandler}
-          >
+        {!props.isEditing && !readOnly && (
+          <Button edit="true" onClick={props.clickEditButtonHandler}>
             <MdEdit />
           </Button>
         )}
@@ -35,12 +35,14 @@ const CardHeader = (props) => {
             </Button>
           </Fragment>
         )}
-        <Checkbox
-          type="checkbox"
-          isEditing={props.isEditing}
-          checked={props.isChecked}
-          onChange={props.checkboxChangeHandler}
-        ></Checkbox>
+        {!readOnly && !props.hiddenCheckbox && (
+          <Checkbox
+            type="checkbox"
+            isEditing={props.isEditing}
+            checked={props.isChecked}
+            onChange={props.checkboxChangeHandler}
+          ></Checkbox>
+        )}
       </Header>
     </Fragment>
   );

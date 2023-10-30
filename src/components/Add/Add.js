@@ -1,14 +1,18 @@
 import { useState, useContext } from 'react';
-import { ItemsContext } from '../../store/context';
+import { useDispatch } from 'react-redux';
 
 import { Form, Label, Input, Textarea } from './Add.styled';
 import { Button } from '../UI/Button.styled';
 
 const Add = () => {
+  const dispatch = useDispatch();
+
   const [title, setTitle] = useState('');
   const [descr, setDescr] = useState('');
 
-  const { handleAdd } = useContext(ItemsContext);
+  const handleAdd = () => {
+    dispatch({ type: 'ADD_ITEM', title, descr });
+  };
 
   const titleChangeHandler = (event) => {
     setTitle(event.target.value);

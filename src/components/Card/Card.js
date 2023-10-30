@@ -1,11 +1,11 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import CardHeader from './CardHeader';
 import CardBody from './CardBody';
 import CardWrapper from '../UI/CardWrapper';
 import withLoadingDelay from '../UI/withLoadingDelay';
 import PropTypes from 'prop-types';
-import { ItemsContext } from '../../store/context';
 
 const Card = (props) => {
   Card.propTypes = {
@@ -15,20 +15,36 @@ const Card = (props) => {
     isChecked: PropTypes.bool,
     handleChange: PropTypes.func,
     readOnly: PropTypes.bool,
+    isCheckbox: PropTypes.bool,
+    hiddenCheckbox: PropTypes.bool,
   };
-
-  const { readOnly, handleChange } = useContext(ItemsContext);
 
   //checkbox
   const [isChecked, setIsChecked] = useState(props.isChecked);
 
   //edit
-  const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(props.title);
   const [editedDescr, setEditedDescr] = useState(props.descr);
 
+  const dispatch = useDispatch();
+  const readOnly = useSelector((state) => state.readOnly);
+  const isEditing = useSelector((state) => state.isEditing);
+
+  const handleChange = () => {
+    dispatch({
+      type: 'ITEM_CHANGE',
+      id: props.id,
+      editedTitle: editedTitle,
+      editedDescr: editedDescr,
+      isChecked: isChecked,
+    });
+  };
+
   const resetEditingMode = () => {
-    setIsEditing(false);
+    dispatch({
+      type: 'SET_CHECKBOX_VISABILITY',
+      isEditing: isEditing,
+    });
   };
 
   useEffect(() => {
@@ -41,19 +57,30 @@ const Card = (props) => {
   //checkbox func
   const checkboxChangeHandler = () => {
     const newIsChecked = !isChecked;
-
     setIsChecked(newIsChecked);
-    handleChange(props.id, editedTitle, editedDescr, newIsChecked);
+    dispatch({
+      type: 'ITEM_CHANGE',
+      id: props.id,
+      editedTitle: editedTitle,
+      editedDescr: editedDescr,
+      isChecked: newIsChecked,
+    });
   };
 
   //buttons func-s
   const clickEditButtonHandler = () => {
-    setIsEditing(!isEditing);
+    dispatch({
+      type: 'SET_ISEDITING',
+      isEditing: !isEditing,
+    });
     setIsChecked(false);
   };
 
   const clickSaveButtonHandler = () => {
-    setIsEditing(!isEditing);
+    dispatch({
+      type: 'SET_ISEDITING',
+      isEditing: !isEditing,
+    });
     handleChange(props.id, editedTitle, editedDescr, isChecked);
   };
 
@@ -63,7 +90,10 @@ const Card = (props) => {
   };
 
   const clickCancelButtonHandler = () => {
-    setIsEditing(!isEditing);
+    dispatch({
+      type: 'SET_ISEDITING',
+      isEditing: !isEditing,
+    });
     resetValues();
   };
 
@@ -78,25 +108,28 @@ const Card = (props) => {
 
   return (
     <CardWrapper>
-      <CardHeader
-        id={props.id}
-        isEditing={isEditing}
-        editedTitle={editedTitle}
-        title={props.title}
-        titleChangeHandler={titleChangeHandler}
-        clickEditButtonHandler={clickEditButtonHandler}
-        clickSaveButtonHandler={clickSaveButtonHandler}
-        clickCancelButtonHandler={clickCancelButtonHandler}
-        checkboxChangeHandler={checkboxChangeHandler}
-        isChecked={isChecked}
-        readOnly={readOnly}
-      ></CardHeader>
-      <CardBody
-        descr={props.descr}
-        editedDescr={editedDescr}
-        isEditing={isEditing}
-        descrChangeHandler={descrChangeHandler}
-      ></CardBody>
+      <div onDoubleClick={props.onDoubleClick}>
+        <CardHeader
+          id={props.id}
+          isEditing={isEditing}
+          editedTitle={editedTitle}
+          title={props.title}
+          titleChangeHandler={titleChangeHandler}
+          clickEditButtonHandler={clickEditButtonHandler}
+          clickSaveButtonHandler={clickSaveButtonHandler}
+          clickCancelButtonHandler={clickCancelButtonHandler}
+          checkboxChangeHandler={checkboxChangeHandler}
+          isChecked={isChecked}
+          readOnly={readOnly}
+          hiddenCheckbox={props.hiddenCheckbox}
+        ></CardHeader>
+        <CardBody
+          descr={props.descr}
+          editedDescr={editedDescr}
+          isEditing={isEditing}
+          descrChangeHandler={descrChangeHandler}
+        ></CardBody>
+      </div>
     </CardWrapper>
   );
 };
