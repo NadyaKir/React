@@ -1,6 +1,8 @@
-import { createStore } from 'redux';
-
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { v4 as uuidv4 } from 'uuid';
+
+import { logActionMiddleware } from './logActionMiddleware';
 
 const initialState = {
   items: [],
@@ -16,15 +18,15 @@ const cardsReducer = (state = initialState, action) => {
   if (action.type === 'FETCH_DATA') {
     return {
       ...state,
-      items: action.modifiedData,
-      itemsCount: action.modifiedData.length,
+      items: action.payload.modifiedData,
+      itemsCount: action.payload.modifiedDataLength,
     };
   }
 
   if (action.type === 'SET_ISEDITING') {
     return {
       ...state,
-      isEditing: action.isEditing,
+      isEditing: action.payload.isEditing,
     };
   }
 
@@ -33,8 +35,8 @@ const cardsReducer = (state = initialState, action) => {
     const id = uuidv4();
     const newItem = {
       Number: id,
-      Name: action.title,
-      About: action.descr,
+      Name: action.payload.title,
+      About: action.payload.descr,
       isChecked: false,
     };
 
@@ -52,9 +54,9 @@ const cardsReducer = (state = initialState, action) => {
       if (item.Number === action.id) {
         return {
           ...item,
-          Name: action.editedTitle,
-          About: action.editedDescr,
-          isChecked: action.isChecked,
+          Name: action.payload.editedTitle,
+          About: action.payload.editedDescr,
+          isChecked: action.payload.isChecked,
         };
       }
       return item;
@@ -89,7 +91,6 @@ const cardsReducer = (state = initialState, action) => {
   if (action.type === 'CLOSE_ADD_MODAL') {
     return {
       ...state,
-
       isAddModalOpen: false,
     };
   }
@@ -106,6 +107,9 @@ const cardsReducer = (state = initialState, action) => {
   return state;
 };
 
-const store = createStore(cardsReducer);
+const store = createStore(
+  cardsReducer,
+  applyMiddleware(thunk, logActionMiddleware)
+);
 
 export default store;

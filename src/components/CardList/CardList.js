@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Card from '../Card/Card';
+import { fetchData } from '../../store/cartActions';
 
 import { Wrapper } from './CardList.styled';
 
@@ -23,7 +24,7 @@ const CardList = () => {
           ...item,
           isChecked: false,
         }));
-        dispatch({ type: 'FETCH_DATA', modifiedData });
+        dispatch(fetchData(modifiedData, modifiedData.length));
       })
       .catch((err) => console.log(err));
   }, [dispatch]);
