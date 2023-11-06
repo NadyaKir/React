@@ -14,9 +14,10 @@ export const addItem = (title, descr) => ({
   },
 });
 
-export const itemChange = (editedTitle, editedDescr, isChecked) => ({
+export const itemChange = (id, editedTitle, editedDescr, isChecked) => ({
   type: 'ITEM_CHANGE',
   payload: {
+    id,
     editedTitle,
     editedDescr,
     isChecked,

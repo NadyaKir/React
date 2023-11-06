@@ -32,7 +32,7 @@ const Card = (props) => {
   const isEditing = useSelector((state) => state.isEditing);
 
   const handleChange = () => {
-    dispatch(itemChange(editedTitle, editedDescr, isChecked));
+    dispatch(itemChange(props.id, editedTitle, editedDescr, isChecked));
   };
 
   const resetEditingMode = () => {
@@ -50,7 +50,7 @@ const Card = (props) => {
   const checkboxChangeHandler = () => {
     const newIsChecked = !isChecked;
     setIsChecked(newIsChecked);
-    dispatch(itemChange(editedTitle, editedDescr, newIsChecked));
+    dispatch(itemChange(props.id, editedTitle, editedDescr, newIsChecked));
   };
 
   //buttons func-s

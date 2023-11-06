@@ -51,7 +51,7 @@ const cardsReducer = (state = initialState, action) => {
   //updateCardData
   if (action.type === 'ITEM_CHANGE') {
     const updatedItems = state.items.map((item) => {
-      if (item.Number === action.id) {
+      if (item.Number === action.payload.id) {
         return {
           ...item,
           Name: action.payload.editedTitle,
