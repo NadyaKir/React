@@ -6,6 +6,7 @@ import CardBody from './CardBody';
 import CardWrapper from '../UI/CardWrapper';
 import withLoadingDelay from '../UI/withLoadingDelay';
 import PropTypes from 'prop-types';
+import { itemChange, setIsEditing } from '../../store/cartActions';
 
 const Card = (props) => {
   Card.propTypes = {
@@ -31,20 +32,11 @@ const Card = (props) => {
   const isEditing = useSelector((state) => state.isEditing);
 
   const handleChange = () => {
-    dispatch({
-      type: 'ITEM_CHANGE',
-      id: props.id,
-      editedTitle: editedTitle,
-      editedDescr: editedDescr,
-      isChecked: isChecked,
-    });
+    dispatch(itemChange(props.id, editedTitle, editedDescr, isChecked));
   };
 
   const resetEditingMode = () => {
-    dispatch({
-      type: 'SET_CHECKBOX_VISABILITY',
-      isEditing: isEditing,
-    });
+    dispatch(setIsEditing(isEditing));
   };
 
   useEffect(() => {
@@ -58,29 +50,17 @@ const Card = (props) => {
   const checkboxChangeHandler = () => {
     const newIsChecked = !isChecked;
     setIsChecked(newIsChecked);
-    dispatch({
-      type: 'ITEM_CHANGE',
-      id: props.id,
-      editedTitle: editedTitle,
-      editedDescr: editedDescr,
-      isChecked: newIsChecked,
-    });
+    dispatch(itemChange(props.id, editedTitle, editedDescr, newIsChecked));
   };
 
   //buttons func-s
   const clickEditButtonHandler = () => {
-    dispatch({
-      type: 'SET_ISEDITING',
-      isEditing: !isEditing,
-    });
+    dispatch(setIsEditing(!isEditing));
     setIsChecked(false);
   };
 
   const clickSaveButtonHandler = () => {
-    dispatch({
-      type: 'SET_ISEDITING',
-      isEditing: !isEditing,
-    });
+    dispatch(setIsEditing(!isEditing));
     handleChange(props.id, editedTitle, editedDescr, isChecked);
   };
 
@@ -90,10 +70,7 @@ const Card = (props) => {
   };
 
   const clickCancelButtonHandler = () => {
-    dispatch({
-      type: 'SET_ISEDITING',
-      isEditing: !isEditing,
-    });
+    dispatch(setIsEditing(!isEditing));
     resetValues();
   };
 
