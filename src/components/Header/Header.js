@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { cardsActions } from '../../store';
 
 import {
   HeaderWrapper,
@@ -13,7 +14,7 @@ import headerLogo from './header-logo.png';
 import stars from './stars.png';
 
 const Header = () => {
-  const itemsCount = useSelector((state) => state.itemsCount);
+  const itemsCount = useSelector((state) => state.cards.itemsCount);
 
   return (
     <HeaderWrapper>

@@ -4,15 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Card from '../Card/Card';
-import { fetchData } from '../../store/cartActions';
+import { cardsActions } from '../../store';
 
 import { Wrapper } from './CardList.styled';
 
 const CardList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const items = useSelector((state) => state.items) || {};
-  const readOnly = useSelector((state) => state.readOnly);
+  const items = useSelector((state) => state.cards.items || []);
+  const readOnly = useSelector((state) => state.cards.readOnly);
 
   useEffect(() => {
     axios
@@ -24,7 +24,12 @@ const CardList = () => {
           ...item,
           isChecked: false,
         }));
-        dispatch(fetchData(modifiedData, modifiedData.length));
+        dispatch(
+          cardsActions.fetchData({
+            items: modifiedData,
+            itemsCount: modifiedData.length,
+          })
+        );
       })
       .catch((err) => console.log(err));
   }, [dispatch]);

@@ -1,9 +1,10 @@
 import { useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { addItem } from '../../store/cartActions';
 import { Form, Label, Input, Textarea } from './Add.styled';
 import { Button } from '../UI/Button.styled';
+
+import { cardsActions } from '../../store';
 
 const Add = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const Add = () => {
   const [descr, setDescr] = useState('');
 
   const handleAdd = () => {
-    dispatch(addItem(title, descr));
+    dispatch(cardsActions.addItem(title, descr));
   };
 
   const titleChangeHandler = (event) => {

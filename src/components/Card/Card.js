@@ -6,7 +6,8 @@ import CardBody from './CardBody';
 import CardWrapper from '../UI/CardWrapper';
 import withLoadingDelay from '../UI/withLoadingDelay';
 import PropTypes from 'prop-types';
-import { itemChange, setIsEditing } from '../../store/cartActions';
+
+import { cardsActions } from '../../store';
 
 const Card = (props) => {
   Card.propTypes = {
@@ -28,15 +29,17 @@ const Card = (props) => {
   const [editedDescr, setEditedDescr] = useState(props.descr);
 
   const dispatch = useDispatch();
-  const readOnly = useSelector((state) => state.readOnly);
-  const isEditing = useSelector((state) => state.isEditing);
+  const readOnly = useSelector((state) => state.cards.readOnly);
+  const isEditing = useSelector((state) => state.cards.isEditing);
 
   const handleChange = () => {
-    dispatch(itemChange(props.id, editedTitle, editedDescr, isChecked));
+    dispatch(
+      cardsActions.itemChange(props.id, editedTitle, editedDescr, isChecked)
+    );
   };
 
   const resetEditingMode = () => {
-    dispatch(setIsEditing(isEditing));
+    dispatch(cardsActions.setIsEditing(isEditing));
   };
 
   useEffect(() => {
@@ -50,17 +53,19 @@ const Card = (props) => {
   const checkboxChangeHandler = () => {
     const newIsChecked = !isChecked;
     setIsChecked(newIsChecked);
-    dispatch(itemChange(props.id, editedTitle, editedDescr, newIsChecked));
+    dispatch(
+      cardsActions.itemChange(props.id, editedTitle, editedDescr, newIsChecked)
+    );
   };
 
   //buttons func-s
   const clickEditButtonHandler = () => {
-    dispatch(setIsEditing(!isEditing));
+    dispatch(cardsActions.setIsEditing(!isEditing));
     setIsChecked(false);
   };
 
   const clickSaveButtonHandler = () => {
-    dispatch(setIsEditing(!isEditing));
+    dispatch(cardsActions.setIsEditing(!isEditing));
     handleChange(props.id, editedTitle, editedDescr, isChecked);
   };
 
@@ -70,7 +75,7 @@ const Card = (props) => {
   };
 
   const clickCancelButtonHandler = () => {
-    dispatch(setIsEditing(!isEditing));
+    dispatch(cardsActions.setIsEditing(!isEditing));
     resetValues();
   };
 
