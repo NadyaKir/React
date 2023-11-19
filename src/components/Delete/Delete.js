@@ -1,12 +1,14 @@
 import { useDispatch } from 'react-redux';
 
+import { cardsActions } from '../../store';
+
 import { Button } from '../UI/Button.styled';
 
 const Delete = ({ readOnly }) => {
   const dispatch = useDispatch();
 
   const handleDeleteCards = () => {
-    dispatch({ type: 'DELETE_ITEM' });
+    dispatch(cardsActions.deleteItem());
   };
 
   return (

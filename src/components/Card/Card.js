@@ -34,12 +34,17 @@ const Card = (props) => {
 
   const handleChange = () => {
     dispatch(
-      cardsActions.itemChange(props.id, editedTitle, editedDescr, isChecked)
+      cardsActions.itemChange({
+        id: props.id,
+        editedTitle,
+        editedDescr,
+        isChecked,
+      })
     );
   };
 
   const resetEditingMode = () => {
-    dispatch(cardsActions.setIsEditing(isEditing));
+    dispatch(cardsActions.setIsEditing({ isEditing: isEditing }));
   };
 
   useEffect(() => {
@@ -54,18 +59,23 @@ const Card = (props) => {
     const newIsChecked = !isChecked;
     setIsChecked(newIsChecked);
     dispatch(
-      cardsActions.itemChange(props.id, editedTitle, editedDescr, newIsChecked)
+      cardsActions.itemChange({
+        id: props.id,
+        editedTitle,
+        editedDescr,
+        isChecked: newIsChecked,
+      })
     );
   };
 
   //buttons func-s
   const clickEditButtonHandler = () => {
-    dispatch(cardsActions.setIsEditing(!isEditing));
+    dispatch(cardsActions.setIsEditing({ isEditing: !isEditing }));
     setIsChecked(false);
   };
 
   const clickSaveButtonHandler = () => {
-    dispatch(cardsActions.setIsEditing(!isEditing));
+    dispatch(cardsActions.setIsEditing({ isEditing: !isEditing }));
     handleChange(props.id, editedTitle, editedDescr, isChecked);
   };
 
@@ -75,7 +85,7 @@ const Card = (props) => {
   };
 
   const clickCancelButtonHandler = () => {
-    dispatch(cardsActions.setIsEditing(!isEditing));
+    dispatch(cardsActions.setIsEditing({ isEditing: !isEditing }));
     resetValues();
   };
 

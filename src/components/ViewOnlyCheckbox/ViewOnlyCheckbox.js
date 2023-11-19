@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
+import { cardsActions } from '../../store';
+
 import {
   ViewOnlyCheckboxWrapper,
   HiddenCheckbox,
@@ -10,11 +12,11 @@ import {
 
 const ViewOnlyCheckbox = () => {
   const dispatch = useDispatch();
-  const readOnly = useSelector((state) => state.readOnly);
+  const readOnly = useSelector((state) => state.cards.readOnly);
 
   const readOnlyHandler = () => {
     {
-      dispatch({ type: 'SET_READ_ONLY' });
+      dispatch(cardsActions.setReadOnly());
     }
   };
 

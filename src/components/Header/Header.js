@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import { cardsActions } from '../../store';
 
 import {
   HeaderWrapper,

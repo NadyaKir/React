@@ -22,31 +22,55 @@ const cardsSlice = createSlice({
       state.items = action.payload.items;
       state.itemsCount = action.payload.itemsCount;
     },
-    setIsEditing() {},
-    addItem() {},
-    itemChange() {},
-    openAddModal() {},
-    closeAddModal() {},
-    setReadOnly() {},
+    setIsEditing(state, action) {
+      state.isEditing = action.payload.isEditing;
+    },
+    addItem(state, action) {
+      const id = uuidv4();
+      const newItem = {
+        Number: id,
+        Name: action.payload.title,
+        About: action.payload.descr,
+        isChecked: false,
+      };
+
+      state.items = [newItem, ...state.items];
+      state.isAddModalOpen = false;
+      state.itemsCount = state.items.length + 1;
+    },
+    itemChange(state, action) {
+      const updatedItems = state.items.map((item) => {
+        if (item.Number === action.payload.id) {
+          return {
+            ...item,
+            Name: action.payload.editedTitle,
+            About: action.payload.editedDescr,
+            isChecked: action.payload.isChecked,
+          };
+        }
+        return item;
+      });
+
+      state.items = updatedItems;
+    },
+    deleteItem(state, action) {
+      const updatedItems = state.items.filter((item) => !item.isChecked);
+
+      state.items = updatedItems;
+      state.itemsCount = updatedItems.length;
+    },
+    openAddModal(state, action) {
+      state.isAddModalOpen = true;
+    },
+    closeAddModal(state, action) {
+      state.isAddModalOpen = false;
+    },
+    setReadOnly(state, action) {
+      state.readOnly = !state.readOnly;
+      state.isEditing = false;
+    },
   },
 });
-
-// const cardsReducer = (state = initialState, action) => {
-//   //dataLoading
-//   if (action.type === 'FETCH_DATA') {
-//     return {
-//       ...state,
-//       items: action.payload.modifiedData,
-//       itemsCount: action.payload.modifiedDataLength,
-//     };
-//   }
-
-//   if (action.type === 'SET_ISEDITING') {
-//     return {
-//       ...state,
-//       isEditing: action.payload.isEditing,
-//     };
-//   }
 
 //   //addNewCard
 //   if (action.type === 'ADD_ITEM') {
@@ -86,43 +110,6 @@ const cardsSlice = createSlice({
 //     };
 //   }
 
-//   //deleteCard
-//   if (action.type === 'DELETE_ITEM') {
-//     const updatedItems = state.items.filter((item) => !item.isChecked);
-
-//     return {
-//       ...state,
-//       items: updatedItems,
-//       itemsCount: updatedItems.length,
-//     };
-//   }
-
-//   //openAddModal
-//   if (action.type === 'OPEN_ADD_MODAL') {
-//     return {
-//       ...state,
-//       isAddModalOpen: true,
-//     };
-//   }
-
-//   //closeAddModal
-//   if (action.type === 'CLOSE_ADD_MODAL') {
-//     return {
-//       ...state,
-//       isAddModalOpen: false,
-//     };
-//   }
-
-//   //checkboxViewOnlyState
-//   if (action.type === 'SET_READ_ONLY') {
-//     return {
-//       ...state,
-//       readOnly: !state.readOnly,
-//       isEditing: false,
-//     };
-//   }
-
-//   return state;
 // };
 
 const store = configureStore({

@@ -1,6 +1,8 @@
 import { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { cardsActions } from '../../store';
+
 import CardList from '../CardList/CardList';
 import ViewOnlyCheckbox from '../ViewOnlyCheckbox/ViewOnlyCheckbox';
 import Delete from '../Delete/Delete';
@@ -12,15 +14,15 @@ import { Button } from '../UI/Button.styled';
 
 const Content = () => {
   const dispatch = useDispatch();
-  const isAddModalOpen = useSelector((state) => state.isAddModalOpen);
-  const readOnly = useSelector((state) => state.readOnly);
+  const isAddModalOpen = useSelector((state) => state.cards.isAddModalOpen);
+  const readOnly = useSelector((state) => state.cards.readOnly);
 
   const handleAddClick = () => {
-    dispatch({ type: 'OPEN_ADD_MODAL' });
+    dispatch(cardsActions.openAddModal());
   };
 
   const closeModal = () => {
-    dispatch({ type: 'CLOSE_ADD_MODAL' });
+    dispatch(cardsActions.closeAddModal());
   };
 
   return (
