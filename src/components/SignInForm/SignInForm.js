@@ -1,10 +1,17 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { loginActions } from '../../store';
 
 import { Button } from '../UI/Button.styled';
 import { Form } from './SignInForm.styled';
 import { UsernameInput, PasswordInput } from '../UI/Input';
 
 const SignInForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [enteredUsername, setEnteredUsername] = useState('');
   const [enteredPassword, setEnteredPassword] = useState('');
   const [enteredUsernameValid, setEnteredUsernameValid] = useState(false);
@@ -23,6 +30,22 @@ const SignInForm = () => {
   };
 
   const isSignInFormValid = enteredUsernameValid && enteredPasswordValid;
+
+  const onClickLoginButton = () => {
+    if (isSignInFormValid) {
+      if (
+        enteredUsername === 'testAdmin@gmail.com' &&
+        enteredPassword === '12345yuiopp'
+      ) {
+        dispatch(loginActions.setLogin({ isLoggedIn: true, isAdmin: true }));
+      } else {
+        dispatch(loginActions.setLogin({ isLoggedIn: true }));
+      }
+
+      dispatch(loginActions.handleUsername({ username: enteredUsername }));
+      navigate('/');
+    }
+  };
 
   return (
     <Form onSubmit={onSubmitHandler}>
@@ -44,7 +67,9 @@ const SignInForm = () => {
         setEnteredPasswordValid={setEnteredPasswordValid}
         required
       />
-      <Button disabled={!isSignInFormValid}>Log in</Button>
+      <Button onClick={onClickLoginButton} disabled={!isSignInFormValid}>
+        Log in
+      </Button>
     </Form>
   );
 };

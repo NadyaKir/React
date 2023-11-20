@@ -11,7 +11,7 @@ import { cardsActions } from '../../store';
 
 const Card = (props) => {
   Card.propTypes = {
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     title: PropTypes.string,
     descr: PropTypes.string,
     isChecked: PropTypes.bool,

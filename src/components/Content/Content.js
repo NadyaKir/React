@@ -27,7 +27,6 @@ const Content = () => {
 
   return (
     <Fragment>
-      <ViewOnlyCheckbox />
       <ActionsBlock>
         <Button readOnly={readOnly} save="true" onClick={handleAddClick}>
           Добавить

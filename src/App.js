@@ -5,6 +5,7 @@ import HomePage from './pages/Home';
 import CardPage from './pages/Card';
 import SignInPage from './pages/SignIn';
 import ErrorPage from './pages/Error';
+import SettingsPage from './pages/Settings';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: 'signin', element: <SignInPage /> },
+      { path: 'settings', element: <SettingsPage /> },
       { path: 'card/:id', element: <CardPage /> },
     ],
   },

@@ -6,7 +6,7 @@ import { Header, Textarea, Title, Checkbox } from './CardHeader.styled';
 import { Button } from '../UI/Button.styled';
 
 const CardHeader = (props) => {
-  const readOnly = useSelector((state) => state.readOnly);
+  const readOnly = useSelector((state) => state.cards.readOnly);
 
   return (
     <Fragment>

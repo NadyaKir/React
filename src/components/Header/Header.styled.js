@@ -22,24 +22,36 @@ export const HeaderLink = styled(Link)`
   margin-right: 1rem;
 `;
 
+export const LoggedInBlock = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const UserText = styled.p`
+  margin-right: 1rem;
+`;
+export const HeaderUsername = styled.span`
+  font-weight: 700;
+  color: #fff;
+`;
+
 export const ImgLogo = styled.img`
   max-width: 12rem;
   height: auto;
 `;
 
-export const ImgStars = styled.img`
-  max-width: 5rem;
-  height: auto;
-  margin-right: 1rem;
+export const BadgeBlock = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 3rem;
 `;
 
 export const Badge = styled.span`
-  margin-left: 2rem;
-  margin-right: 3rem;
+  margin-left: 1rem;
   font-size: 20px;
   color: #fff6e5;
   font-weight: 700;
   background-color: red;
-  padding: 0.3rem 1rem;
+  padding: 0.3rem 0.5rem;
   border-radius: 0.5rem;
 `;

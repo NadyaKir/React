@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { logActionMiddleware } from './logActionMiddleware';
 
-const initialState = {
+const initialCardsState = {
   items: [],
   readOnly: true,
   isAddModalOpen: false,
@@ -14,9 +14,15 @@ const initialState = {
   itemsCount: 0,
 };
 
+const initialLoginState = {
+  isLoggedIn: false,
+  isAdmin: false,
+  username: '',
+};
+
 const cardsSlice = createSlice({
   name: 'cards',
-  initialState,
+  initialState: initialCardsState,
   reducers: {
     fetchData(state, action) {
       state.items = action.payload.items;
@@ -72,52 +78,36 @@ const cardsSlice = createSlice({
   },
 });
 
-//   //addNewCard
-//   if (action.type === 'ADD_ITEM') {
-//     const id = uuidv4();
-//     const newItem = {
-//       Number: id,
-//       Name: action.payload.title,
-//       About: action.payload.descr,
-//       isChecked: false,
-//     };
+const getInitialAuthState = () => {
+  const storedAuthState = localStorage.getItem('authState');
+  return storedAuthState ? JSON.parse(storedAuthState) : initialLoginState;
+};
 
-//     return {
-//       ...state,
-//       items: [newItem, ...state.items],
-//       isAddModalOpen: false,
-//       itemsCount: state.items.length + 1,
-//     };
-//   }
-
-//   //updateCardData
-//   if (action.type === 'ITEM_CHANGE') {
-//     const updatedItems = state.items.map((item) => {
-//       if (item.Number === action.payload.id) {
-//         return {
-//           ...item,
-//           Name: action.payload.editedTitle,
-//           About: action.payload.editedDescr,
-//           isChecked: action.payload.isChecked,
-//         };
-//       }
-//       return item;
-//     });
-
-//     return {
-//       ...state,
-//       items: updatedItems,
-//     };
-//   }
-
-// };
+const loginSlice = createSlice({
+  name: 'login',
+  initialState: getInitialAuthState(),
+  reducers: {
+    setLogin(state, action) {
+      state.isLoggedIn = action.payload.isLoggedIn;
+      state.isAdmin = action.payload.isAdmin;
+      localStorage.setItem('authState', JSON.stringify(state));
+    },
+    handleUsername(state, action) {
+      state.username = action.payload.username;
+      localStorage.setItem('authState', JSON.stringify(state));
+    },
+  },
+});
 
 const store = configureStore({
   reducer: {
     cards: cardsSlice.reducer,
+    login: loginSlice.reducer,
   },
   middleware: [thunk, logActionMiddleware],
 });
 
 export const cardsActions = cardsSlice.actions;
+export const loginActions = loginSlice.actions;
+
 export default store;
