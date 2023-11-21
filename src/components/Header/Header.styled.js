@@ -4,18 +4,24 @@ import styled from 'styled-components';
 
 export const HeaderWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   background: #ffa07a;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-bottom: 0.5rem solid #e9967a;
-  border-bottom-left-radius: 1rem; /* Закругление нижнего левого угла */
-  border-bottom-right-radius: 1rem; /* Закругление нижнего правого угла */
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
 `;
 
 export const HeaderLogo = styled(Link)`
   text-align: center;
+`;
+
+export const NavBlock = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
 `;
 
 export const HeaderLink = styled(Link)`
@@ -25,11 +31,12 @@ export const HeaderLink = styled(Link)`
 export const LoggedInBlock = styled.div`
   display: flex;
   align-items: center;
+
+  p {
+    margin-right: 1rem;
+  }
 `;
 
-export const UserText = styled.p`
-  margin-right: 1rem;
-`;
 export const HeaderUsername = styled.span`
   font-weight: 700;
   color: #fff;

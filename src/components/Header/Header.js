@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { loginActions } from '../../store';
+import { cardsActions, loginActions } from '../../store';
 
 import {
   HeaderWrapper,
   HeaderLogo,
+  NavBlock,
   HeaderLink,
   ImgLogo,
   BadgeBlock,
@@ -25,6 +26,7 @@ const Header = () => {
 
   const handleLogout = () => {
     dispatch(loginActions.setLogin({ isLoggedIn: false, isAdmin: false }));
+    dispatch(cardsActions.setReadOnly({ readOnly: true }));
   };
 
   return (
@@ -32,23 +34,28 @@ const Header = () => {
       <HeaderLogo>
         <ImgLogo src={headerLogo} alt="Cute sleeping cat" />
       </HeaderLogo>
-      <HeaderLink to="">Home</HeaderLink>
-
-      {isLoggedIn ? (
-        <LoggedInBlock>
-          <UserText>
-            Welcome, <HeaderUsername>{username}</HeaderUsername>
-          </UserText>
-          {isAdmin && <HeaderLink to="settings">Settings</HeaderLink>}
-          <HeaderLink onClick={handleLogout}>Logout</HeaderLink>
-        </LoggedInBlock>
-      ) : (
-        <HeaderLink to="signin">Sign in</HeaderLink>
-      )}
-      <BadgeBlock>
-        <p>Cards amount:</p>
-        <Badge>{itemsCount}</Badge>
-      </BadgeBlock>
+      <NavBlock>
+        {isLoggedIn ? (
+          <LoggedInBlock>
+            <p>
+              Welcome, <HeaderUsername>{username}</HeaderUsername>
+            </p>
+          </LoggedInBlock>
+        ) : (
+          <>
+            <HeaderLink to="signin">Sign in</HeaderLink>
+          </>
+        )}
+        <HeaderLink to="">Home</HeaderLink>
+        {isAdmin && <HeaderLink to="settings">Settings</HeaderLink>}
+        {isLoggedIn && <HeaderLink onClick={handleLogout}>Logout</HeaderLink>}
+        {isLoggedIn && (
+          <BadgeBlock>
+            <p>Cards amount:</p>
+            <Badge>{itemsCount}</Badge>
+          </BadgeBlock>
+        )}
+      </NavBlock>
     </HeaderWrapper>
   );
 };

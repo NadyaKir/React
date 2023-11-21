@@ -16,6 +16,7 @@ const Content = () => {
   const dispatch = useDispatch();
   const isAddModalOpen = useSelector((state) => state.cards.isAddModalOpen);
   const readOnly = useSelector((state) => state.cards.readOnly);
+  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
 
   const handleAddClick = () => {
     dispatch(cardsActions.openAddModal());
@@ -27,12 +28,14 @@ const Content = () => {
 
   return (
     <Fragment>
-      <ActionsBlock>
-        <Button readOnly={readOnly} save="true" onClick={handleAddClick}>
-          Добавить
-        </Button>
-        <Delete readOnly={readOnly}></Delete>
-      </ActionsBlock>
+      {isLoggedIn && (
+        <ActionsBlock>
+          <Button readOnly={readOnly} save="true" onClick={handleAddClick}>
+            Добавить
+          </Button>
+          <Delete readOnly={readOnly}></Delete>
+        </ActionsBlock>
+      )}
       <CardList />
       {isAddModalOpen && (
         <Modal closeModal={() => closeModal()}>

@@ -72,7 +72,7 @@ const cardsSlice = createSlice({
       state.isAddModalOpen = false;
     },
     setReadOnly(state, action) {
-      state.readOnly = !state.readOnly;
+      state.readOnly = action.payload.readOnly;
       state.isEditing = false;
     },
   },

@@ -15,3 +15,11 @@ export const Wrapper = styled.div`
     flex-direction: column;
   }
 `;
+
+export const WelcomeText = styled.div`
+  margin: auto;
+
+  h1 {
+    text-align: center;
+  }
+`;

@@ -16,7 +16,7 @@ const ViewOnlyCheckbox = () => {
 
   const readOnlyHandler = () => {
     {
-      dispatch(cardsActions.setReadOnly());
+      dispatch(cardsActions.setReadOnly({ readOnly: !readOnly }));
     }
   };
 
