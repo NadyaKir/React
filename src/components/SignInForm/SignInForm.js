@@ -39,7 +39,7 @@ const SignInForm = () => {
       ) {
         dispatch(loginActions.setLogin({ isLoggedIn: true, isAdmin: true }));
       } else {
-        dispatch(loginActions.setLogin({ isLoggedIn: true }));
+        dispatch(loginActions.setLogin({ isLoggedIn: true, isAdmin: false }));
       }
 
       dispatch(loginActions.handleUsername({ username: enteredUsername }));

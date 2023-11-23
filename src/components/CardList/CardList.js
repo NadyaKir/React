@@ -12,7 +12,6 @@ const CardList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const items = useSelector((state) => state.cards.items || []);
-  const readOnly = useSelector((state) => state.cards.readOnly);
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
 
   useEffect(() => {

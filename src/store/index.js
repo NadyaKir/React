@@ -1,4 +1,3 @@
-import { createStore, applyMiddleware } from 'redux';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
 import { v4 as uuidv4 } from 'uuid';

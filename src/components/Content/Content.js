@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { cardsActions } from '../../store';
 
 import CardList from '../CardList/CardList';
-import ViewOnlyCheckbox from '../ViewOnlyCheckbox/ViewOnlyCheckbox';
 import Delete from '../Delete/Delete';
 import Add from '../Add/Add';
 import Modal from '../Modal/Modal';

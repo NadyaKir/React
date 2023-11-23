@@ -26,7 +26,7 @@ export const UsernameInput = ({
         placeholder={placeholder}
         required={required}
       />
-      {!isValid && !value.trim().length == 0 && (
+      {!isValid && !value.trim().length === 0 && (
         <p>Incorrect email! Example: dawdavfa@qwe.ru</p>
       )}
     </Fragment>
@@ -62,13 +62,13 @@ export const PasswordInput = ({
         required={required}
       />
       <ul>
-        {!hasLettersRegex && !value.trim().length == 0 && (
+        {!hasLettersRegex && !value.trim().length === 0 && (
           <li>The password must contain at least one letter.</li>
         )}
-        {!hasDigitsRegex && !value.trim().length == 0 && (
+        {!hasDigitsRegex && !value.trim().length === 0 && (
           <li>The password must contain at least one digit.</li>
         )}
-        {!isLengthMinEight && !value.trim().length == 0 && (
+        {!isLengthMinEight && !value.trim().length === 0 && (
           <li>The password must be at least 8 characters long.</li>
         )}
       </ul>

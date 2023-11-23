@@ -10,7 +10,6 @@ import {
   ImgLogo,
   BadgeBlock,
   Badge,
-  UserText,
   LoggedInBlock,
   HeaderUsername,
 } from './Header.styled';
