@@ -7,11 +7,13 @@ import { Button } from '../UI/Button.styled';
 
 const CardHeader = (props) => {
   const readOnly = useSelector((state) => state.cards.readOnly);
+  const editingCardId = useSelector((state) => state.cards.editingCardId);
+  const editingCard = props.id === editingCardId;
 
   return (
     <Fragment>
       <Header>
-        {props.isEditing ? (
+        {props.isEditing && editingCard ? (
           <Textarea
             type="text"
             value={props.editedTitle}
@@ -25,7 +27,7 @@ const CardHeader = (props) => {
             <MdEdit />
           </Button>
         )}
-        {props.isEditing && (
+        {props.isEditing && editingCard && (
           <Fragment>
             <Button save="true" onClick={props.clickSaveButtonHandler}>
               <MdSave />

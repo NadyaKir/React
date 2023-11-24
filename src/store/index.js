@@ -10,6 +10,7 @@ const initialCardsState = {
   isAddModalOpen: false,
   isChecked: false,
   isEditing: false,
+  editingCardId: null,
   itemsCount: 0,
 };
 
@@ -29,6 +30,7 @@ const cardsSlice = createSlice({
     },
     setIsEditing(state, action) {
       state.isEditing = action.payload.isEditing;
+      state.editingCardId = action.payload.editingCardId;
     },
     addItem(state, action) {
       const id = uuidv4();

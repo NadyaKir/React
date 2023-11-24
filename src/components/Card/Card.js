@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import CardHeader from './CardHeader';
@@ -16,15 +16,13 @@ const Card = (props) => {
     descr: PropTypes.string,
     isChecked: PropTypes.bool,
     handleChange: PropTypes.func,
+    onDoubleClick: PropTypes.func,
     readOnly: PropTypes.bool,
     isCheckbox: PropTypes.bool,
     hiddenCheckbox: PropTypes.bool,
   };
 
-  //checkbox
   const [isChecked, setIsChecked] = useState(props.isChecked);
-
-  //edit
   const [editedTitle, setEditedTitle] = useState(props.title);
   const [editedDescr, setEditedDescr] = useState(props.descr);
 
@@ -43,18 +41,22 @@ const Card = (props) => {
     );
   };
 
-  const resetEditingMode = () => {
+  const resetEditingMode = useCallback(() => {
     dispatch(cardsActions.setIsEditing({ isEditing: isEditing }));
-  };
+  }, [dispatch, isEditing]);
+
+  const resetValues = useCallback(() => {
+    setEditedTitle(props.title);
+    setEditedDescr(props.descr);
+  }, [props.title, props.descr]);
 
   useEffect(() => {
     if (readOnly && isEditing) {
       resetValues();
       resetEditingMode();
     }
-  }, [isEditing, readOnly]);
+  }, [isEditing, readOnly, resetValues, resetEditingMode]);
 
-  //checkbox func
   const checkboxChangeHandler = () => {
     const newIsChecked = !isChecked;
     setIsChecked(newIsChecked);
@@ -68,9 +70,13 @@ const Card = (props) => {
     );
   };
 
-  //buttons func-s
   const clickEditButtonHandler = () => {
-    dispatch(cardsActions.setIsEditing({ isEditing: !isEditing }));
+    dispatch(
+      cardsActions.setIsEditing({
+        isEditing: !isEditing,
+        editingCardId: props.id,
+      })
+    );
     setIsChecked(false);
   };
 
@@ -79,17 +85,11 @@ const Card = (props) => {
     handleChange(props.id, editedTitle, editedDescr, isChecked);
   };
 
-  const resetValues = () => {
-    setEditedTitle(props.title);
-    setEditedDescr(props.descr);
-  };
-
   const clickCancelButtonHandler = () => {
     dispatch(cardsActions.setIsEditing({ isEditing: !isEditing }));
     resetValues();
   };
 
-  //change handlers
   const titleChangeHandler = (event) => {
     setEditedTitle(event.target.value);
   };
@@ -116,6 +116,7 @@ const Card = (props) => {
           hiddenCheckbox={props.hiddenCheckbox}
         ></CardHeader>
         <CardBody
+          id={props.id}
           descr={props.descr}
           editedDescr={editedDescr}
           isEditing={isEditing}
