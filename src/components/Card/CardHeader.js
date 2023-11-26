@@ -7,13 +7,11 @@ import { Button } from '../UI/Button.styled';
 
 const CardHeader = (props) => {
   const readOnly = useSelector((state) => state.cards.readOnly);
-  const editingCardId = useSelector((state) => state.cards.editingCardId);
-  const editingCard = props.id === editingCardId;
 
   return (
     <Fragment>
       <Header>
-        {props.isEditing && editingCard ? (
+        {props.isCardEditing ? (
           <Textarea
             type="text"
             value={props.editedTitle}
@@ -22,25 +20,25 @@ const CardHeader = (props) => {
         ) : (
           <Title>{props.title}</Title>
         )}
-        {!props.isEditing && !readOnly && (
-          <Button edit="true" onClick={props.clickEditButtonHandler}>
+        {!props.isCardEditing && !readOnly && (
+          <Button $edit="true" onClick={props.clickEditButtonHandler}>
             <MdEdit />
           </Button>
         )}
-        {props.isEditing && editingCard && (
+        {props.isCardEditing && (
           <Fragment>
-            <Button save="true" onClick={props.clickSaveButtonHandler}>
+            <Button $save="true" onClick={props.clickSaveButtonHandler}>
               <MdSave />
             </Button>
-            <Button cancel="true" onClick={props.clickCancelButtonHandler}>
+            <Button $cancel="true" onClick={props.clickCancelButtonHandler}>
               <MdEditOff />
             </Button>
           </Fragment>
         )}
-        {!readOnly && !props.hiddenCheckbox && (
+        {!props.isCardEditing && !readOnly && !props.hiddenCheckbox && (
           <Checkbox
             type="checkbox"
-            isEditing={props.isEditing}
+            style={{ display: props.isEditing ? 'none' : 'block' }}
             checked={props.isChecked}
             onChange={props.checkboxChangeHandler}
           ></Checkbox>

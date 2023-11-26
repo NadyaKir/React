@@ -12,7 +12,7 @@ const Delete = ({ readOnly }) => {
   };
 
   return (
-    <Button readOnly={readOnly} delete="true" onClick={handleDeleteCards}>
+    <Button readOnly={readOnly} $delete="true" onClick={handleDeleteCards}>
       Удалить выбранные карточки
     </Button>
   );

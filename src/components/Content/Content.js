@@ -29,7 +29,7 @@ const Content = () => {
     <Fragment>
       {isLoggedIn && (
         <ActionsBlock>
-          <Button readOnly={readOnly} save="true" onClick={handleAddClick}>
+          <Button readOnly={readOnly} $save="true" onClick={handleAddClick}>
             Добавить
           </Button>
           <Delete readOnly={readOnly}></Delete>

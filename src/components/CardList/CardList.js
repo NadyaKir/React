@@ -23,6 +23,7 @@ const CardList = () => {
         const modifiedData = res.data.slice(0, 15).map((item) => ({
           ...item,
           isChecked: false,
+          isEditing: false,
         }));
         dispatch(
           cardsActions.fetchData({
@@ -48,6 +49,7 @@ const CardList = () => {
             title={item.Name}
             descr={item.About}
             isChecked={item.isChecked}
+            isEditing={item.isEditing}
             hiddenCheckbox={false}
             onDoubleClick={() => handleDoubleClick(item.Number)}
           />
