@@ -12,6 +12,10 @@ export const HeaderWrapper = styled.div`
   border-bottom: 0.5rem solid #e9967a;
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
+
+  @media only screen and (max-width: 585px) {
+    height: 5rem;
+  }
 `;
 
 export const HeaderLogo = styled(Link)`
@@ -36,6 +40,14 @@ export const LoggedInBlock = styled.div`
   p {
     margin-right: 1rem;
   }
+
+  @media screen and (min-width: 586px) and (max-width: 656px) {
+    margin-left: 4rem;
+  }
+
+  @media only screen and (max-width: 585px) {
+    display: none;
+  }
 `;
 
 export const HeaderUsername = styled.span`
@@ -46,6 +58,10 @@ export const HeaderUsername = styled.span`
 export const ImgLogo = styled.img`
   max-width: 12rem;
   height: auto;
+
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 `;
 
 export const BadgeBlock = styled.div`
@@ -53,6 +69,15 @@ export const BadgeBlock = styled.div`
   align-items: center;
   margin-left: 1rem;
   margin-right: 3rem;
+
+  @media screen and (max-width: 915px) {
+    p {
+      display: none;
+    }
+  }
+  @media only screen and (max-width: 585px) {
+    margin: 0;
+  }
 `;
 
 export const Badge = styled.span`
@@ -63,4 +88,8 @@ export const Badge = styled.span`
   background-color: red;
   padding: 0.3rem 0.5rem;
   border-radius: 0.5rem;
+
+  @media screen and (max-width: 915px) {
+    margin-right: 0;
+  }
 `;

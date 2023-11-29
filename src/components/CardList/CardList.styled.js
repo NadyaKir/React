@@ -19,7 +19,8 @@ export const Wrapper = styled.div`
 export const WelcomeText = styled.div`
   margin: auto;
 
-  h1 {
+  h1,
+  p {
     text-align: center;
   }
 `;
