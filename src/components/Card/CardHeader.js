@@ -11,7 +11,7 @@ const CardHeader = (props) => {
   return (
     <Fragment>
       <Header>
-        {props.isCardEditing ? (
+        {props.isEditing ? (
           <Textarea
             type="text"
             value={props.editedTitle}
@@ -20,12 +20,12 @@ const CardHeader = (props) => {
         ) : (
           <Title>{props.title}</Title>
         )}
-        {!props.isCardEditing && !readOnly && (
+        {!props.isEditing && !readOnly && (
           <Button $edit="true" onClick={props.clickEditButtonHandler}>
             <MdEdit />
           </Button>
         )}
-        {props.isCardEditing && (
+        {props.isEditing && (
           <Fragment>
             <Button $save="true" onClick={props.clickSaveButtonHandler}>
               <MdSave />
@@ -35,7 +35,7 @@ const CardHeader = (props) => {
             </Button>
           </Fragment>
         )}
-        {!props.isCardEditing && !readOnly && !props.hiddenCheckbox && (
+        {!props.isEditing && !readOnly && !props.hiddenCheckbox && (
           <Checkbox
             type="checkbox"
             style={{ display: props.isEditing ? 'none' : 'block' }}

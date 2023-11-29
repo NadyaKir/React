@@ -26,9 +26,6 @@ const Card = (props) => {
   const [isChecked, setIsChecked] = useState(props.isChecked);
   const [editedTitle, setEditedTitle] = useState(props.title);
   const [editedDescr, setEditedDescr] = useState(props.descr);
-  const isCardEditing = useSelector((state) =>
-    state.cards.editingCardIds.includes(props.id)
-  );
 
   const dispatch = useDispatch();
   const readOnly = useSelector((state) => state.cards.readOnly);
@@ -40,7 +37,6 @@ const Card = (props) => {
         editedTitle,
         editedDescr,
         isChecked,
-        isEditing: props.isEditing,
       })
     );
   };
@@ -62,7 +58,7 @@ const Card = (props) => {
     dispatch(
       cardsActions.setIsEditing({
         isEditing: true,
-        editingCardId: props.id,
+        Number: props.id,
       })
     );
     setIsChecked(false);
@@ -72,7 +68,7 @@ const Card = (props) => {
     dispatch(
       cardsActions.setIsEditing({
         isEditing: false,
-        editingCardId: props.id,
+        Number: props.id,
       })
     );
     handleChange(props.id, editedTitle, editedDescr, isChecked);
@@ -82,7 +78,7 @@ const Card = (props) => {
     dispatch(
       cardsActions.setIsEditing({
         isEditing: false,
-        editingCardId: props.id,
+        Number: props.id,
       })
     );
   };
@@ -101,7 +97,6 @@ const Card = (props) => {
         <CardHeader
           id={props.id}
           isEditing={props.isEditing}
-          isCardEditing={isCardEditing}
           editedTitle={editedTitle}
           title={props.title}
           titleChangeHandler={titleChangeHandler}
@@ -118,7 +113,6 @@ const Card = (props) => {
           descr={props.descr}
           editedDescr={editedDescr}
           isEditing={props.isEditing}
-          isCardEditing={isCardEditing}
           descrChangeHandler={descrChangeHandler}
         ></CardBody>
       </div>

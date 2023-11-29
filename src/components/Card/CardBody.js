@@ -5,7 +5,7 @@ import { Textarea, Paragraph } from './CardBody.styled';
 const CardBody = (props) => {
   return (
     <Fragment>
-      {props.isCardEditing ? (
+      {props.isEditing ? (
         <Textarea
           value={props.editedDescr}
           onChange={props.descrChangeHandler}

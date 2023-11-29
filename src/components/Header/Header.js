@@ -33,7 +33,7 @@ const Header = () => {
       <HeaderLogo>
         <ImgLogo src={headerLogo} alt="Cute sleeping cat" />
       </HeaderLogo>
-      <NavBlock>
+      <NavBlock isLoggedIn={isLoggedIn}>
         {isLoggedIn ? (
           <LoggedInBlock>
             <p>

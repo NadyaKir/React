@@ -20,6 +20,7 @@ export const HeaderLogo = styled(Link)`
 
 export const NavBlock = styled.div`
   display: flex;
+  flex-direction: ${(props) => (props.isLoggedIn ? 'row' : 'row-reverse')};
   align-items: center;
   margin-right: 1rem;
 `;
@@ -50,7 +51,8 @@ export const ImgLogo = styled.img`
 export const BadgeBlock = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 3rem;
+  margin-left: 1rem;
+  margin-right: 3rem;
 `;
 
 export const Badge = styled.span`

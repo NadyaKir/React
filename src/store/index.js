@@ -8,7 +8,6 @@ const initialCardsState = {
   items: [],
   readOnly: true,
   isAddModalOpen: false,
-  editingCardIds: [],
   itemsCount: 0,
 };
 
@@ -27,17 +26,17 @@ const cardsSlice = createSlice({
       state.itemsCount = action.payload.itemsCount;
     },
     setIsEditing(state, action) {
-      const { editingCardId, isEditing } = action.payload;
+      const updatedItems = state.items.map((item) => {
+        if (item.Number === action.payload.Number) {
+          return {
+            ...item,
+            isEditing: action.payload.isEditing,
+          };
+        }
+        return item;
+      });
 
-      if (editingCardId) {
-        const updatedEditingCardIds = isEditing
-          ? [...state.editingCardIds, editingCardId]
-          : state.editingCardIds.filter((id) => id !== editingCardId);
-
-        state.editingCardIds = updatedEditingCardIds;
-      }
-
-      state.isEditing = isEditing;
+      state.items = updatedItems;
     },
     addItem(state, action) {
       const id = uuidv4();
