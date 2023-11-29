@@ -13,6 +13,7 @@ import {
   LoggedInBlock,
   HeaderUsername,
 } from './Header.styled';
+import Container from '../UI/Container';
 
 import headerLogo from './header-logo.png';
 
@@ -30,31 +31,33 @@ const Header = () => {
 
   return (
     <HeaderWrapper>
-      <HeaderLogo>
-        <ImgLogo src={headerLogo} alt="Cute sleeping cat" />
-      </HeaderLogo>
-      <NavBlock isLoggedIn={isLoggedIn}>
-        {isLoggedIn ? (
-          <LoggedInBlock>
-            <p>
-              Welcome, <HeaderUsername>{username}</HeaderUsername>
-            </p>
-          </LoggedInBlock>
-        ) : (
-          <>
-            <HeaderLink to="signin">Sign in</HeaderLink>
-          </>
-        )}
-        <HeaderLink to="">Home</HeaderLink>
-        {isAdmin && <HeaderLink to="settings">Settings</HeaderLink>}
-        {isLoggedIn && <HeaderLink onClick={handleLogout}>Logout</HeaderLink>}
-        {isLoggedIn && (
-          <BadgeBlock>
-            <p>Cards amount:</p>
-            <Badge>{itemsCount}</Badge>
-          </BadgeBlock>
-        )}
-      </NavBlock>
+      <Container>
+        <HeaderLogo>
+          <ImgLogo src={headerLogo} alt="Cute sleeping cat" />
+        </HeaderLogo>
+        <NavBlock isLoggedIn={isLoggedIn}>
+          {isLoggedIn ? (
+            <LoggedInBlock>
+              <p>
+                Welcome, <HeaderUsername>{username}</HeaderUsername>
+              </p>
+            </LoggedInBlock>
+          ) : (
+            <>
+              <HeaderLink to="signin">Sign in</HeaderLink>
+            </>
+          )}
+          <HeaderLink to="">Home</HeaderLink>
+          {isAdmin && <HeaderLink to="settings">Settings</HeaderLink>}
+          {isLoggedIn && <HeaderLink onClick={handleLogout}>Logout</HeaderLink>}
+          {isLoggedIn && (
+            <BadgeBlock>
+              <p>Cards amount:</p>
+              <Badge>{itemsCount}</Badge>
+            </BadgeBlock>
+          )}
+        </NavBlock>
+      </Container>
     </HeaderWrapper>
   );
 };

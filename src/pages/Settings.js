@@ -3,7 +3,7 @@ import ViewOnlyCheckbox from '../components/ViewOnlyCheckbox/ViewOnlyCheckbox';
 const SettingsPage = () => {
   return (
     <div>
-      <h2>Settings</h2>
+      <h1>Settings</h1>
       <ViewOnlyCheckbox />
     </div>
   );
