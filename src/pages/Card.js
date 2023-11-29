@@ -16,6 +16,7 @@ const CardPage = () => {
         title={selectedCard.Name}
         descr={selectedCard.About}
         isChecked={selectedCard.isChecked}
+        isEditing={selectedCard.isEditing}
         hiddenCheckbox={true}
       />
     </div>
