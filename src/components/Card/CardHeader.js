@@ -17,6 +17,7 @@ const CardHeader = (props) => {
 
   const autoResize = (textarea) => {
     textarea.style.height = 'auto';
+    textarea.style.width = '100%';
     textarea.style.height = textarea.scrollHeight + 'px';
   };
   return (
