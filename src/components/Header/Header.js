@@ -30,8 +30,8 @@ const Header = () => {
   };
 
   return (
-    <HeaderWrapper>
-      <Container>
+    <Container>
+      <HeaderWrapper>
         <HeaderLogo>
           <ImgLogo src={headerLogo} alt="Cute sleeping cat" />
         </HeaderLogo>
@@ -57,8 +57,8 @@ const Header = () => {
             </BadgeBlock>
           )}
         </NavBlock>
-      </Container>
-    </HeaderWrapper>
+      </HeaderWrapper>
+    </Container>
   );
 };
 
