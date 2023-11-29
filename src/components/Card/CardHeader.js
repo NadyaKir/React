@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import { MdEdit, MdSave, MdEditOff } from 'react-icons/md';
@@ -7,13 +7,25 @@ import { Button } from '../UI/Button.styled';
 
 const CardHeader = (props) => {
   const readOnly = useSelector((state) => state.cards.readOnly);
+  const textareaRef = useRef(null);
 
+  useEffect(() => {
+    if (props.isEditing && textareaRef.current) {
+      autoResize(textareaRef.current);
+    }
+  }, [props.isEditing]);
+
+  const autoResize = (textarea) => {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+  };
   return (
     <Fragment>
       <Header>
         {props.isEditing ? (
           <Textarea
             type="text"
+            ref={textareaRef}
             value={props.editedTitle}
             onChange={props.titleChangeHandler}
           ></Textarea>

@@ -1,14 +1,30 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useRef } from 'react';
 
 import { Textarea, Paragraph } from './CardBody.styled';
 
 const CardBody = (props) => {
+  const textareaRef = useRef(null);
+
+  useEffect(() => {
+    if (props.isEditing && textareaRef.current) {
+      autoResize(textareaRef.current);
+    }
+  }, [props.isEditing]);
+
+  const autoResize = (textarea) => {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+  };
+
   return (
     <Fragment>
       {props.isEditing ? (
         <Textarea
+          type="text"
+          ref={textareaRef}
           value={props.editedDescr}
           onChange={props.descrChangeHandler}
+          onClick={(e) => autoResize(e.target)}
         ></Textarea>
       ) : (
         <Paragraph>{props.descr}</Paragraph>
