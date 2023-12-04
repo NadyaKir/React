@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import CardHeader from './CardHeader';
@@ -6,75 +6,85 @@ import CardBody from './CardBody';
 import CardWrapper from '../UI/CardWrapper';
 import withLoadingDelay from '../UI/withLoadingDelay';
 import PropTypes from 'prop-types';
-import { itemChange, setIsEditing } from '../../store/cartActions';
+
+import { cardsActions } from '../../store';
 
 const Card = (props) => {
   Card.propTypes = {
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     title: PropTypes.string,
     descr: PropTypes.string,
     isChecked: PropTypes.bool,
+    isEditing: PropTypes.bool,
     handleChange: PropTypes.func,
+    onDoubleClick: PropTypes.func,
     readOnly: PropTypes.bool,
     isCheckbox: PropTypes.bool,
     hiddenCheckbox: PropTypes.bool,
   };
 
-  //checkbox
   const [isChecked, setIsChecked] = useState(props.isChecked);
-
-  //edit
   const [editedTitle, setEditedTitle] = useState(props.title);
   const [editedDescr, setEditedDescr] = useState(props.descr);
 
   const dispatch = useDispatch();
-  const readOnly = useSelector((state) => state.readOnly);
-  const isEditing = useSelector((state) => state.isEditing);
+  const readOnly = useSelector((state) => state.cards.readOnly);
 
   const handleChange = () => {
-    dispatch(itemChange(props.id, editedTitle, editedDescr, isChecked));
+    dispatch(
+      cardsActions.itemChange({
+        id: props.id,
+        editedTitle,
+        editedDescr,
+        isChecked,
+      })
+    );
   };
 
-  const resetEditingMode = () => {
-    dispatch(setIsEditing(isEditing));
-  };
-
-  useEffect(() => {
-    if (readOnly && isEditing) {
-      resetValues();
-      resetEditingMode();
-    }
-  }, [isEditing, readOnly]);
-
-  //checkbox func
   const checkboxChangeHandler = () => {
     const newIsChecked = !isChecked;
     setIsChecked(newIsChecked);
-    dispatch(itemChange(props.id, editedTitle, editedDescr, newIsChecked));
+    dispatch(
+      cardsActions.itemChange({
+        id: props.id,
+        editedTitle,
+        editedDescr,
+        isChecked: newIsChecked,
+      })
+    );
   };
 
-  //buttons func-s
   const clickEditButtonHandler = () => {
-    dispatch(setIsEditing(!isEditing));
+    dispatch(
+      cardsActions.setIsEditing({
+        isEditing: true,
+        Number: props.id,
+      })
+    );
     setIsChecked(false);
   };
 
   const clickSaveButtonHandler = () => {
-    dispatch(setIsEditing(!isEditing));
+    dispatch(
+      cardsActions.setIsEditing({
+        isEditing: false,
+        Number: props.id,
+      })
+    );
     handleChange(props.id, editedTitle, editedDescr, isChecked);
   };
 
-  const resetValues = () => {
+  const clickCancelButtonHandler = () => {
+    dispatch(
+      cardsActions.setIsEditing({
+        isEditing: false,
+        Number: props.id,
+      })
+    );
     setEditedTitle(props.title);
     setEditedDescr(props.descr);
   };
 
-  const clickCancelButtonHandler = () => {
-    dispatch(setIsEditing(!isEditing));
-    resetValues();
-  };
-
-  //change handlers
   const titleChangeHandler = (event) => {
     setEditedTitle(event.target.value);
   };
@@ -88,7 +98,7 @@ const Card = (props) => {
       <div onDoubleClick={props.onDoubleClick}>
         <CardHeader
           id={props.id}
-          isEditing={isEditing}
+          isEditing={props.isEditing}
           editedTitle={editedTitle}
           title={props.title}
           titleChangeHandler={titleChangeHandler}
@@ -101,9 +111,10 @@ const Card = (props) => {
           hiddenCheckbox={props.hiddenCheckbox}
         ></CardHeader>
         <CardBody
+          id={props.id}
           descr={props.descr}
           editedDescr={editedDescr}
-          isEditing={isEditing}
+          isEditing={props.isEditing}
           descrChangeHandler={descrChangeHandler}
         ></CardBody>
       </div>

@@ -18,6 +18,7 @@ export const Textarea = styled.textarea`
   resize: none;
   font-weight: bold;
   border: none;
+  outline: none;
   font-family: inherit;
   font-size: 24px;
   box-sizing: border-box;

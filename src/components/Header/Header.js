@@ -1,31 +1,64 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { cardsActions, loginActions } from '../../store';
 
 import {
   HeaderWrapper,
   HeaderLogo,
+  NavBlock,
   HeaderLink,
   ImgLogo,
-  ImgStars,
+  BadgeBlock,
   Badge,
+  LoggedInBlock,
+  HeaderUsername,
 } from './Header.styled';
+import Container from '../UI/Container';
 
 import headerLogo from './header-logo.png';
-import stars from './stars.png';
 
 const Header = () => {
-  const itemsCount = useSelector((state) => state.itemsCount);
+  const dispatch = useDispatch();
+  const itemsCount = useSelector((state) => state.cards.itemsCount);
+  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const username = useSelector((state) => state.login.username);
+  const isAdmin = useSelector((state) => state.login.isAdmin);
+
+  const handleLogout = () => {
+    dispatch(loginActions.setLogin({ isLoggedIn: false, isAdmin: false }));
+    dispatch(cardsActions.setReadOnly({ readOnly: true }));
+  };
 
   return (
-    <HeaderWrapper>
-      <ImgStars src={stars} alt="stars" />
-      <HeaderLogo>
-        <ImgLogo src={headerLogo} alt="Cute sleeping cat" />
-      </HeaderLogo>
-      <ImgStars src={stars} alt="stars" />
-      <Badge>{itemsCount}</Badge>
-      <HeaderLink to="">Home</HeaderLink>
-      <HeaderLink to="signin">Sign in</HeaderLink>
-    </HeaderWrapper>
+    <Container>
+      <HeaderWrapper>
+        <HeaderLogo>
+          <ImgLogo src={headerLogo} alt="Cute sleeping cat" />
+        </HeaderLogo>
+        <NavBlock isLoggedIn={isLoggedIn}>
+          {isLoggedIn ? (
+            <LoggedInBlock>
+              <p>
+                Welcome, <HeaderUsername>{username}</HeaderUsername>
+              </p>
+            </LoggedInBlock>
+          ) : (
+            <>
+              <HeaderLink to="signin">Sign in</HeaderLink>
+            </>
+          )}
+          <HeaderLink to="">Home</HeaderLink>
+          {isAdmin && <HeaderLink to="settings">Settings</HeaderLink>}
+          {isLoggedIn && <HeaderLink onClick={handleLogout}>Logout</HeaderLink>}
+          {isLoggedIn && (
+            <BadgeBlock>
+              <p>Cards amount:</p>
+              <Badge>{itemsCount}</Badge>
+            </BadgeBlock>
+          )}
+        </NavBlock>
+      </HeaderWrapper>
+    </Container>
   );
 };
 

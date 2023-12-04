@@ -16,7 +16,7 @@ export const Button = styled.button`
   }
 
   ${(props) =>
-    props.edit &&
+    props.$edit &&
     css`
       margin-top: 0;
       margin-right: 0.5em;
@@ -24,14 +24,14 @@ export const Button = styled.button`
     `}
 
   ${(props) =>
-    props.save &&
+    props.$save &&
     css`
       margin-right: 0.5em;
       background-color: #4caf50;
     `}
 
   ${(props) =>
-    props.cancel &&
+    props.$cancel &&
     css`
       margin-top: 0;
       margin-right: 0;
@@ -39,7 +39,7 @@ export const Button = styled.button`
     `};
 
   ${(props) =>
-    props.delete &&
+    props.$delete &&
     css`
       margin-right: 0;
       background-color: #f44336;
