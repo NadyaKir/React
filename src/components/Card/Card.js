@@ -81,6 +81,8 @@ const Card = (props) => {
         Number: props.id,
       })
     );
+    setEditedTitle(props.title);
+    setEditedDescr(props.descr);
   };
 
   const titleChangeHandler = (event) => {
