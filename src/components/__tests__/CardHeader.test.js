@@ -82,13 +82,13 @@ describe('CardHeader Component', () => {
         </Provider>
       );
 
-      const saveButton = screen.getByTestId('saveButton');
-      const cancelButton = screen.getByTestId('cancelButton');
-      const textarea = screen.getByTestId('headerInput');
+      const saveButtonElement = screen.getByTestId('saveButton');
+      const cancelButtonElement = screen.getByTestId('cancelButton');
+      const textareaElement = screen.getByTestId('headerInput');
 
-      expect(saveButton).toBeInTheDocument();
-      expect(cancelButton).toBeInTheDocument();
-      expect(textarea).toBeInTheDocument();
+      expect(saveButtonElement).toBeInTheDocument();
+      expect(cancelButtonElement).toBeInTheDocument();
+      expect(textareaElement).toBeInTheDocument();
     });
 
     test('not renders textarea, save and cancel buttons in not card editing mode', () => {
@@ -104,9 +104,9 @@ describe('CardHeader Component', () => {
         </Provider>
       );
 
-      const saveButton = screen.getByTestId('saveButton');
-      const cancelButton = screen.getByTestId('cancelButton');
-      const textarea = screen.getByTestId('headerInput');
+      const saveButtonElement = screen.getByTestId('saveButton');
+      const cancelButtonElement = screen.getByTestId('cancelButton');
+      const textareaElement = screen.getByTestId('headerInput');
 
       rerender(
         <Provider store={store}>
@@ -114,9 +114,9 @@ describe('CardHeader Component', () => {
         </Provider>
       );
 
-      expect(saveButton).not.toBeInTheDocument();
-      expect(cancelButton).not.toBeInTheDocument();
-      expect(textarea).not.toBeInTheDocument();
+      expect(saveButtonElement).not.toBeInTheDocument();
+      expect(cancelButtonElement).not.toBeInTheDocument();
+      expect(textareaElement).not.toBeInTheDocument();
     });
 
     test('check if textarea has text in card editing mode', () => {
@@ -134,8 +134,8 @@ describe('CardHeader Component', () => {
 
       const expectedText = 'Bulbasaur';
 
-      const textarea = screen.getByTestId('headerInput');
-      expect(textarea).toHaveValue(expectedText);
+      const textareaElement = screen.getByTestId('headerInput');
+      expect(textareaElement).toHaveValue(expectedText);
     });
 
     test('check if textarea has text in not card editing mode', () => {
@@ -260,11 +260,11 @@ describe('CardHeader Component', () => {
         </Provider>
       );
 
-      const checkbox = screen.getByTestId('cardCheckbox');
+      const checkboxElement = screen.getByTestId('cardCheckbox');
 
       fireEvent.click(checkbox);
 
-      expect(checkbox).toBeChecked();
+      expect(checkboxElement).toBeChecked();
       expect(onChangeMock).toHaveBeenCalled();
     });
   });
