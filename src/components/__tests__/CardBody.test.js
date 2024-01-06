@@ -56,6 +56,7 @@ describe('CardBody component', () => {
         <CardBody
           isEditing={false}
           descr="Bulbasaur can be seen napping in bright sunlight."
+          descrChangeHandler={jest.fn()}
         />
       </Provider>
     );
@@ -78,6 +79,7 @@ describe('CardBody component', () => {
         <CardBody
           isEditing={true}
           editedDescr="Bulbasaur can be seen napping in bright sunlight."
+          descrChangeHandler={jest.fn()}
         />
       </Provider>
     );
@@ -86,5 +88,20 @@ describe('CardBody component', () => {
 
     const textareaElement = screen.getByTestId('cardBodyTextarea');
     expect(textareaElement).toHaveValue(expectedText);
+  });
+
+  test('auto resizes textarea in editing mode', () => {
+    render(
+      <CardBody
+        isEditing={true}
+        editedDescr="Bulbasaur can be seen napping in bright sunlight."
+        descrChangeHandler={jest.fn()}
+      />
+    );
+
+    const textareaElement = screen.getByTestId('cardBodyTextarea');
+    const currentHeight = textareaElement.offsetHeight + 'px';
+
+    expect(textareaElement.style.height).toBe(currentHeight);
   });
 });

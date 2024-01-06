@@ -128,7 +128,11 @@ describe('CardHeader Component', () => {
 
       render(
         <Provider store={store}>
-          <CardHeader isEditing={true} editedTitle="Bulbasaur" />
+          <CardHeader
+            isEditing={true}
+            editedTitle="Bulbasaur"
+            titleChangeHandler={jest.fn()}
+          />
         </Provider>
       );
 
@@ -206,6 +210,29 @@ describe('CardHeader Component', () => {
 
       expect(onClickCancelButtonMock).toHaveBeenCalled();
     });
+
+    test('auto resizes textarea in editing mode', () => {
+      const store = mockStore({
+        cards: {
+          readOnly: false,
+        },
+      });
+
+      render(
+        <Provider store={store}>
+          <CardHeader
+            isEditing={true}
+            editedTitle="Bulbasaur can be seen napping in bright sunlight."
+            titleChangeHandler={jest.fn()}
+          />
+        </Provider>
+      );
+
+      const textareaElement = screen.getByTestId('headerInput');
+      const currentHeight = textareaElement.offsetHeight + 'px';
+
+      expect(textareaElement.style.height).toBe(currentHeight);
+    });
   });
 
   describe('Checkbox component', () => {
@@ -262,7 +289,7 @@ describe('CardHeader Component', () => {
 
       const checkboxElement = screen.getByTestId('cardCheckbox');
 
-      fireEvent.click(checkbox);
+      fireEvent.click(checkboxElement);
 
       expect(checkboxElement).toBeChecked();
       expect(onChangeMock).toHaveBeenCalled();
