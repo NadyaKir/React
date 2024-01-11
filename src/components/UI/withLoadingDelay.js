@@ -20,7 +20,12 @@ const withLoadingDelay = (WrappedComponent) => {
     if (isLoading) {
       return (
         <div>
-          <CircleLoader size={60} color={'#e9967a'} loading={true} />
+          <CircleLoader
+            data-testid="cardSpinner"
+            size={60}
+            color={'#e9967a'}
+            loading={true}
+          />
         </div>
       );
     }

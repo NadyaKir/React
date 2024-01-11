@@ -7,8 +7,8 @@ import CardWrapper from '../UI/CardWrapper';
 import withLoadingDelay from '../UI/withLoadingDelay';
 import PropTypes from 'prop-types';
 
-import store, { cardsActions } from '../../store';
-// import store from '../../store';
+import { cardsActions } from '../../store';
+
 const Card = (props) => {
   Card.propTypes = {
     id: PropTypes.string.isRequired,
@@ -62,7 +62,6 @@ const Card = (props) => {
       })
     );
     setIsChecked(false);
-    console.log(store.getState());
   };
 
   const clickSaveButtonHandler = () => {
