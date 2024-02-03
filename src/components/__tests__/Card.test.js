@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { screen, render, act } from '@testing-library/react';
+import { screen, render, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 
@@ -37,11 +37,15 @@ describe('Card component', () => {
       </Provider>
     );
 
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        expect(screen.getByTestId('headerTitle'));
-        resolve();
-      }, 3000);
-    });
+    await waitFor(
+      () => {
+        const spinnerElement = screen.queryByTestId('cardSpinner');
+        expect(spinnerElement).toBeNull();
+      },
+      { timeout: 4000 }
+    );
+
+    const headerTitleElement = screen.getByTestId('headerTitle');
+    expect(headerTitleElement).toBeInTheDocument();
   });
 });
