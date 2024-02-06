@@ -4,10 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { logActionMiddleware } from './logActionMiddleware';
 
 const initialCardsState = {
-  // items: [],
-  items: [{ Number: '001', isEditing: true }],
+  items: [],
   readOnly: false,
-  // readOnly: true,
   isAddModalOpen: false,
   itemsCount: 0,
 };
@@ -27,11 +25,12 @@ const cardsSlice = createSlice({
       state.itemsCount = action.payload.itemsCount;
     },
     setIsEditing(state, action) {
-      const updatedItems = state.items.map((item) => {
+      let updatedItems;
+      updatedItems = state.items.map((item) => {
         if (item.Number === action.payload.Number) {
           return {
             ...item,
-            isEditing: action.payload.isEditing,
+            isEditing: action.payload.isEditing
           };
         }
         return item;
@@ -54,14 +53,15 @@ const cardsSlice = createSlice({
       state.itemsCount = state.items.length + 1;
     },
     itemChange(state, action) {
-      const updatedItems = state.items.map((item) => {
+      let updatedItems;
+      updatedItems = state.items.map((item) => {
         if (item.Number === action.payload.id) {
           return {
             ...item,
             Name: action.payload.editedTitle,
             About: action.payload.editedDescr,
             isChecked: action.payload.isChecked,
-            isEditing: action.payload.isEditing,
+            isEditing: action.payload.isEditing
           };
         }
         return item;
@@ -69,16 +69,16 @@ const cardsSlice = createSlice({
 
       state.items = updatedItems;
     },
-    deleteItem(state, action) {
+    deleteItem(state) {
       const updatedItems = state.items.filter((item) => !item.isChecked);
 
       state.items = updatedItems;
       state.itemsCount = updatedItems.length;
     },
-    openAddModal(state, action) {
+    openAddModal(state) {
       state.isAddModalOpen = true;
     },
-    closeAddModal(state, action) {
+    closeAddModal(state) {
       state.isAddModalOpen = false;
     },
     setReadOnly(state, action) {
