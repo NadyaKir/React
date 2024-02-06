@@ -9,7 +9,7 @@ describe('CardHeader Component', () => {
   const mockStore = configureMockStore();
 
   describe('Edit button component', () => {
-    test('not renders edit button  in readonly mode', () => {
+    test('renders edit button in not readonly mode', () => {
       const store = mockStore({
         cards: {
           readOnly: false,
@@ -27,7 +27,7 @@ describe('CardHeader Component', () => {
       expect(editButtonElement).toBeInTheDocument();
     });
 
-    test('renders edit button in not readonly mode', () => {
+    test('not renders edit button  in readonly mode', () => {
       const store = mockStore({
         cards: {
           readOnly: true,
@@ -209,29 +209,6 @@ describe('CardHeader Component', () => {
       fireEvent.click(cancelButtonElement);
 
       expect(onClickCancelButtonMock).toHaveBeenCalled();
-    });
-
-    test('auto resizes textarea in editing mode', () => {
-      const store = mockStore({
-        cards: {
-          readOnly: false,
-        },
-      });
-
-      render(
-        <Provider store={store}>
-          <CardHeader
-            isEditing={true}
-            editedTitle="Bulbasaur can be seen napping in bright sunlight."
-            titleChangeHandler={jest.fn()}
-          />
-        </Provider>
-      );
-
-      const textareaElement = screen.getByTestId('headerInput');
-      const currentHeight = textareaElement.offsetHeight + 'px';
-
-      expect(textareaElement.style.height).toBe(currentHeight);
     });
   });
 

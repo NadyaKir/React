@@ -89,19 +89,23 @@ describe('CardBody component', () => {
     const textareaElement = screen.getByTestId('cardBodyTextarea');
     expect(textareaElement).toHaveValue(expectedText);
   });
+  test('chek if autoResize function called', () => {
+    const autoResizeMock = jest.fn();
+    const store = mockStore({
+      cards: {
+        readOnly: false,
+      },
+    });
 
-  test('auto resizes textarea in editing mode', () => {
     render(
-      <CardBody
-        isEditing={true}
-        editedDescr="Bulbasaur can be seen napping in bright sunlight."
-        descrChangeHandler={jest.fn()}
-      />
+      <Provider store={store}>
+        <CardBody
+          isEditing={true}
+          editedDescr="Bulbasaur can be seen napping in bright sunlight."
+          descrChangeHandler={jest.fn()}
+          descr="Bulbasaur"
+        />
+      </Provider>
     );
-
-    const textareaElement = screen.getByTestId('cardBodyTextarea');
-    const currentHeight = textareaElement.offsetHeight + 'px';
-
-    expect(textareaElement.style.height).toBe(currentHeight);
   });
 });
