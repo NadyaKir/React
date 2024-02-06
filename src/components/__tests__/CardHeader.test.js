@@ -22,7 +22,7 @@ describe('CardHeader Component', () => {
         </Provider>
       );
 
-      const editButtonElement = screen.queryByTestId('editButton');
+      const editButtonElement = screen.getByTestId('editButton');
 
       expect(editButtonElement).toBeInTheDocument();
     });
@@ -40,7 +40,7 @@ describe('CardHeader Component', () => {
         </Provider>
       );
 
-      const editButtonElement = screen.queryByTestId('editButton');
+      const editButtonElement = screen.getByTestId('editButton');
 
       expect(editButtonElement).not.toBeInTheDocument();
     });
@@ -60,7 +60,7 @@ describe('CardHeader Component', () => {
         </Provider>
       );
 
-      const editButtonElement = screen.queryByTestId('editButton');
+      const editButtonElement = screen.getByTestId('editButton');
 
       fireEvent.click(editButtonElement);
 
@@ -173,7 +173,7 @@ describe('CardHeader Component', () => {
         </Provider>
       );
 
-      const saveButtonElement = screen.queryByTestId('saveButton');
+      const saveButtonElement = screen.getByTestId('saveButton');
 
       fireEvent.click(saveButtonElement);
 
@@ -198,7 +198,7 @@ describe('CardHeader Component', () => {
         </Provider>
       );
 
-      const cancelButtonElement = screen.queryByTestId('cancelButton');
+      const cancelButtonElement = screen.getByTestId('cancelButton');
 
       fireEvent.click(cancelButtonElement);
 
@@ -220,7 +220,7 @@ describe('CardHeader Component', () => {
         </Provider>
       );
 
-      const checkboxElement = screen.queryByRole('checkbox');
+      const checkboxElement = screen.getByRole('checkbox');
 
       expect(checkboxElement).toBeInTheDocument();
     });
@@ -240,7 +240,7 @@ describe('CardHeader Component', () => {
 
       const checkboxElement = screen.queryByRole('checkbox');
 
-      expect(checkboxElement).not.toBeInTheDocument();
+      expect(checkboxElement).toBeNull();
     });
 
     test('toggle checkbox value on click', () => {
