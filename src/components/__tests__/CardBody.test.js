@@ -55,13 +55,13 @@ describe('CardBody component', () => {
       <Provider store={store}>
         <CardBody
           isEditing={false}
-          descr="Bulbasaur can be seen napping in bright sunlight."
+          descr="Bulbasaur can be seen napping in bright sunlight"
           descrChangeHandler={jest.fn()}
         />
       </Provider>
     );
 
-    const expectedText = 'Bulbasaur can be seen napping in bright sunlight.';
+    const expectedText = 'Bulbasaur can be seen napping in bright sunlight';
 
     const paragraphElement = screen.getByTestId('cardBodyParagraph');
     expect(paragraphElement.textContent).toBe(expectedText);
@@ -78,34 +78,15 @@ describe('CardBody component', () => {
       <Provider store={store}>
         <CardBody
           isEditing={true}
-          editedDescr="Bulbasaur can be seen napping in bright sunlight."
+          editedDescr="Bulbasaur can be seen napping in bright sunlight"
           descrChangeHandler={jest.fn()}
         />
       </Provider>
     );
 
-    const expectedText = 'Bulbasaur can be seen napping in bright sunlight.';
+    const expectedText = 'Bulbasaur can be seen napping in bright sunlight';
 
     const textareaElement = screen.getByTestId('cardBodyTextarea');
     expect(textareaElement).toHaveValue(expectedText);
-  });
-  test('chek if autoResize function called', () => {
-    const autoResizeMock = jest.fn();
-    const store = mockStore({
-      cards: {
-        readOnly: false,
-      },
-    });
-
-    render(
-      <Provider store={store}>
-        <CardBody
-          isEditing={true}
-          editedDescr="Bulbasaur can be seen napping in bright sunlight."
-          descrChangeHandler={jest.fn()}
-          descr="Bulbasaur"
-        />
-      </Provider>
-    );
   });
 });

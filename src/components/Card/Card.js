@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 
 import { cardsActions } from '../../store';
 
-const Card = (props) => {
+export const Card = (props) => {
   Card.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string,

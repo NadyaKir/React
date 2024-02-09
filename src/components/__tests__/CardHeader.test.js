@@ -27,7 +27,7 @@ describe('CardHeader Component', () => {
       expect(editButtonElement).toBeInTheDocument();
     });
 
-    test('not renders edit button  in readonly mode', () => {
+    test('not renders edit button in readonly mode', () => {
       const store = mockStore({
         cards: {
           readOnly: true,
@@ -36,13 +36,13 @@ describe('CardHeader Component', () => {
 
       render(
         <Provider store={store}>
-          <CardHeader />
+          <CardHeader/>
         </Provider>
       );
 
-      const editButtonElement = screen.getByTestId('editButton');
+      const editButtonElement = screen.queryByTestId('editButton');
 
-      expect(editButtonElement).not.toBeInTheDocument();
+      expect(editButtonElement).toBeNull();
     });
 
     test('responds to click on edit button', () => {
@@ -86,9 +86,9 @@ describe('CardHeader Component', () => {
       const cancelButtonElement = screen.queryByTestId('cancelButton');
       const textareaElement = screen.queryByTestId('headerInput');
 
-      expect(saveButtonElement).toBeNull();
-      expect(cancelButtonElement).toBeNull();
-      expect(textareaElement).toBeNull();
+      expect(saveButtonElement).toBeInTheDocument();
+      expect(cancelButtonElement).toBeInTheDocument();
+      expect(textareaElement).toBeInTheDocument();
     });
 
     test('not renders textarea, save and cancel buttons in not card editing mode', () => {
@@ -100,7 +100,7 @@ describe('CardHeader Component', () => {
 
       render(
         <Provider store={store}>
-          <CardHeader isEditing={true} />
+          <CardHeader isEditing={false} />
         </Provider>
       );
 
