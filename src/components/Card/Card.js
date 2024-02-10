@@ -16,7 +16,6 @@ export const Card = (props) => {
     descr: PropTypes.string,
     isChecked: PropTypes.bool,
     isEditing: PropTypes.bool,
-    handleChange: PropTypes.func,
     onDoubleClick: PropTypes.func,
     readOnly: PropTypes.bool,
     isCheckbox: PropTypes.bool,
