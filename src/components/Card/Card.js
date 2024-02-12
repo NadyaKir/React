@@ -9,14 +9,13 @@ import PropTypes from 'prop-types';
 
 import { cardsActions } from '../../store';
 
-const Card = (props) => {
+export const Card = (props) => {
   Card.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string,
     descr: PropTypes.string,
     isChecked: PropTypes.bool,
     isEditing: PropTypes.bool,
-    handleChange: PropTypes.func,
     onDoubleClick: PropTypes.func,
     readOnly: PropTypes.bool,
     isCheckbox: PropTypes.bool,
