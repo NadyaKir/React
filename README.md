@@ -9,6 +9,6 @@ To log in as a user, please use the following credentials:
 * Password: 
   Enter a password consisting of at least 8 characters, including at least one letter and one digit.
 
-To log in as a user, please use the following credentials:
+To log in as a admin, please use the following credentials:
 * Username: testAdmin@gmail.com
 * Password: 12345yuiopp
